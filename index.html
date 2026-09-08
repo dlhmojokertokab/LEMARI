@@ -3,108 +3,2659 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>LEMARI DLH</title>
 
+  <meta
+    name="description"
+    content="Layanan Elektronik Manajemen Arsip Ringkas dan Integratif — DLH Kabupaten Mojokerto"
+  >
+
   <style>
+    :root {
+      --primary: #7c3aed;
+      --primary-dark: #5b21b6;
+      --primary-soft: #f3e8ff;
+
+      --pink: #db2777;
+      --pink-soft: #fce7f3;
+
+      --teal: #0d9488;
+      --teal-soft: #ccfbf1;
+
+      --green: #15803d;
+      --green-soft: #dcfce7;
+
+      --red: #dc2626;
+      --red-soft: #fee2e2;
+
+      --amber: #b45309;
+      --amber-soft: #fef3c7;
+
+      --text: #211a2f;
+      --muted: #746d82;
+
+      --border: #e8e1f0;
+      --card: rgba(255,255,255,.90);
+      --surface: #ffffff;
+
+      --shadow:
+        0 18px 45px rgba(64,42,90,.10);
+
+      --radius: 18px;
+      --radius-sm: 12px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
-      font-family: Arial, sans-serif;
-      max-width: 900px;
-      margin: 60px auto;
-      padding: 0 20px;
-      background: #f8fafc;
-      color: #1f2937;
+      margin: 0;
+      min-height: 100vh;
+
+      font-family:
+        Inter,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+      color: var(--text);
+
+      background:
+        radial-gradient(
+          circle at 8% 0%,
+          rgba(219,39,119,.11),
+          transparent 30%
+        ),
+        radial-gradient(
+          circle at 88% 10%,
+          rgba(124,58,237,.12),
+          transparent 34%
+        ),
+        radial-gradient(
+          circle at 80% 90%,
+          rgba(13,148,136,.10),
+          transparent 32%
+        ),
+        #f8f7fb;
     }
 
-    .card {
+    button,
+    input,
+    select {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .app {
+      width: min(1360px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 24px 0 46px;
+    }
+
+    /* ==================================================
+       HEADER
+    ================================================== */
+
+    .hero {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+
+      padding: 20px 22px;
+
+      border: 1px solid rgba(124,58,237,.09);
+      border-radius: 22px;
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(255,255,255,.93),
+          rgba(251,247,255,.90)
+        );
+
+      box-shadow:
+        var(--shadow);
+
+      backdrop-filter:
+        blur(14px);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      min-width: 0;
+    }
+
+    .brand-mark {
+      display: grid;
+      place-items: center;
+
+      flex: 0 0 58px;
+      width: 58px;
+      height: 58px;
+
+      border-radius: 17px;
+
+      background:
+        linear-gradient(
+          145deg,
+          var(--pink),
+          var(--primary)
+        );
+
+      color: white;
+      font-size: 27px;
+
+      box-shadow:
+        0 12px 25px rgba(124,58,237,.24);
+    }
+
+    .brand-copy {
+      min-width: 0;
+    }
+
+    .brand-title {
+      margin: 0;
+
+      font-size:
+        clamp(24px, 3vw, 34px);
+
+      line-height: 1;
+      font-weight: 950;
+      letter-spacing: -.035em;
+    }
+
+    .brand-subtitle {
+      margin: 7px 0 0;
+
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+
+      min-height: 38px;
+      padding: 8px 13px;
+
+      border: 1px solid rgba(13,148,136,.13);
+      border-radius: 999px;
+
+      background: rgba(204,251,241,.72);
+      color: #0f766e;
+
+      font-size: 12px;
+      font-weight: 850;
+      white-space: nowrap;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--teal);
+      box-shadow: 0 0 0 4px rgba(13,148,136,.10);
+    }
+
+    .read-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+
+      min-height: 38px;
+      padding: 8px 13px;
+
+      border: 1px solid rgba(124,58,237,.12);
+      border-radius: 999px;
+
+      background: rgba(243,232,255,.76);
+      color: var(--primary-dark);
+
+      font-size: 12px;
+      font-weight: 850;
+      white-space: nowrap;
+    }
+
+    /* ==================================================
+       MAIN
+    ================================================== */
+
+    .main {
+      margin-top: 18px;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 14px;
+
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      margin: 0;
+
+      font-size:
+        clamp(22px, 3vw, 30px);
+
+      font-weight: 950;
+      letter-spacing: -.025em;
+    }
+
+    .section-desc {
+      margin: 5px 0 0;
+
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .count-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      min-height: 34px;
+      padding: 7px 11px;
+
+      border-radius: 999px;
+
+      background: var(--primary-soft);
+      color: var(--primary-dark);
+
+      font-size: 12px;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    /* ==================================================
+       TOOLBAR
+    ================================================== */
+
+    .toolbar {
+      display: grid;
+      grid-template-columns:
+        minmax(260px, 1.5fr)
+        repeat(3, minmax(150px, .65fr))
+        auto;
+      gap: 10px;
+
+      padding: 14px;
+
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+
+      background: var(--card);
+
+      box-shadow:
+        0 12px 30px rgba(60,38,80,.07);
+
+      backdrop-filter:
+        blur(12px);
+    }
+
+    .field {
+      position: relative;
+    }
+
+    .field-label {
+      display: block;
+      margin: 0 0 6px 2px;
+
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 850;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+
+    .input,
+    .select {
+      width: 100%;
+      min-height: 43px;
+      padding: 10px 12px;
+
+      border: 1px solid #ddd5e8;
+      border-radius: 11px;
+
+      outline: 0;
+      background: rgba(255,255,255,.94);
+      color: var(--text);
+
+      transition:
+        border-color .15s ease,
+        box-shadow .15s ease,
+        background .15s ease;
+    }
+
+    .input:focus,
+    .select:focus {
+      border-color: rgba(124,58,237,.55);
+      box-shadow: 0 0 0 4px rgba(124,58,237,.08);
       background: white;
-      padding: 24px;
-      border-radius: 16px;
-      box-shadow: 0 12px 30px rgba(0,0,0,.08);
     }
 
-    .ok {
-      color: #15803d;
-      font-weight: 700;
+    .reset-wrap {
+      display: flex;
+      align-items: flex-end;
     }
 
-    .error {
-      color: #b91c1c;
-      font-weight: 700;
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+
+      min-height: 43px;
+      padding: 10px 14px;
+
+      border: 0;
+      border-radius: 11px;
+
+      font-weight: 850;
+      text-decoration: none;
+
+      transition:
+        transform .14s ease,
+        box-shadow .14s ease,
+        background .14s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      border: 1px solid #ded7e8;
+      background: white;
+      color: #5c5468;
+    }
+
+    .btn-secondary:hover {
+      background: #faf8fc;
+    }
+
+    /* ==================================================
+       TABLE
+    ================================================== */
+
+    .archive-card {
+      margin-top: 12px;
+
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+
+      background: rgba(255,255,255,.93);
+
+      box-shadow:
+        0 16px 38px rgba(58,38,76,.08);
+
+      overflow: hidden;
+    }
+
+    .table-scroll {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    thead th {
+      padding: 13px 14px;
+
+      border-bottom: 1px solid var(--border);
+
+      background:
+        linear-gradient(
+          180deg,
+          #fbf9fd,
+          #f8f5fb
+        );
+
+      color: #6e667b;
+
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: .045em;
+      text-align: left;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .sort-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+
+      padding: 0;
+      border: 0;
+      background: transparent;
+      color: inherit;
+      font: inherit;
+      cursor: pointer;
+    }
+
+    tbody td {
+      padding: 14px;
+
+      border-bottom: 1px solid #eee9f3;
+
+      vertical-align: middle;
+      font-size: 12px;
+    }
+
+    tbody tr:last-child td {
+      border-bottom: 0;
+    }
+
+    tbody tr {
+      transition: background .14s ease;
+    }
+
+    tbody tr:hover {
+      background: #fcfaff;
+    }
+
+    .document-cell {
+      min-width: 280px;
+    }
+
+    .doc-title {
+      margin: 0;
+      font-weight: 900;
+      line-height: 1.35;
+    }
+
+    .doc-id {
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 10px;
+      font-family:
+        ui-monospace,
+        SFMono-Regular,
+        Menlo,
+        Consolas,
+        monospace;
+    }
+
+    .doc-badges {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-top: 7px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+
+      min-height: 23px;
+      padding: 4px 7px;
+
+      border-radius: 999px;
+
+      font-size: 9px;
+      font-weight: 900;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    .badge-open {
+      background: var(--teal-soft);
+      color: #0f766e;
+    }
+
+    .badge-restricted {
+      background: var(--amber-soft);
+      color: var(--amber);
+    }
+
+    .badge-category {
+      background: #f3eef8;
+      color: #635a70;
+    }
+
+    .aksi-cell {
+      width: 128px;
+      white-space: nowrap;
+    }
+
+    .actions {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 7px;
+    }
+
+    .icon-btn {
+      display: inline-grid;
+      place-items: center;
+
+      width: 36px;
+      height: 36px;
+
+      padding: 0;
+
+      border: 1px solid #ddd5e8;
+      border-radius: 10px;
+
+      background: white;
+      color: var(--text);
+
+      transition:
+        transform .14s ease,
+        border-color .14s ease,
+        background .14s ease;
+    }
+
+    .icon-btn:hover {
+      transform: translateY(-1px);
+      border-color: #cbb8e8;
+      background: #fcf9ff;
+    }
+
+    /* ==================================================
+       STATES
+    ================================================== */
+
+    .state {
+      display: none;
+      padding: 44px 24px;
+      text-align: center;
+    }
+
+    .state.active {
+      display: block;
+    }
+
+    .state-icon {
+      font-size: 34px;
+      line-height: 1;
+    }
+
+    .state-title {
+      margin: 12px 0 5px;
+      font-size: 17px;
+      font-weight: 950;
+    }
+
+    .state-desc {
+      margin: 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.55;
+    }
+
+    .spinner {
+      width: 30px;
+      height: 30px;
+      margin: 0 auto;
+
+      border: 3px solid #e9e1f1;
+      border-top-color: var(--primary);
+      border-radius: 50%;
+
+      animation: spin .75s linear infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* ==================================================
+       PAGINATION
+    ================================================== */
+
+    .pagination-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+
+      padding: 13px 14px;
+
+      border-top: 1px solid var(--border);
+      background: #fcfbfd;
+    }
+
+    .pagination-info {
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 750;
+    }
+
+    .pagination-actions {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .page-size {
+      min-height: 36px;
+      padding: 6px 8px;
+
+      border: 1px solid #ddd5e8;
+      border-radius: 9px;
+
+      background: white;
+      color: var(--text);
+
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .page-btn {
+      display: inline-grid;
+      place-items: center;
+
+      min-width: 36px;
+      height: 36px;
+
+      padding: 0 9px;
+
+      border: 1px solid #ddd5e8;
+      border-radius: 9px;
+
+      background: white;
+      color: var(--text);
+
+      font-size: 11px;
+      font-weight: 900;
+    }
+
+    .page-btn:disabled {
+      opacity: .4;
+      cursor: default;
+      transform: none;
+    }
+
+    .page-current {
+      min-width: 38px;
+      text-align: center;
+      font-size: 11px;
+      font-weight: 900;
+      color: var(--primary-dark);
+    }
+
+    /* ==================================================
+       TOAST
+    ================================================== */
+
+    .toast {
+      position: fixed;
+      right: 18px;
+      top: 18px;
+      z-index: 9999;
+
+      display: flex;
+      align-items: center;
+      gap: 9px;
+
+      max-width: min(420px, calc(100vw - 36px));
+
+      padding: 11px 13px;
+
+      border: 1px solid rgba(21,128,61,.18);
+      border-radius: 12px;
+
+      background: rgba(240,253,244,.97);
+      color: #166534;
+
+      box-shadow:
+        0 15px 35px rgba(37,70,44,.15);
+
+      font-size: 12px;
+      font-weight: 850;
+
+      transform: translateY(-120px);
+      opacity: 0;
+
+      transition:
+        transform .22s ease,
+        opacity .22s ease;
+    }
+
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    /* ==================================================
+       MOBILE CARDS
+    ================================================== */
+
+    .mobile-list {
+      display: none;
+    }
+
+    .mobile-item {
+      padding: 14px;
+
+      border-bottom: 1px solid var(--border);
+    }
+
+    .mobile-item:last-child {
+      border-bottom: 0;
+    }
+
+    .mobile-meta {
+      display: grid;
+      grid-template-columns:
+        repeat(2, minmax(0,1fr));
+      gap: 8px;
+
+      margin-top: 11px;
+    }
+
+    .meta-box {
+      padding: 9px;
+
+      border-radius: 10px;
+      background: #faf8fc;
+    }
+
+    .meta-label {
+      color: var(--muted);
+      font-size: 8px;
+      font-weight: 900;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+
+    .meta-value {
+      margin-top: 3px;
+      font-size: 11px;
+      font-weight: 850;
+    }
+
+    .mobile-actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .mobile-actions .btn {
+      flex: 1;
+    }
+
+    /* ==================================================
+       RESPONSIVE
+    ================================================== */
+
+    @media (max-width: 980px) {
+      .toolbar {
+        grid-template-columns:
+          repeat(2, minmax(0,1fr));
+      }
+
+      .field-search {
+        grid-column: 1 / -1;
+      }
+
+      .reset-wrap {
+        align-items: stretch;
+      }
+
+      .reset-wrap .btn {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .app {
+        width: min(100% - 20px, 1360px);
+        padding-top: 10px;
+      }
+
+      .hero {
+        align-items: flex-start;
+        padding: 16px;
+      }
+
+      .brand-mark {
+        flex-basis: 50px;
+        width: 50px;
+        height: 50px;
+        border-radius: 15px;
+        font-size: 23px;
+      }
+
+      .brand-subtitle {
+        font-size: 11px;
+      }
+
+      .header-actions {
+        display: none;
+      }
+
+      .section-head {
+        align-items: flex-start;
+      }
+
+      .toolbar {
+        grid-template-columns: 1fr;
+        padding: 11px;
+      }
+
+      .field-search {
+        grid-column: auto;
+      }
+
+      .table-scroll {
+        display: none;
+      }
+
+      .mobile-list {
+        display: block;
+      }
+
+      .pagination-bar {
+        align-items: stretch;
+      }
+
+      .pagination-actions {
+        width: 100%;
+        justify-content: space-between;
+      }
+    }
+
+    @media (max-width: 460px) {
+      .brand {
+        gap: 11px;
+      }
+
+      .brand-title {
+        font-size: 23px;
+      }
+
+      .mobile-meta {
+        grid-template-columns: 1fr;
+      }
+
+      .section-desc {
+        font-size: 11px;
+      }
     }
   </style>
 </head>
 
 <body>
 
-  <div class="card">
-    <h1>🗄️ LEMARI DLH</h1>
-
-    <p>
-      Layanan Elektronik Manajemen Arsip Ringkas dan Integratif
-    </p>
-
-    <hr>
-
-    <p>
-      Status backend:
-      <span id="status">Memeriksa...</span>
-    </p>
-
-    <pre id="detail"></pre>
+  <div
+    id="toast"
+    class="toast"
+  >
+    ✅ Link dokumen tersalin
   </div>
+
+
+  <div class="app">
+
+    <!-- =================================================
+         HEADER
+    ================================================== -->
+
+    <header class="hero">
+
+      <div class="brand">
+
+        <div
+          class="brand-mark"
+          aria-hidden="true"
+        >
+          🗄️
+        </div>
+
+
+        <div class="brand-copy">
+
+          <h1 class="brand-title">
+            LEMARI DLH
+          </h1>
+
+          <p class="brand-subtitle">
+            Layanan Elektronik Manajemen Arsip Ringkas dan Integratif
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="header-actions">
+
+        <div
+          id="backendStatus"
+          class="status-pill"
+        >
+          <span class="status-dot"></span>
+          Memeriksa sistem...
+        </div>
+
+        <div class="read-pill">
+          👁️ Mode Baca
+        </div>
+
+      </div>
+
+    </header>
+
+
+    <!-- =================================================
+         MAIN
+    ================================================== -->
+
+    <main class="main">
+
+      <div class="section-head">
+
+        <div>
+
+          <h2 class="section-title">
+            LEMARI
+          </h2>
+
+          <p class="section-desc">
+            Cari dan temukan kembali arsip DLH dengan cepat.
+          </p>
+
+        </div>
+
+
+        <div
+          id="archiveCount"
+          class="count-badge"
+        >
+          Memuat...
+        </div>
+
+      </div>
+
+
+      <!-- FILTER -->
+
+      <section
+        class="toolbar"
+        aria-label="Pencarian dan filter arsip"
+      >
+
+        <div class="field field-search">
+
+          <label
+            class="field-label"
+            for="searchInput"
+          >
+            Cari arsip
+          </label>
+
+          <input
+            id="searchInput"
+            class="input"
+            type="search"
+            placeholder="Judul, ID, bidang, kategori..."
+            autocomplete="off"
+          >
+
+        </div>
+
+
+        <div class="field">
+
+          <label
+            class="field-label"
+            for="yearFilter"
+          >
+            Tahun
+          </label>
+
+          <select
+            id="yearFilter"
+            class="select"
+          >
+            <option value="">
+              Semua Tahun
+            </option>
+          </select>
+
+        </div>
+
+
+        <div class="field">
+
+          <label
+            class="field-label"
+            for="divisionFilter"
+          >
+            Bidang
+          </label>
+
+          <select
+            id="divisionFilter"
+            class="select"
+          >
+            <option value="">
+              Semua Bidang
+            </option>
+          </select>
+
+        </div>
+
+
+        <div class="field">
+
+          <label
+            class="field-label"
+            for="categoryFilter"
+          >
+            Kategori
+          </label>
+
+          <select
+            id="categoryFilter"
+            class="select"
+          >
+            <option value="">
+              Semua Kategori
+            </option>
+          </select>
+
+        </div>
+
+
+        <div class="reset-wrap">
+
+          <button
+            id="resetBtn"
+            class="btn btn-secondary"
+            type="button"
+          >
+            ↺ Reset
+          </button>
+
+        </div>
+
+      </section>
+
+
+      <!-- ARCHIVE -->
+
+      <section class="archive-card">
+
+        <!-- LOADING -->
+
+        <div
+          id="loadingState"
+          class="state active"
+        >
+
+          <div class="spinner"></div>
+
+          <h3 class="state-title">
+            Membuka LEMARI...
+          </h3>
+
+          <p class="state-desc">
+            Mengambil daftar arsip dari sistem.
+          </p>
+
+        </div>
+
+
+        <!-- ERROR -->
+
+        <div
+          id="errorState"
+          class="state"
+        >
+
+          <div class="state-icon">
+            ⚠️
+          </div>
+
+          <h3 class="state-title">
+            LEMARI belum bisa dibuka
+          </h3>
+
+          <p
+            id="errorMessage"
+            class="state-desc"
+          >
+            Terjadi kesalahan saat mengambil arsip.
+          </p>
+
+          <button
+            id="retryBtn"
+            class="btn btn-secondary"
+            type="button"
+            style="margin-top:14px"
+          >
+            Coba Lagi
+          </button>
+
+        </div>
+
+
+        <!-- EMPTY -->
+
+        <div
+          id="emptyState"
+          class="state"
+        >
+
+          <div class="state-icon">
+            🗂️
+          </div>
+
+          <h3 class="state-title">
+            Arsip tidak ditemukan
+          </h3>
+
+          <p class="state-desc">
+            Coba ubah kata pencarian atau filter yang digunakan.
+          </p>
+
+        </div>
+
+
+        <!-- DESKTOP TABLE -->
+
+        <div
+          id="tableWrap"
+          class="table-scroll"
+          hidden
+        >
+
+          <table>
+
+            <thead>
+
+              <tr>
+
+                <th>
+                  <button
+                    class="sort-btn"
+                    data-sort="judul"
+                  >
+                    Dokumen
+                    <span data-sort-icon="judul">↕</span>
+                  </button>
+                </th>
+
+                <th>
+                  <button
+                    class="sort-btn"
+                    data-sort="tahun"
+                  >
+                    Tahun
+                    <span data-sort-icon="tahun">↕</span>
+                  </button>
+                </th>
+
+                <th>
+                  <button
+                    class="sort-btn"
+                    data-sort="bidang"
+                  >
+                    Bidang
+                    <span data-sort-icon="bidang">↕</span>
+                  </button>
+                </th>
+
+                <th>
+                  <button
+                    class="sort-btn"
+                    data-sort="kategori"
+                  >
+                    Kategori
+                    <span data-sort-icon="kategori">↕</span>
+                  </button>
+                </th>
+
+                <th>
+                  <button
+                    class="sort-btn"
+                    data-sort="tanggal"
+                  >
+                    Tanggal
+                    <span data-sort-icon="tanggal">↓</span>
+                  </button>
+                </th>
+
+                <th
+                  style="text-align:right"
+                >
+                  Aksi
+                </th>
+
+              </tr>
+
+            </thead>
+
+
+            <tbody id="archiveTableBody"></tbody>
+
+          </table>
+
+        </div>
+
+
+        <!-- MOBILE -->
+
+        <div
+          id="mobileList"
+          class="mobile-list"
+          hidden
+        ></div>
+
+
+        <!-- PAGINATION -->
+
+        <div
+          id="paginationBar"
+          class="pagination-bar"
+          hidden
+        >
+
+          <div
+            id="paginationInfo"
+            class="pagination-info"
+          >
+            -
+          </div>
+
+
+          <div class="pagination-actions">
+
+            <select
+              id="pageSizeSelect"
+              class="page-size"
+              title="Jumlah arsip per halaman"
+            >
+              <option value="25">25 / halaman</option>
+              <option value="50">50 / halaman</option>
+              <option value="100">100 / halaman</option>
+            </select>
+
+
+            <button
+              id="prevPageBtn"
+              class="page-btn"
+              type="button"
+              title="Halaman sebelumnya"
+            >
+              ←
+            </button>
+
+
+            <span
+              id="pageCurrent"
+              class="page-current"
+            >
+              1 / 1
+            </span>
+
+
+            <button
+              id="nextPageBtn"
+              class="page-btn"
+              type="button"
+              title="Halaman berikutnya"
+            >
+              →
+            </button>
+
+          </div>
+
+        </div>
+
+      </section>
+
+    </main>
+
+  </div>
+
 
   <script>
     const API_URL =
       "https://lemari-api.sialif.workers.dev";
 
+
+    const state = {
+      page: 1,
+      pageSize: 25,
+
+      q: "",
+      tahun: "",
+      bidang: "",
+      kategori: "",
+
+      sortBy: "tanggal",
+      sortDir: "desc",
+
+      total: 0,
+      totalPages: 1,
+
+      loading: false,
+    };
+
+
+    let searchTimer =
+      null;
+
+
+    const els = {
+      backendStatus:
+        document.getElementById(
+          "backendStatus"
+        ),
+
+      archiveCount:
+        document.getElementById(
+          "archiveCount"
+        ),
+
+      searchInput:
+        document.getElementById(
+          "searchInput"
+        ),
+
+      yearFilter:
+        document.getElementById(
+          "yearFilter"
+        ),
+
+      divisionFilter:
+        document.getElementById(
+          "divisionFilter"
+        ),
+
+      categoryFilter:
+        document.getElementById(
+          "categoryFilter"
+        ),
+
+      resetBtn:
+        document.getElementById(
+          "resetBtn"
+        ),
+
+      loadingState:
+        document.getElementById(
+          "loadingState"
+        ),
+
+      errorState:
+        document.getElementById(
+          "errorState"
+        ),
+
+      errorMessage:
+        document.getElementById(
+          "errorMessage"
+        ),
+
+      emptyState:
+        document.getElementById(
+          "emptyState"
+        ),
+
+      retryBtn:
+        document.getElementById(
+          "retryBtn"
+        ),
+
+      tableWrap:
+        document.getElementById(
+          "tableWrap"
+        ),
+
+      archiveTableBody:
+        document.getElementById(
+          "archiveTableBody"
+        ),
+
+      mobileList:
+        document.getElementById(
+          "mobileList"
+        ),
+
+      paginationBar:
+        document.getElementById(
+          "paginationBar"
+        ),
+
+      paginationInfo:
+        document.getElementById(
+          "paginationInfo"
+        ),
+
+      pageSizeSelect:
+        document.getElementById(
+          "pageSizeSelect"
+        ),
+
+      prevPageBtn:
+        document.getElementById(
+          "prevPageBtn"
+        ),
+
+      nextPageBtn:
+        document.getElementById(
+          "nextPageBtn"
+        ),
+
+      pageCurrent:
+        document.getElementById(
+          "pageCurrent"
+        ),
+
+      toast:
+        document.getElementById(
+          "toast"
+        ),
+    };
+
+
+    // ==================================================
+    // UTIL
+    // ==================================================
+
+    function escapeHtml(value) {
+      return String(
+        value ?? ""
+      )
+        .replaceAll(
+          "&",
+          "&amp;"
+        )
+        .replaceAll(
+          "<",
+          "&lt;"
+        )
+        .replaceAll(
+          ">",
+          "&gt;"
+        )
+        .replaceAll(
+          '"',
+          "&quot;"
+        )
+        .replaceAll(
+          "'",
+          "&#039;"
+        );
+    }
+
+
+    function buildApiUrl(
+      pathname,
+      params = {}
+    ) {
+      const url =
+        new URL(
+          API_URL +
+          pathname
+        );
+
+
+      Object.entries(
+        params
+      ).forEach(
+        ([key, value]) => {
+
+          if (
+            value !== "" &&
+            value !== null &&
+            value !== undefined
+          ) {
+            url.searchParams.set(
+              key,
+              value
+            );
+          }
+
+        }
+      );
+
+
+      return url.toString();
+    }
+
+
+    function fillSelect(
+      select,
+      values
+    ) {
+      const first =
+        select.options[0];
+
+
+      select.innerHTML =
+        "";
+
+
+      select.appendChild(
+        first
+      );
+
+
+      values.forEach(
+        value => {
+
+          const option =
+            document.createElement(
+              "option"
+            );
+
+          option.value =
+            value;
+
+          option.textContent =
+            value;
+
+          select.appendChild(
+            option
+          );
+
+        }
+      );
+    }
+
+
+    function showToast(
+      message
+    ) {
+      els.toast.textContent =
+        "✅ " +
+        message;
+
+
+      els.toast.classList.add(
+        "show"
+      );
+
+
+      clearTimeout(
+        showToast.timer
+      );
+
+
+      showToast.timer =
+        setTimeout(
+          () => {
+
+            els.toast
+              .classList
+              .remove(
+                "show"
+              );
+
+          },
+          1800
+        );
+    }
+
+
+    async function copyText(
+      text
+    ) {
+      try {
+        await navigator.clipboard.writeText(
+          text
+        );
+
+        return true;
+      }
+      catch (error) {
+        const temp =
+          document.createElement(
+            "textarea"
+          );
+
+        temp.value =
+          text;
+
+        temp.setAttribute(
+          "readonly",
+          ""
+        );
+
+        temp.style.position =
+          "fixed";
+
+        temp.style.opacity =
+          "0";
+
+        document.body.appendChild(
+          temp
+        );
+
+        temp.select();
+
+
+        let copied =
+          false;
+
+
+        try {
+          copied =
+            document.execCommand(
+              "copy"
+            );
+        }
+        catch (e) {
+          copied =
+            false;
+        }
+
+
+        temp.remove();
+
+        return copied;
+      }
+    }
+
+
+    // ==================================================
+    // STATE DISPLAY
+    // ==================================================
+
+    function hideAllStates() {
+      [
+        els.loadingState,
+        els.errorState,
+        els.emptyState,
+      ].forEach(
+        element => {
+
+          element.classList.remove(
+            "active"
+          );
+
+        }
+      );
+
+
+      els.tableWrap.hidden =
+        true;
+
+      els.mobileList.hidden =
+        true;
+
+      els.paginationBar.hidden =
+        true;
+    }
+
+
+    function showLoading() {
+      hideAllStates();
+
+      els.loadingState.classList.add(
+        "active"
+      );
+    }
+
+
+    function showError(
+      message
+    ) {
+      hideAllStates();
+
+      els.errorMessage.textContent =
+        message;
+
+      els.errorState.classList.add(
+        "active"
+      );
+    }
+
+
+    function showEmpty() {
+      hideAllStates();
+
+      els.emptyState.classList.add(
+        "active"
+      );
+    }
+
+
+    // ==================================================
+    // BACKEND HEALTH
+    // ==================================================
+
     async function checkBackend() {
-      const status =
-        document.getElementById("status");
-
-      const detail =
-        document.getElementById("detail");
-
       try {
         const response =
           await fetch(
-            API_URL + "/health"
+            API_URL +
+            "/health",
+            {
+              cache: "no-store",
+            }
           );
+
 
         const data =
           await response.json();
 
-        if (data.ok) {
-          status.textContent =
-            "TERHUBUNG ✅";
 
-          status.className =
-            "ok";
-
-          detail.textContent =
-            JSON.stringify(
-              data,
-              null,
-              2
-            );
-        } else {
+        if (
+          !response.ok ||
+          !data.ok
+        ) {
           throw new Error(
-            "Backend merespons tetapi status tidak OK."
+            "Backend tidak siap"
           );
         }
+
+
+        els.backendStatus.innerHTML =
+          '<span class="status-dot"></span>' +
+          "Sistem Aktif";
       }
       catch (error) {
-        status.textContent =
-          "GAGAL TERHUBUNG ❌";
+        els.backendStatus.innerHTML =
+          "⚠️ Sistem Bermasalah";
 
-        status.className =
-          "error";
+        els.backendStatus.style.background =
+          "var(--red-soft)";
 
-        detail.textContent =
-          error.message;
+        els.backendStatus.style.color =
+          "#991b1b";
       }
     }
 
-    checkBackend();
+
+    // ==================================================
+    // BOOTSTRAP
+    // ==================================================
+
+    async function loadBootstrap() {
+      const response =
+        await fetch(
+          API_URL +
+          "/api/bootstrap",
+          {
+            cache: "no-store",
+          }
+        );
+
+
+      const data =
+        await response.json();
+
+
+      if (
+        !response.ok ||
+        !data.ok
+      ) {
+        throw new Error(
+          data.error ||
+          "Gagal memuat master LEMARI."
+        );
+      }
+
+
+      fillSelect(
+        els.yearFilter,
+        data.tahun || []
+      );
+
+
+      fillSelect(
+        els.divisionFilter,
+        data.bidang || []
+      );
+
+
+      fillSelect(
+        els.categoryFilter,
+        data.kategori || []
+      );
+    }
+
+
+    // ==================================================
+    // ARCHIVE RENDER
+    // ==================================================
+
+    function renderTable(
+      items
+    ) {
+      els.archiveTableBody.innerHTML =
+        "";
+
+
+      items.forEach(
+        item => {
+
+          const row =
+            document.createElement(
+              "tr"
+            );
+
+
+          const accessClass =
+            item.sensitif
+              ? "badge-restricted"
+              : "badge-open";
+
+
+          const accessIcon =
+            item.sensitif
+              ? "🔒"
+              : "🌐";
+
+
+          row.innerHTML =
+            `
+            <td class="document-cell">
+              <p class="doc-title">
+                ${escapeHtml(item.judul)}
+              </p>
+
+              <div class="doc-id">
+                ${escapeHtml(item.id)}
+              </div>
+
+              <div class="doc-badges">
+                <span class="badge ${accessClass}">
+                  ${accessIcon}
+                  ${escapeHtml(item.aksesLabel)}
+                </span>
+
+                <span class="badge badge-category">
+                  ${escapeHtml(item.kategori)}
+                </span>
+              </div>
+            </td>
+
+            <td>
+              ${escapeHtml(item.tahun)}
+            </td>
+
+            <td>
+              ${escapeHtml(item.bidang)}
+            </td>
+
+            <td>
+              ${escapeHtml(item.kategori)}
+            </td>
+
+            <td>
+              ${escapeHtml(item.tanggalUpload)}
+            </td>
+
+            <td class="aksi-cell">
+              <div class="actions">
+
+                <button
+                  class="icon-btn"
+                  type="button"
+                  title="${
+                    item.sensitif
+                      ? "Buka dokumen (akses terbatas)"
+                      : "Buka dokumen"
+                  }"
+                  data-open="${escapeHtml(item.link)}"
+                >
+                  👁️
+                </button>
+
+                <button
+                  class="icon-btn"
+                  type="button"
+                  title="${
+                    item.sensitif
+                      ? "Salin link (akses tetap terbatas)"
+                      : "Salin link untuk dibagikan"
+                  }"
+                  data-share="${escapeHtml(item.link)}"
+                >
+                  🔗
+                </button>
+
+              </div>
+            </td>
+            `;
+
+
+          els.archiveTableBody.appendChild(
+            row
+          );
+
+        }
+      );
+    }
+
+
+    function renderMobile(
+      items
+    ) {
+      els.mobileList.innerHTML =
+        "";
+
+
+      items.forEach(
+        item => {
+
+          const accessClass =
+            item.sensitif
+              ? "badge-restricted"
+              : "badge-open";
+
+
+          const accessIcon =
+            item.sensitif
+              ? "🔒"
+              : "🌐";
+
+
+          const card =
+            document.createElement(
+              "article"
+            );
+
+
+          card.className =
+            "mobile-item";
+
+
+          card.innerHTML =
+            `
+            <p class="doc-title">
+              ${escapeHtml(item.judul)}
+            </p>
+
+            <div class="doc-id">
+              ${escapeHtml(item.id)}
+            </div>
+
+            <div class="doc-badges">
+              <span class="badge ${accessClass}">
+                ${accessIcon}
+                ${escapeHtml(item.aksesLabel)}
+              </span>
+
+              <span class="badge badge-category">
+                ${escapeHtml(item.kategori)}
+              </span>
+            </div>
+
+
+            <div class="mobile-meta">
+
+              <div class="meta-box">
+                <div class="meta-label">
+                  Tahun
+                </div>
+                <div class="meta-value">
+                  ${escapeHtml(item.tahun)}
+                </div>
+              </div>
+
+              <div class="meta-box">
+                <div class="meta-label">
+                  Bidang
+                </div>
+                <div class="meta-value">
+                  ${escapeHtml(item.bidang)}
+                </div>
+              </div>
+
+              <div class="meta-box">
+                <div class="meta-label">
+                  Kategori
+                </div>
+                <div class="meta-value">
+                  ${escapeHtml(item.kategori)}
+                </div>
+              </div>
+
+              <div class="meta-box">
+                <div class="meta-label">
+                  Tanggal
+                </div>
+                <div class="meta-value">
+                  ${escapeHtml(item.tanggalUpload)}
+                </div>
+              </div>
+
+            </div>
+
+
+            <div class="mobile-actions">
+
+              <button
+                class="btn btn-secondary"
+                type="button"
+                data-open="${escapeHtml(item.link)}"
+              >
+                👁️ Buka
+              </button>
+
+              <button
+                class="btn btn-secondary"
+                type="button"
+                data-share="${escapeHtml(item.link)}"
+              >
+                🔗 Salin Link
+              </button>
+
+            </div>
+            `;
+
+
+          els.mobileList.appendChild(
+            card
+          );
+
+        }
+      );
+    }
+
+
+    function bindArchiveActions() {
+      document
+        .querySelectorAll(
+          "[data-open]"
+        )
+        .forEach(
+          button => {
+
+            button.addEventListener(
+              "click",
+              function() {
+
+                const link =
+                  this.dataset.open;
+
+
+                if (!link) {
+                  return;
+                }
+
+
+                window.open(
+                  link,
+                  "_blank",
+                  "noopener,noreferrer"
+                );
+
+              }
+            );
+
+          }
+        );
+
+
+      document
+        .querySelectorAll(
+          "[data-share]"
+        )
+        .forEach(
+          button => {
+
+            button.addEventListener(
+              "click",
+              async function() {
+
+                const link =
+                  this.dataset.share;
+
+
+                if (!link) {
+                  return;
+                }
+
+
+                const copied =
+                  await copyText(
+                    link
+                  );
+
+
+                if (copied) {
+                  showToast(
+                    "Link dokumen tersalin"
+                  );
+                }
+
+              }
+            );
+
+          }
+        );
+    }
+
+
+    function renderPagination() {
+      const start =
+        state.total === 0
+          ? 0
+          : (
+              (state.page - 1) *
+              state.pageSize
+            ) + 1;
+
+
+      const end =
+        Math.min(
+          state.page *
+          state.pageSize,
+          state.total
+        );
+
+
+      els.paginationInfo.textContent =
+        `${start}–${end} dari ${state.total} arsip`;
+
+
+      els.pageCurrent.textContent =
+        `${state.page} / ${state.totalPages}`;
+
+
+      els.prevPageBtn.disabled =
+        state.page <= 1;
+
+
+      els.nextPageBtn.disabled =
+        state.page >=
+        state.totalPages;
+
+
+      els.pageSizeSelect.value =
+        String(
+          state.pageSize
+        );
+    }
+
+
+    function updateSortIcons() {
+      document
+        .querySelectorAll(
+          "[data-sort-icon]"
+        )
+        .forEach(
+          icon => {
+
+            const field =
+              icon.dataset
+                .sortIcon;
+
+
+            if (
+              field !==
+              state.sortBy
+            ) {
+              icon.textContent =
+                "↕";
+
+              return;
+            }
+
+
+            icon.textContent =
+              state.sortDir ===
+                "asc"
+                ? "↑"
+                : "↓";
+
+          }
+        );
+    }
+
+
+    // ==================================================
+    // LOAD ARCHIVE
+    // ==================================================
+
+    async function loadArchives() {
+      if (state.loading) {
+        return;
+      }
+
+
+      state.loading =
+        true;
+
+
+      showLoading();
+
+
+      const url =
+        buildApiUrl(
+          "/api/arsip",
+          {
+            page:
+              state.page,
+
+            pageSize:
+              state.pageSize,
+
+            q:
+              state.q,
+
+            tahun:
+              state.tahun,
+
+            bidang:
+              state.bidang,
+
+            kategori:
+              state.kategori,
+
+            sortBy:
+              state.sortBy,
+
+            sortDir:
+              state.sortDir,
+          }
+        );
+
+
+      try {
+        const response =
+          await fetch(
+            url,
+            {
+              cache: "no-store",
+            }
+          );
+
+
+        const data =
+          await response.json();
+
+
+        if (
+          !response.ok ||
+          !data.ok
+        ) {
+          throw new Error(
+            data.error ||
+            "Gagal mengambil daftar arsip."
+          );
+        }
+
+
+        state.page =
+          data.pagination.page;
+
+        state.pageSize =
+          data.pagination.pageSize;
+
+        state.total =
+          data.pagination.total;
+
+        state.totalPages =
+          data.pagination.totalPages;
+
+
+        els.archiveCount.textContent =
+          `${state.total} arsip`;
+
+
+        const items =
+          data.items || [];
+
+
+        if (!items.length) {
+          showEmpty();
+          return;
+        }
+
+
+        hideAllStates();
+
+
+        renderTable(
+          items
+        );
+
+
+        renderMobile(
+          items
+        );
+
+
+        bindArchiveActions();
+
+
+        renderPagination();
+
+
+        updateSortIcons();
+
+
+        els.tableWrap.hidden =
+          false;
+
+        els.mobileList.hidden =
+          false;
+
+        els.paginationBar.hidden =
+          false;
+      }
+      catch (error) {
+        showError(
+          error.message ||
+          "Terjadi kesalahan saat membuka LEMARI."
+        );
+      }
+      finally {
+        state.loading =
+          false;
+      }
+    }
+
+
+    // ==================================================
+    // EVENTS
+    // ==================================================
+
+    els.searchInput.addEventListener(
+      "input",
+      function() {
+
+        clearTimeout(
+          searchTimer
+        );
+
+
+        searchTimer =
+          setTimeout(
+            () => {
+
+              state.q =
+                this.value
+                  .trim();
+
+              state.page =
+                1;
+
+              loadArchives();
+
+            },
+            350
+          );
+
+      }
+    );
+
+
+    els.yearFilter.addEventListener(
+      "change",
+      function() {
+
+        state.tahun =
+          this.value;
+
+        state.page =
+          1;
+
+        loadArchives();
+
+      }
+    );
+
+
+    els.divisionFilter.addEventListener(
+      "change",
+      function() {
+
+        state.bidang =
+          this.value;
+
+        state.page =
+          1;
+
+        loadArchives();
+
+      }
+    );
+
+
+    els.categoryFilter.addEventListener(
+      "change",
+      function() {
+
+        state.kategori =
+          this.value;
+
+        state.page =
+          1;
+
+        loadArchives();
+
+      }
+    );
+
+
+    els.resetBtn.addEventListener(
+      "click",
+      function() {
+
+        state.q =
+          "";
+
+        state.tahun =
+          "";
+
+        state.bidang =
+          "";
+
+        state.kategori =
+          "";
+
+        state.page =
+          1;
+
+        state.sortBy =
+          "tanggal";
+
+        state.sortDir =
+          "desc";
+
+
+        els.searchInput.value =
+          "";
+
+        els.yearFilter.value =
+          "";
+
+        els.divisionFilter.value =
+          "";
+
+        els.categoryFilter.value =
+          "";
+
+
+        loadArchives();
+
+      }
+    );
+
+
+    els.pageSizeSelect.addEventListener(
+      "change",
+      function() {
+
+        state.pageSize =
+          Number(
+            this.value
+          );
+
+        state.page =
+          1;
+
+        loadArchives();
+
+      }
+    );
+
+
+    els.prevPageBtn.addEventListener(
+      "click",
+      function() {
+
+        if (
+          state.page <= 1
+        ) {
+          return;
+        }
+
+        state.page -=
+          1;
+
+        loadArchives();
+
+      }
+    );
+
+
+    els.nextPageBtn.addEventListener(
+      "click",
+      function() {
+
+        if (
+          state.page >=
+          state.totalPages
+        ) {
+          return;
+        }
+
+        state.page +=
+          1;
+
+        loadArchives();
+
+      }
+    );
+
+
+    document
+      .querySelectorAll(
+        "[data-sort]"
+      )
+      .forEach(
+        button => {
+
+          button.addEventListener(
+            "click",
+            function() {
+
+              const field =
+                this.dataset.sort;
+
+
+              if (
+                state.sortBy ===
+                field
+              ) {
+                state.sortDir =
+                  state.sortDir ===
+                    "asc"
+                    ? "desc"
+                    : "asc";
+              }
+              else {
+                state.sortBy =
+                  field;
+
+                state.sortDir =
+                  field ===
+                    "tanggal"
+                    ? "desc"
+                    : "asc";
+              }
+
+
+              state.page =
+                1;
+
+
+              loadArchives();
+
+            }
+          );
+
+        }
+      );
+
+
+    els.retryBtn.addEventListener(
+      "click",
+      async function() {
+
+        await init();
+
+      }
+    );
+
+
+    // ==================================================
+    // INIT
+    // ==================================================
+
+    async function init() {
+      showLoading();
+
+      checkBackend();
+
+
+      try {
+        await loadBootstrap();
+
+        await loadArchives();
+      }
+      catch (error) {
+        showError(
+          error.message ||
+          "Gagal membuka LEMARI."
+        );
+      }
+    }
+
+
+    init();
   </script>
 
 </body>

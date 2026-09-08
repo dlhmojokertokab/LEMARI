@@ -1006,6 +1006,131 @@
     }
 
 
+
+    .admin-mode-btn {
+      min-height: 38px;
+      padding: 8px 13px;
+      border: 1px solid rgba(124,58,237,.15);
+      border-radius: 999px;
+      background: rgba(255,255,255,.76);
+      color: var(--primary-dark);
+      font-size: 12px;
+      font-weight: 850;
+    }
+
+    .admin-mode-btn.admin-active {
+      border-color: rgba(13,148,136,.22);
+      background: var(--teal-soft);
+      color: #0f766e;
+    }
+
+    .admin-only {
+      display: none !important;
+    }
+
+    body.admin-active .admin-only {
+      display: inline-flex !important;
+    }
+
+    .settings-modal-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: 14px;
+    }
+
+    .settings-box {
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      background: rgba(255,255,255,.78);
+      padding: 14px;
+    }
+
+    .settings-box h3 {
+      margin: 0 0 10px;
+      font-size: 14px;
+      font-weight: 950;
+    }
+
+    .master-add-row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .master-add-row .input {
+      flex: 1;
+    }
+
+    .master-list {
+      display: grid;
+      gap: 7px;
+      max-height: 280px;
+      overflow: auto;
+    }
+
+    .master-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 8px 9px;
+      border: 1px solid #ece6f1;
+      border-radius: 10px;
+      background: #fcfbfd;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .master-actions {
+      display: flex;
+      gap: 5px;
+    }
+
+    .mini-btn {
+      min-width: 30px;
+      height: 30px;
+      padding: 0 7px;
+      border: 1px solid #ded7e8;
+      border-radius: 8px;
+      background: white;
+      font-size: 11px;
+      font-weight: 900;
+    }
+
+    .danger-box {
+      margin-top: 14px;
+      border: 1px solid rgba(220,38,38,.20);
+      border-radius: 15px;
+      background: linear-gradient(135deg,#fff5f5,#fff);
+      padding: 14px;
+    }
+
+    .danger-title {
+      margin: 0;
+      color: #991b1b;
+      font-size: 14px;
+      font-weight: 950;
+    }
+
+    .danger-desc {
+      margin: 5px 0 11px;
+      color: #7f1d1d;
+      font-size: 10px;
+      line-height: 1.5;
+    }
+
+    .btn-danger {
+      background: #dc2626;
+      color: white;
+    }
+
+    .settings-trash-info {
+      margin: 8px 0 11px;
+      color: #991b1b;
+      font-size: 11px;
+      font-weight: 850;
+    }
+
     /* ==================================================
        RESPONSIVE
     ================================================== */
@@ -1111,7 +1236,8 @@
       }
 
       .chooser-grid,
-      .form-grid {
+      .form-grid,
+      .settings-modal-grid {
         grid-template-columns:
           1fr;
       }
@@ -1160,6 +1286,24 @@
           <span class="status-dot"></span>
           Memeriksa sistem...
         </div>
+
+
+        <button
+          id="adminModeBtn"
+          class="admin-mode-btn"
+          type="button"
+        >
+          🔒 Mode Pengguna
+        </button>
+
+
+        <button
+          id="settingsBtn"
+          class="btn btn-secondary admin-only"
+          type="button"
+        >
+          ⚙️ Pengaturan
+        </button>
 
 
         <button
@@ -1835,6 +1979,149 @@
   </div>
 
 
+
+  <!-- =================================================
+       SETTINGS ADMIN
+  ================================================== -->
+
+  <div
+    id="settingsModal"
+    class="modal-backdrop"
+  >
+
+    <div class="modal-card">
+
+      <div class="modal-head">
+
+        <div>
+
+          <h2 class="modal-title">
+            ⚙️ Pengaturan Admin
+          </h2>
+
+          <p class="modal-desc">
+            Kelola master LEMARI dan Sampah arsip.
+          </p>
+
+        </div>
+
+        <button
+          class="close-btn"
+          type="button"
+          data-close="settingsModal"
+        >
+          ×
+        </button>
+
+      </div>
+
+
+      <div class="modal-body">
+
+        <div class="settings-modal-grid">
+
+          <section class="settings-box">
+
+            <h3>
+              Bidang
+            </h3>
+
+            <div class="master-add-row">
+
+              <input
+                id="newBidangInput"
+                class="input"
+                type="text"
+                placeholder="Bidang baru"
+              >
+
+              <button
+                id="addBidangBtn"
+                class="btn btn-secondary"
+                type="button"
+              >
+                ＋
+              </button>
+
+            </div>
+
+            <div
+              id="bidangMasterList"
+              class="master-list"
+            ></div>
+
+          </section>
+
+
+          <section class="settings-box">
+
+            <h3>
+              Kategori
+            </h3>
+
+            <div class="master-add-row">
+
+              <input
+                id="newKategoriInput"
+                class="input"
+                type="text"
+                placeholder="Kategori baru"
+              >
+
+              <button
+                id="addKategoriBtn"
+                class="btn btn-secondary"
+                type="button"
+              >
+                ＋
+              </button>
+
+            </div>
+
+            <div
+              id="kategoriMasterList"
+              class="master-list"
+            ></div>
+
+          </section>
+
+        </div>
+
+
+        <section class="danger-box">
+
+          <h3 class="danger-title">
+            🗑️ Sampah LEMARI
+          </h3>
+
+          <p class="danger-desc">
+            Menghapus permanen hanya file arsip buatan LEMARI yang sudah berada di Sampah Google Drive.
+          </p>
+
+          <div
+            id="trashInfoText"
+            class="settings-trash-info"
+          >
+            Memeriksa sampah...
+          </div>
+
+          <button
+            id="emptyTrashBtn"
+            class="btn btn-danger"
+            type="button"
+          >
+            DELETE SEMUA SAMPAH LEMARI
+          </button>
+
+        </section>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
   <script>
     const API_URL =
       "https://lemari-api.sialif.workers.dev";
@@ -1891,6 +2178,20 @@
 
     let searchTimer =
       null;
+
+
+    let adminToken =
+      sessionStorage.getItem(
+        "lemariAdminToken"
+      ) || "";
+
+
+    let isAdmin =
+      false;
+
+
+    let currentItems =
+      [];
 
 
     const $ =
@@ -2052,6 +2353,983 @@
         document.body.style.overflow =
           "";
       }
+    }
+
+
+
+    function adminHeaders() {
+      return {
+        "Content-Type":
+          "application/json",
+
+        "Authorization":
+          "Bearer " +
+          adminToken,
+      };
+    }
+
+
+    async function adminPost(
+      pathname,
+      body = {}
+    ) {
+      const response =
+        await fetch(
+          API_URL +
+          pathname,
+          {
+            method:
+              "POST",
+
+            headers:
+              adminHeaders(),
+
+            body:
+              JSON.stringify(
+                body
+              ),
+          }
+        );
+
+
+      const data =
+        await response.json();
+
+
+      if (
+        response.status ===
+          401
+      ) {
+        clearAdminSession();
+      }
+
+
+      return {
+        response,
+        data,
+      };
+    }
+
+
+    function applyAdminUi() {
+      document.body
+        .classList
+        .toggle(
+          "admin-active",
+          isAdmin
+        );
+
+
+      $("adminModeBtn")
+        .classList
+        .toggle(
+          "admin-active",
+          isAdmin
+        );
+
+
+      $("adminModeBtn")
+        .textContent =
+          isAdmin
+            ? "🔓 Mode Admin"
+            : "🔒 Mode Pengguna";
+
+
+      if (
+        currentItems.length
+      ) {
+        renderArchive(
+          currentItems
+        );
+      }
+    }
+
+
+    function clearAdminSession() {
+      adminToken =
+        "";
+
+      isAdmin =
+        false;
+
+      sessionStorage.removeItem(
+        "lemariAdminToken"
+      );
+
+      closeModal(
+        "settingsModal"
+      );
+
+      applyAdminUi();
+    }
+
+
+    async function validateSavedAdminSession() {
+      if (
+        !adminToken
+      ) {
+        return;
+      }
+
+
+      try {
+        const {
+          response,
+          data,
+        } =
+          await adminPost(
+            "/api/admin/session"
+          );
+
+
+        if (
+          response.ok &&
+          data.ok
+        ) {
+          isAdmin =
+            true;
+
+          applyAdminUi();
+        }
+        else {
+          clearAdminSession();
+        }
+      }
+
+      catch (_) {
+        clearAdminSession();
+      }
+    }
+
+
+    async function loginAdmin() {
+      const result =
+        await Swal.fire({
+          title:
+            "🔐 Mode Admin",
+
+          text:
+            "Masukkan PIN Admin LEMARI.",
+
+          input:
+            "password",
+
+          inputAttributes: {
+            maxlength:
+              "6",
+
+            inputmode:
+              "numeric",
+
+            autocomplete:
+              "off",
+          },
+
+          showCancelButton:
+            true,
+
+          confirmButtonText:
+            "Masuk",
+
+          cancelButtonText:
+            "Batal",
+
+          confirmButtonColor:
+            "#7c3aed",
+        });
+
+
+      if (
+        !result.isConfirmed
+      ) {
+        return;
+      }
+
+
+      try {
+        const response =
+          await fetch(
+            API_URL +
+            "/api/admin/login",
+            {
+              method:
+                "POST",
+
+              headers: {
+                "Content-Type":
+                  "application/json",
+              },
+
+              body:
+                JSON.stringify({
+                  pin:
+                    String(
+                      result.value ||
+                      ""
+                    ).trim(),
+                }),
+            }
+          );
+
+
+        const data =
+          await response.json();
+
+
+        if (
+          !response.ok ||
+          !data.ok ||
+          !data.token
+        ) {
+          throw new Error(
+            data.error ||
+            "Login admin gagal."
+          );
+        }
+
+
+        adminToken =
+          data.token;
+
+        isAdmin =
+          true;
+
+
+        sessionStorage.setItem(
+          "lemariAdminToken",
+          adminToken
+        );
+
+
+        applyAdminUi();
+
+
+        await Swal.fire({
+          icon:
+            "success",
+
+          title:
+            "Mode Admin aktif",
+
+          timer:
+            1200,
+
+          showConfirmButton:
+            false,
+        });
+      }
+
+      catch (error) {
+        await Swal.fire({
+          icon:
+            "error",
+
+          title:
+            "Gagal masuk",
+
+          text:
+            error.message,
+        });
+      }
+    }
+
+
+    function optionsHtml(
+      values,
+      selected
+    ) {
+      return values
+        .map(
+          value =>
+            `<option value="${escapeHtml(value)}" ${
+              value === selected
+                ? "selected"
+                : ""
+            }>${escapeHtml(value)}</option>`
+        )
+        .join("");
+    }
+
+
+    async function editArchive(
+      item
+    ) {
+      const result =
+        await Swal.fire({
+          title:
+            "✏️ Edit Arsip",
+
+          html:
+            `
+            <div style="display:grid;gap:10px;text-align:left">
+
+              <label>
+                <small>Judul</small>
+                <input
+                  id="editJudul"
+                  class="swal2-input"
+                  style="margin:4px 0 0;width:100%"
+                  value="${escapeHtml(item.judul)}"
+                >
+              </label>
+
+              <label>
+                <small>Tahun</small>
+                <input
+                  id="editTahun"
+                  class="swal2-input"
+                  style="margin:4px 0 0;width:100%"
+                  type="number"
+                  value="${escapeHtml(item.tahun)}"
+                >
+              </label>
+
+              <label>
+                <small>Bidang</small>
+                <select
+                  id="editBidang"
+                  class="swal2-select"
+                  style="margin:4px 0 0;width:100%"
+                >
+                  ${optionsHtml(
+                    bootstrapData.bidang,
+                    item.bidang
+                  )}
+                </select>
+              </label>
+
+              <label>
+                <small>Kategori</small>
+                <select
+                  id="editKategori"
+                  class="swal2-select"
+                  style="margin:4px 0 0;width:100%"
+                >
+                  ${optionsHtml(
+                    bootstrapData.kategori,
+                    item.kategori
+                  )}
+                </select>
+              </label>
+
+              <label style="display:flex;gap:8px;align-items:center;margin-top:4px">
+                <input
+                  id="editSensitif"
+                  type="checkbox"
+                  ${item.sensitif ? "checked" : ""}
+                >
+                🔒 Akses terbatas / Sensitif
+              </label>
+
+            </div>
+            `,
+
+          showCancelButton:
+            true,
+
+          confirmButtonText:
+            "Simpan",
+
+          cancelButtonText:
+            "Batal",
+
+          confirmButtonColor:
+            "#7c3aed",
+
+          preConfirm: () => ({
+            id:
+              item.id,
+
+            judul:
+              $("editJudul").value.trim(),
+
+            tahun:
+              $("editTahun").value.trim(),
+
+            bidang:
+              $("editBidang").value,
+
+            kategori:
+              $("editKategori").value,
+
+            sensitif:
+              $("editSensitif").checked,
+          }),
+        });
+
+
+      if (
+        !result.isConfirmed
+      ) {
+        return;
+      }
+
+
+      const {
+        response,
+        data,
+      } =
+        await adminPost(
+          "/api/admin/archive/update",
+          result.value
+        );
+
+
+      if (
+        !response.ok ||
+        !data.ok
+      ) {
+        await Swal.fire({
+          icon:
+            "error",
+
+          title:
+            "Edit gagal",
+
+          text:
+            data.error ||
+            "Gagal memperbarui arsip.",
+        });
+
+        return;
+      }
+
+
+      await loadBootstrap();
+
+      await loadArchives();
+
+
+      await Swal.fire({
+        icon:
+          "success",
+
+        title:
+          "Arsip diperbarui",
+
+        timer:
+          1200,
+
+        showConfirmButton:
+          false,
+      });
+    }
+
+
+    async function deleteArchive(
+      item
+    ) {
+      const result =
+        await Swal.fire({
+          icon:
+            "warning",
+
+          title:
+            "Hapus arsip?",
+
+          html:
+            `<b>${escapeHtml(item.judul)}</b><br>${escapeHtml(item.id)}<br><br>File akan dipindahkan ke Sampah LEMARI.`,
+
+          showCancelButton:
+            true,
+
+          confirmButtonText:
+            "Hapus",
+
+          cancelButtonText:
+            "Batal",
+
+          confirmButtonColor:
+            "#dc2626",
+        });
+
+
+      if (
+        !result.isConfirmed
+      ) {
+        return;
+      }
+
+
+      const {
+        response,
+        data,
+      } =
+        await adminPost(
+          "/api/admin/archive/delete",
+          {
+            id:
+              item.id,
+          }
+        );
+
+
+      if (
+        !response.ok ||
+        !data.ok
+      ) {
+        await Swal.fire({
+          icon:
+            "error",
+
+          title:
+            "Hapus gagal",
+
+          text:
+            data.error ||
+            "Gagal menghapus arsip.",
+        });
+
+        return;
+      }
+
+
+      await loadArchives();
+
+
+      await Swal.fire({
+        icon:
+          "success",
+
+        title:
+          "Masuk Sampah LEMARI",
+
+        timer:
+          1200,
+
+        showConfirmButton:
+          false,
+      });
+    }
+
+
+    function formatBytes(
+      bytes
+    ) {
+      bytes =
+        Number(bytes) || 0;
+
+      if (
+        bytes < 1024
+      ) {
+        return `${bytes} B`;
+      }
+
+      if (
+        bytes < 1024 * 1024
+      ) {
+        return `${(
+          bytes / 1024
+        ).toFixed(1)} KB`;
+      }
+
+      if (
+        bytes < 1024 * 1024 * 1024
+      ) {
+        return `${(
+          bytes /
+          1024 /
+          1024
+        ).toFixed(1)} MB`;
+      }
+
+      return `${(
+        bytes /
+        1024 /
+        1024 /
+        1024
+      ).toFixed(2)} GB`;
+    }
+
+
+    async function loadTrashInfo() {
+      $("trashInfoText").textContent =
+        "Memeriksa sampah...";
+
+
+      const {
+        response,
+        data,
+      } =
+        await adminPost(
+          "/api/admin/trash/info"
+        );
+
+
+      if (
+        !response.ok ||
+        !data.ok
+      ) {
+        $("trashInfoText").textContent =
+          data.error ||
+          "Gagal membaca sampah.";
+
+        return;
+      }
+
+
+      $("trashInfoText").textContent =
+        `${data.jumlahFile} file • ${formatBytes(data.totalBytes)}`;
+    }
+
+
+    function renderMasterList(
+      type
+    ) {
+      const values =
+        type ===
+          "bidang"
+          ? bootstrapData.bidang
+          : bootstrapData.kategori;
+
+
+      const target =
+        type ===
+          "bidang"
+          ? $("bidangMasterList")
+          : $("kategoriMasterList");
+
+
+      target.innerHTML =
+        "";
+
+
+      values.forEach(
+        value => {
+
+          const row =
+            document.createElement(
+              "div"
+            );
+
+
+          row.className =
+            "master-row";
+
+
+          row.innerHTML =
+            `
+            <span>
+              ${escapeHtml(value)}
+            </span>
+
+            <span class="master-actions">
+
+              <button
+                class="mini-btn"
+                type="button"
+                data-master-edit="${escapeHtml(type)}"
+                data-master-value="${escapeHtml(value)}"
+              >
+                ✏️
+              </button>
+
+              <button
+                class="mini-btn"
+                type="button"
+                data-master-delete="${escapeHtml(type)}"
+                data-master-value="${escapeHtml(value)}"
+              >
+                🗑️
+              </button>
+
+            </span>
+            `;
+
+
+          target.appendChild(
+            row
+          );
+
+        }
+      );
+
+
+      target
+        .querySelectorAll(
+          "[data-master-edit]"
+        )
+        .forEach(
+          button => {
+
+            button.onclick =
+              () =>
+                renameMaster(
+                  button.dataset.masterEdit,
+                  button.dataset.masterValue
+                );
+
+          }
+        );
+
+
+      target
+        .querySelectorAll(
+          "[data-master-delete]"
+        )
+        .forEach(
+          button => {
+
+            button.onclick =
+              () =>
+                deleteMaster(
+                  button.dataset.masterDelete,
+                  button.dataset.masterValue
+                );
+
+          }
+        );
+    }
+
+
+    async function addMaster(
+      type
+    ) {
+      const input =
+        type ===
+          "bidang"
+          ? $("newBidangInput")
+          : $("newKategoriInput");
+
+
+      const value =
+        input.value.trim();
+
+
+      if (!value) {
+        return;
+      }
+
+
+      const {
+        response,
+        data,
+      } =
+        await adminPost(
+          "/api/admin/master/add",
+          {
+            type,
+            value,
+          }
+        );
+
+
+      if (
+        !response.ok ||
+        !data.ok
+      ) {
+        await Swal.fire({
+          icon:
+            "error",
+
+          title:
+            "Gagal",
+
+          text:
+            data.error,
+        });
+
+        return;
+      }
+
+
+      input.value =
+        "";
+
+
+      await loadBootstrap();
+
+      renderMasterList(
+        "bidang"
+      );
+
+      renderMasterList(
+        "kategori"
+      );
+    }
+
+
+    async function renameMaster(
+      type,
+      oldValue
+    ) {
+      const result =
+        await Swal.fire({
+          title:
+            "Ubah Master",
+
+          input:
+            "text",
+
+          inputValue:
+            oldValue,
+
+          showCancelButton:
+            true,
+
+          confirmButtonText:
+            "Simpan",
+
+          cancelButtonText:
+            "Batal",
+
+          confirmButtonColor:
+            "#7c3aed",
+        });
+
+
+      if (
+        !result.isConfirmed
+      ) {
+        return;
+      }
+
+
+      const {
+        response,
+        data,
+      } =
+        await adminPost(
+          "/api/admin/master/rename",
+          {
+            type,
+            oldValue,
+            newValue:
+              String(
+                result.value ||
+                ""
+              ).trim(),
+          }
+        );
+
+
+      if (
+        !response.ok ||
+        !data.ok
+      ) {
+        await Swal.fire({
+          icon:
+            "error",
+
+          title:
+            "Gagal",
+
+          text:
+            data.error,
+        });
+
+        return;
+      }
+
+
+      await loadBootstrap();
+
+      renderMasterList(
+        "bidang"
+      );
+
+      renderMasterList(
+        "kategori"
+      );
+    }
+
+
+    async function deleteMaster(
+      type,
+      value
+    ) {
+      const result =
+        await Swal.fire({
+          icon:
+            "warning",
+
+          title:
+            "Hapus master?",
+
+          text:
+            value,
+
+          showCancelButton:
+            true,
+
+          confirmButtonText:
+            "Hapus",
+
+          cancelButtonText:
+            "Batal",
+
+          confirmButtonColor:
+            "#dc2626",
+        });
+
+
+      if (
+        !result.isConfirmed
+      ) {
+        return;
+      }
+
+
+      const {
+        response,
+        data,
+      } =
+        await adminPost(
+          "/api/admin/master/delete",
+          {
+            type,
+            value,
+          }
+        );
+
+
+      if (
+        !response.ok ||
+        !data.ok
+      ) {
+        await Swal.fire({
+          icon:
+            "error",
+
+          title:
+            "Gagal",
+
+          text:
+            data.error,
+        });
+
+        return;
+      }
+
+
+      await loadBootstrap();
+
+      renderMasterList(
+        "bidang"
+      );
+
+      renderMasterList(
+        "kategori"
+      );
+    }
+
+
+    async function openSettings() {
+      renderMasterList(
+        "bidang"
+      );
+
+      renderMasterList(
+        "kategori"
+      );
+
+
+      openModal(
+        "settingsModal"
+      );
+
+
+      await loadTrashInfo();
     }
 
 
@@ -2242,6 +3520,10 @@
     function renderArchive(
       items
     ) {
+      currentItems =
+        items;
+
+
       $("archiveTableBody").innerHTML =
         "";
 
@@ -2332,6 +3614,30 @@
                 >
                   🔗
                 </button>
+
+                ${
+                  isAdmin
+                    ? `
+                      <button
+                        class="icon-btn"
+                        type="button"
+                        data-edit="${escapeHtml(item.id)}"
+                        title="Edit arsip"
+                      >
+                        ✏️
+                      </button>
+
+                      <button
+                        class="icon-btn"
+                        type="button"
+                        data-delete="${escapeHtml(item.id)}"
+                        title="Hapus arsip"
+                      >
+                        🗑️
+                      </button>
+                    `
+                    : ""
+                }
 
               </div>
 
@@ -2453,6 +3759,28 @@
                 🔗 Salin Link
               </button>
 
+              ${
+                isAdmin
+                  ? `
+                    <button
+                      class="btn btn-secondary"
+                      type="button"
+                      data-edit="${escapeHtml(item.id)}"
+                    >
+                      ✏️ Edit
+                    </button>
+
+                    <button
+                      class="btn btn-secondary"
+                      type="button"
+                      data-delete="${escapeHtml(item.id)}"
+                    >
+                      🗑️ Hapus
+                    </button>
+                  `
+                  : ""
+              }
+
             </div>
             `;
 
@@ -2523,6 +3851,66 @@
                     showConfirmButton:
                       false,
                   });
+                }
+
+              };
+
+          }
+        );
+
+
+      document
+        .querySelectorAll(
+          "[data-edit]"
+        )
+        .forEach(
+          button => {
+
+            button.onclick =
+              () => {
+
+                const item =
+                  currentItems.find(
+                    x =>
+                      x.id ===
+                      button.dataset.edit
+                  );
+
+
+                if (item) {
+                  editArchive(
+                    item
+                  );
+                }
+
+              };
+
+          }
+        );
+
+
+      document
+        .querySelectorAll(
+          "[data-delete]"
+        )
+        .forEach(
+          button => {
+
+            button.onclick =
+              () => {
+
+                const item =
+                  currentItems.find(
+                    x =>
+                      x.id ===
+                      button.dataset.delete
+                  );
+
+
+                if (item) {
+                  deleteArchive(
+                    item
+                  );
                 }
 
               };
@@ -3062,6 +4450,172 @@
     // EVENTS
     // ==================================================
 
+    $("adminModeBtn").onclick =
+      async () => {
+
+        if (
+          isAdmin
+        ) {
+          const result =
+            await Swal.fire({
+              icon:
+                "question",
+
+              title:
+                "Keluar Mode Admin?",
+
+              showCancelButton:
+                true,
+
+              confirmButtonText:
+                "Keluar",
+
+              cancelButtonText:
+                "Batal",
+            });
+
+
+          if (
+            result.isConfirmed
+          ) {
+            clearAdminSession();
+          }
+
+          return;
+        }
+
+
+        await loginAdmin();
+
+      };
+
+
+    $("settingsBtn").onclick =
+      () =>
+        openSettings();
+
+
+    $("addBidangBtn").onclick =
+      () =>
+        addMaster(
+          "bidang"
+        );
+
+
+    $("addKategoriBtn").onclick =
+      () =>
+        addMaster(
+          "kategori"
+        );
+
+
+    $("emptyTrashBtn").onclick =
+      async () => {
+
+        const result =
+          await Swal.fire({
+            icon:
+              "warning",
+
+            title:
+              "DELETE SEMUA SAMPAH LEMARI?",
+
+            html:
+              "Permanen dan tidak bisa di-undo.<br><br>Ketik <b>HAPUS</b> untuk melanjutkan.",
+
+            input:
+              "text",
+
+            showCancelButton:
+              true,
+
+            confirmButtonText:
+              "DELETE PERMANEN",
+
+            cancelButtonText:
+              "Batal",
+
+            confirmButtonColor:
+              "#dc2626",
+
+            preConfirm:
+              value => {
+
+                if (
+                  String(
+                    value ||
+                    ""
+                  )
+                    .trim()
+                    .toUpperCase() !==
+                  "HAPUS"
+                ) {
+                  Swal.showValidationMessage(
+                    "Ketik HAPUS untuk mengonfirmasi."
+                  );
+
+                  return false;
+                }
+
+                return true;
+              },
+          });
+
+
+        if (
+          !result.isConfirmed
+        ) {
+          return;
+        }
+
+
+        const {
+          response,
+          data,
+        } =
+          await adminPost(
+            "/api/admin/trash/empty"
+          );
+
+
+        if (
+          !response.ok
+        ) {
+          await Swal.fire({
+            icon:
+              "error",
+
+            title:
+              "Gagal",
+
+            text:
+              data.error ||
+              "Gagal mengosongkan sampah.",
+          });
+
+          return;
+        }
+
+
+        await Swal.fire({
+          icon:
+            data.jumlahGagal
+              ? "warning"
+              : "success",
+
+          title:
+            "Sampah diproses",
+
+          text:
+            `${data.jumlahDihapus} dihapus permanen • ${data.jumlahGagal} gagal`,
+        });
+
+
+        await loadTrashInfo();
+
+      };
+
+
     $("uploadBtn").onclick =
       () =>
         openModal(
@@ -3419,6 +4973,8 @@
 
       try {
         await loadBootstrap();
+
+        await validateSavedAdminSession();
 
         await loadArchives();
       }

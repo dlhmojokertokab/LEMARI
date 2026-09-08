@@ -1131,6 +1131,164 @@
       font-weight: 850;
     }
 
+
+    .badge-version {
+      background: #ede9fe;
+      color: #6d28d9;
+    }
+
+    .multi-modal-card {
+      width: min(980px, 100%);
+    }
+
+    .multi-top-grid {
+      display: grid;
+      grid-template-columns: minmax(220px,.45fr) minmax(0,1fr);
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .multi-file-list {
+      display: grid;
+      gap: 10px;
+      max-height: 52vh;
+      overflow: auto;
+      padding-right: 3px;
+    }
+
+    .multi-item {
+      border: 1px solid #e4ddeb;
+      border-radius: 14px;
+      background: rgba(255,255,255,.88);
+      padding: 12px;
+    }
+
+    .multi-file-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .multi-file-name {
+      min-width: 0;
+      font-size: 11px;
+      font-weight: 900;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .multi-file-size {
+      color: var(--muted);
+      font-size: 9px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .multi-item-grid {
+      display: grid;
+      grid-template-columns: minmax(220px,1.2fr) 120px minmax(160px,.7fr) auto;
+      gap: 9px;
+      align-items: end;
+    }
+
+    .multi-sensitive {
+      min-height: 43px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 8px 10px;
+      border: 1px solid #ddd5e8;
+      border-radius: 11px;
+      background: #faf8fc;
+      font-size: 10px;
+      font-weight: 850;
+      white-space: nowrap;
+    }
+
+    .multi-progress-wrap {
+      display: none;
+      margin-top: 12px;
+      padding: 11px;
+      border-radius: 12px;
+      background: var(--primary-soft);
+    }
+
+    .multi-progress-wrap.show {
+      display: block;
+    }
+
+    .multi-progress-label {
+      margin-bottom: 7px;
+      font-size: 10px;
+      font-weight: 900;
+      color: var(--primary-dark);
+    }
+
+    .multi-progress-track {
+      height: 8px;
+      overflow: hidden;
+      border-radius: 999px;
+      background: rgba(124,58,237,.12);
+    }
+
+    .multi-progress-bar {
+      height: 100%;
+      width: 0%;
+      border-radius: inherit;
+      background: linear-gradient(90deg,var(--primary),var(--pink));
+      transition: width .2s ease;
+    }
+
+    .version-history {
+      display: grid;
+      gap: 8px;
+      text-align: left;
+      margin-top: 4px;
+    }
+
+    .version-row {
+      border: 1px solid #e8e1f0;
+      border-radius: 11px;
+      background: #fcfbfd;
+      padding: 10px;
+    }
+
+    .version-row-active {
+      border-color: rgba(124,58,237,.30);
+      background: #faf5ff;
+    }
+
+    .version-row-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .version-row-title {
+      font-size: 12px;
+      font-weight: 950;
+    }
+
+    .version-row-meta {
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: 9px;
+      line-height: 1.5;
+    }
+
+    .version-open {
+      display: inline-flex;
+      margin-top: 7px;
+      font-size: 10px;
+      font-weight: 900;
+      color: var(--primary-dark);
+      text-decoration: none;
+    }
+
     /* ==================================================
        RESPONSIVE
     ================================================== */
@@ -1237,7 +1395,9 @@
 
       .chooser-grid,
       .form-grid,
-      .settings-modal-grid {
+      .settings-modal-grid,
+      .multi-top-grid,
+      .multi-item-grid {
         grid-template-columns:
           1fr;
       }
@@ -1731,9 +1891,9 @@
 
 
           <button
-            class="choice-card choice-disabled"
+            id="chooseMulti"
+            class="choice-card"
             type="button"
-            disabled
           >
 
             <div class="choice-icon">
@@ -1745,7 +1905,7 @@
             </div>
 
             <div class="choice-desc">
-              Segera hadir di tahap berikutnya.
+              Upload beberapa dokumen sekaligus. Bidang per batch, metadata tetap per file.
             </div>
 
           </button>
@@ -1980,6 +2140,147 @@
 
 
 
+
+  <!-- =================================================
+       MULTI UPLOAD
+  ================================================== -->
+
+  <div
+    id="multiUploadModal"
+    class="modal-backdrop"
+  >
+    <div class="modal-card multi-modal-card">
+
+      <div class="modal-head">
+        <div>
+          <h2 class="modal-title">
+            🗂️ Upload Banyak File
+          </h2>
+          <p class="modal-desc">
+            Bidang berlaku untuk satu batch. Judul, Tahun, Kategori, dan Sensitif diatur per file.
+          </p>
+        </div>
+
+        <button
+          class="close-btn"
+          type="button"
+          data-close="multiUploadModal"
+        >
+          ×
+        </button>
+      </div>
+
+      <div class="modal-body">
+
+        <div class="multi-top-grid">
+          <div>
+            <label
+              class="field-label"
+              for="multiDivision"
+            >
+              Bidang Batch
+            </label>
+
+            <select
+              id="multiDivision"
+              class="select"
+            >
+              <option value="">
+                Pilih Bidang
+              </option>
+            </select>
+          </div>
+
+          <div>
+            <label
+              class="field-label"
+              for="multiFilesInput"
+            >
+              Pilih File
+            </label>
+
+            <div class="file-box">
+              <input
+                id="multiFilesInput"
+                type="file"
+                multiple
+              >
+
+              <div
+                class="sensitive-desc"
+                style="margin-top:8px"
+              >
+                Maksimal 50 MB per file. Upload dilakukan satu per satu agar ID arsip tetap aman.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          id="multiEmptyText"
+          class="state active"
+          style="padding:24px 10px"
+        >
+          <div class="state-icon">
+            📚
+          </div>
+
+          <h3 class="state-title">
+            Pilih beberapa file dulu
+          </h3>
+
+          <p class="state-desc">
+            Setelah dipilih, metadata masing-masing file akan muncul di sini.
+          </p>
+        </div>
+
+        <div
+          id="multiFileList"
+          class="multi-file-list"
+        ></div>
+
+        <div
+          id="multiProgressWrap"
+          class="multi-progress-wrap"
+        >
+          <div
+            id="multiProgressLabel"
+            class="multi-progress-label"
+          >
+            Menyiapkan upload...
+          </div>
+
+          <div class="multi-progress-track">
+            <div
+              id="multiProgressBar"
+              class="multi-progress-bar"
+            ></div>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button
+            id="backMultiChooserBtn"
+            class="btn btn-secondary"
+            type="button"
+          >
+            ← Ganti Jenis Upload
+          </button>
+
+          <button
+            id="submitMultiBtn"
+            class="btn btn-primary"
+            type="button"
+          >
+            Upload Semua
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
   <!-- =================================================
        SETTINGS ADMIN
   ================================================== -->
@@ -2191,6 +2492,10 @@
 
 
     let currentItems =
+      [];
+
+
+    let multiFiles =
       [];
 
 
@@ -2828,7 +3133,7 @@
             "Hapus arsip?",
 
           html:
-            `<b>${escapeHtml(item.judul)}</b><br>${escapeHtml(item.id)}<br><br>File akan dipindahkan ke Sampah LEMARI.`,
+            `<b>${escapeHtml(item.judul)}</b><br>${escapeHtml(item.id)}<br><br>File aktif dan seluruh riwayat versinya akan dipindahkan ke Sampah LEMARI.`,
 
           showCancelButton:
             true,
@@ -3510,6 +3815,12 @@
         $("uploadCategory"),
         bootstrapData.kategori
       );
+
+
+      fillSelect(
+        $("multiDivision"),
+        bootstrapData.bidang
+      );
     }
 
 
@@ -3574,6 +3885,15 @@
                   ${escapeHtml(item.kategori)}
                 </span>
 
+
+                <span class="badge badge-version">
+
+
+                  v${escapeHtml(item.versiTerbaru || 1)}
+
+
+                </span>
+
               </div>
             </td>
 
@@ -3613,6 +3933,15 @@
                   title="Salin link"
                 >
                   🔗
+                </button>
+
+                <button
+                  class="icon-btn"
+                  type="button"
+                  data-version="${escapeHtml(item.id)}"
+                  title="Riwayat versi"
+                >
+                  🕘
                 </button>
 
                 ${
@@ -3680,6 +4009,15 @@
 
               <span class="badge badge-category">
                 ${escapeHtml(item.kategori)}
+              </span>
+
+
+              <span class="badge badge-version">
+
+
+                v${escapeHtml(item.versiTerbaru || 1)}
+
+
               </span>
 
             </div>
@@ -3757,6 +4095,14 @@
                 data-share="${escapeHtml(item.link)}"
               >
                 🔗 Salin Link
+              </button>
+
+              <button
+                class="btn btn-secondary"
+                type="button"
+                data-version="${escapeHtml(item.id)}"
+              >
+                🕘 v${escapeHtml(item.versiTerbaru || 1)}
               </button>
 
               ${
@@ -3853,6 +4199,34 @@
                   });
                 }
 
+              };
+
+          }
+        );
+
+
+      document
+        .querySelectorAll(
+          "[data-version]"
+        )
+        .forEach(
+          button => {
+
+            button.onclick =
+              () => {
+
+                const item =
+                  currentItems.find(
+                    x =>
+                      x.id ===
+                      button.dataset.version
+                  );
+
+                if (item) {
+                  showVersionHistory(
+                    item
+                  );
+                }
               };
 
           }
@@ -4446,6 +4820,889 @@
     }
 
 
+
+    // ==================================================
+    // MULTI UPLOAD
+    // ==================================================
+
+    function baseTitleFromFileName(name) {
+      return String(name || "")
+        .replace(/\.[^.]+$/, "")
+        .trim();
+    }
+
+
+    function resetMultiUpload() {
+      multiFiles = [];
+
+      $("multiFilesInput").value = "";
+      $("multiDivision").value = "";
+      $("multiFileList").innerHTML = "";
+
+      $("multiEmptyText")
+        .classList
+        .add("active");
+
+      $("multiProgressWrap")
+        .classList
+        .remove("show");
+
+      $("multiProgressBar")
+        .style
+        .width = "0%";
+    }
+
+
+    function renderMultiFiles() {
+      const list =
+        $("multiFileList");
+
+      list.innerHTML = "";
+
+      $("multiEmptyText")
+        .classList
+        .toggle(
+          "active",
+          multiFiles.length === 0
+        );
+
+      const currentYear =
+        String(
+          new Date().getFullYear()
+        );
+
+      multiFiles.forEach(
+        (item, index) => {
+
+          const card =
+            document.createElement("div");
+
+          card.className =
+            "multi-item";
+
+          card.dataset.multiIndex =
+            String(index);
+
+          card.innerHTML =
+            `
+            <div class="multi-file-head">
+
+              <div
+                class="multi-file-name"
+                title="${escapeHtml(item.file.name)}"
+              >
+                ${index + 1}. ${escapeHtml(item.file.name)}
+              </div>
+
+              <div class="multi-file-size">
+                ${formatBytes(item.file.size)}
+              </div>
+
+            </div>
+
+            <div class="multi-item-grid">
+
+              <div>
+                <label class="field-label">
+                  Judul
+                </label>
+
+                <input
+                  class="input"
+                  data-multi-field="judul"
+                  value="${escapeHtml(
+                    item.judul ||
+                    baseTitleFromFileName(
+                      item.file.name
+                    )
+                  )}"
+                >
+              </div>
+
+              <div>
+                <label class="field-label">
+                  Tahun
+                </label>
+
+                <input
+                  class="input"
+                  data-multi-field="tahun"
+                  type="number"
+                  min="1900"
+                  max="2100"
+                  value="${escapeHtml(
+                    item.tahun ||
+                    currentYear
+                  )}"
+                >
+              </div>
+
+              <div>
+                <label class="field-label">
+                  Kategori
+                </label>
+
+                <select
+                  class="select"
+                  data-multi-field="kategori"
+                >
+                  <option value="">
+                    Pilih Kategori
+                  </option>
+
+                  ${optionsHtml(
+                    bootstrapData.kategori,
+                    item.kategori || ""
+                  )}
+                </select>
+              </div>
+
+              <label class="multi-sensitive">
+                <input
+                  data-multi-field="sensitif"
+                  type="checkbox"
+                  ${item.sensitif ? "checked" : ""}
+                >
+                🔒 Sensitif
+              </label>
+
+            </div>
+            `;
+
+          list.appendChild(card);
+        }
+      );
+    }
+
+
+    function collectMultiMetadata() {
+      const cards =
+        [
+          ...document.querySelectorAll(
+            "[data-multi-index]"
+          ),
+        ];
+
+      return cards.map(
+        card => {
+
+          const index =
+            Number(
+              card.dataset.multiIndex
+            );
+
+          const item =
+            multiFiles[index];
+
+          return {
+            index,
+            file: item.file,
+
+            judul:
+              card.querySelector(
+                '[data-multi-field="judul"]'
+              ).value.trim(),
+
+            tahun:
+              card.querySelector(
+                '[data-multi-field="tahun"]'
+              ).value.trim(),
+
+            kategori:
+              card.querySelector(
+                '[data-multi-field="kategori"]'
+              ).value,
+
+            sensitif:
+              card.querySelector(
+                '[data-multi-field="sensitif"]'
+              ).checked,
+          };
+        }
+      );
+    }
+
+
+    async function checkMultiBeforeUpload(
+      bidang,
+      items
+    ) {
+      const response =
+        await fetch(
+          API_URL +
+          "/api/upload/multi/check",
+          {
+            method: "POST",
+
+            headers: {
+              "Content-Type":
+                "application/json",
+            },
+
+            body:
+              JSON.stringify({
+                bidang,
+
+                items:
+                  items.map(
+                    item => ({
+                      judul: item.judul,
+                      tahun: item.tahun,
+                      kategori: item.kategori,
+                    })
+                  ),
+              }),
+          }
+        );
+
+      const data =
+        await response.json();
+
+      if (
+        !response.ok ||
+        !data.ok
+      ) {
+        throw new Error(
+          data.error ||
+          "Gagal memeriksa duplikat."
+        );
+      }
+
+      return data;
+    }
+
+
+    async function uploadMultiItem(
+      bidang,
+      item,
+      allowDuplicate
+    ) {
+      const form =
+        new FormData();
+
+      form.append(
+        "judul",
+        item.judul
+      );
+
+      form.append(
+        "tahun",
+        item.tahun
+      );
+
+      form.append(
+        "bidang",
+        bidang
+      );
+
+      form.append(
+        "kategori",
+        item.kategori
+      );
+
+      form.append(
+        "sensitif",
+        item.sensitif
+          ? "YA"
+          : "TIDAK"
+      );
+
+      form.append(
+        "allowDuplicate",
+        allowDuplicate
+          ? "YA"
+          : "TIDAK"
+      );
+
+      form.append(
+        "file",
+        item.file,
+        item.file.name
+      );
+
+      const response =
+        await fetch(
+          API_URL +
+          "/api/upload/single",
+          {
+            method: "POST",
+            body: form,
+          }
+        );
+
+      const data =
+        await response.json();
+
+      return {
+        response,
+        data,
+      };
+    }
+
+
+    async function processMultiUpload() {
+      const bidang =
+        $("multiDivision").value;
+
+      const items =
+        collectMultiMetadata();
+
+      if (!bidang) {
+        await Swal.fire({
+          icon: "warning",
+          title: "Pilih Bidang",
+          text:
+            "Bidang berlaku untuk seluruh batch upload.",
+        });
+
+        return;
+      }
+
+      if (!items.length) {
+        await Swal.fire({
+          icon: "warning",
+          title: "Belum ada file",
+        });
+
+        return;
+      }
+
+      const invalid =
+        items.find(
+          item =>
+            !item.judul ||
+            !/^\d{4}$/.test(item.tahun) ||
+            !item.kategori ||
+            item.file.size <= 0 ||
+            item.file.size >
+              50 * 1024 * 1024
+        );
+
+      if (invalid) {
+        await Swal.fire({
+          icon: "warning",
+          title: "Metadata belum lengkap",
+          text:
+            `Periksa file nomor ${invalid.index + 1}.`,
+        });
+
+        return;
+      }
+
+      const button =
+        $("submitMultiBtn");
+
+      button.disabled = true;
+
+      try {
+        const check =
+          await checkMultiBeforeUpload(
+            bidang,
+            items
+          );
+
+        let allowDuplicate =
+          false;
+
+        if (
+          check.jumlahDuplikat > 0
+        ) {
+          const duplicateNames =
+            check.items
+              .filter(x => x.ditemukan)
+              .slice(0, 6)
+              .map(
+                x =>
+                  "• " +
+                  escapeHtml(
+                    x.judul ||
+                    `File ${x.index + 1}`
+                  )
+              )
+              .join("<br>");
+
+          const result =
+            await Swal.fire({
+              icon: "warning",
+
+              title:
+                `${check.jumlahDuplikat} arsip terindikasi duplikat`,
+
+              html:
+                `${duplicateNames}${
+                  check.jumlahDuplikat > 6
+                    ? "<br>• ..."
+                    : ""
+                }<br><br>Tetap upload seluruh batch?`,
+
+              showCancelButton: true,
+              confirmButtonText:
+                "Tetap Upload",
+              cancelButtonText:
+                "Periksa Lagi",
+              confirmButtonColor:
+                "#7c3aed",
+            });
+
+          if (!result.isConfirmed) {
+            return;
+          }
+
+          allowDuplicate = true;
+        }
+
+        $("multiProgressWrap")
+          .classList
+          .add("show");
+
+        const success = [];
+        const failed = [];
+
+        for (
+          let i = 0;
+          i < items.length;
+          i++
+        ) {
+          const item =
+            items[i];
+
+          $("multiProgressLabel")
+            .textContent =
+              `Mengunggah ${i + 1} dari ${items.length}: ${item.file.name}`;
+
+          $("multiProgressBar")
+            .style
+            .width =
+              `${Math.round(
+                (i / items.length) * 100
+              )}%`;
+
+          try {
+            const {
+              response,
+              data,
+            } =
+              await uploadMultiItem(
+                bidang,
+                item,
+                allowDuplicate
+              );
+
+            if (
+              !response.ok ||
+              !data.ok
+            ) {
+              throw new Error(
+                data.error ||
+                "Upload gagal."
+              );
+            }
+
+            success.push(
+              data.arsip
+            );
+          }
+          catch (error) {
+            failed.push({
+              name:
+                item.file.name,
+
+              error:
+                error.message,
+            });
+          }
+
+          $("multiProgressBar")
+            .style
+            .width =
+              `${Math.round(
+                ((i + 1) / items.length) * 100
+              )}%`;
+        }
+
+        $("multiProgressLabel")
+          .textContent =
+            "Selesai";
+
+        await loadBootstrap();
+
+        state.page = 1;
+
+        await loadArchives();
+
+        if (
+          failed.length === 0
+        ) {
+          closeModal(
+            "multiUploadModal"
+          );
+
+          resetMultiUpload();
+
+          await Swal.fire({
+            icon: "success",
+            title:
+              `${success.length} arsip masuk LEMARI!`,
+            text:
+              "Semua file berhasil diunggah.",
+            confirmButtonColor:
+              "#7c3aed",
+          });
+        }
+        else {
+          const failText =
+            failed
+              .slice(0, 6)
+              .map(
+                x =>
+                  `• ${escapeHtml(x.name)} — ${escapeHtml(x.error)}`
+              )
+              .join("<br>");
+
+          await Swal.fire({
+            icon: "warning",
+            title:
+              "Batch selesai sebagian",
+            html:
+              `${success.length} berhasil • ${failed.length} gagal<br><br>${failText}`,
+            confirmButtonColor:
+              "#7c3aed",
+          });
+        }
+      }
+      catch (error) {
+        await Swal.fire({
+          icon: "error",
+          title:
+            "Multi Upload gagal",
+          text:
+            error.message ||
+            "Terjadi kesalahan.",
+        });
+      }
+      finally {
+        button.disabled = false;
+      }
+    }
+
+
+    // ==================================================
+    // VERSIONING
+    // ==================================================
+
+    async function fetchVersionHistory(id) {
+      const response =
+        await fetch(
+          buildApiUrl(
+            "/api/arsip/versions",
+            {
+              id,
+            }
+          ),
+          {
+            cache: "no-store",
+          }
+        );
+
+      const data =
+        await response.json();
+
+      if (
+        !response.ok ||
+        !data.ok
+      ) {
+        throw new Error(
+          data.error ||
+          "Gagal membaca riwayat versi."
+        );
+      }
+
+      return data;
+    }
+
+
+    function renderVersionHistoryHtml(
+      history
+    ) {
+      return `
+        <div class="version-history">
+          ${
+            history.items
+              .map(
+                version => `
+                  <div class="version-row ${
+                    version.aktif
+                      ? "version-row-active"
+                      : ""
+                  }">
+
+                    <div class="version-row-head">
+                      <div class="version-row-title">
+                        v${escapeHtml(version.versi)}
+                        ${
+                          version.aktif
+                            ? " • AKTIF"
+                            : ""
+                        }
+                      </div>
+
+                      <span class="badge ${
+                        version.sensitif
+                          ? "badge-restricted"
+                          : "badge-open"
+                      }">
+                        ${
+                          version.sensitif
+                            ? "🔒 Terbatas"
+                            : "🌐 Viewer by Link"
+                        }
+                      </span>
+                    </div>
+
+                    <div class="version-row-meta">
+                      ${escapeHtml(version.namaFile)}
+                      <br>
+                      ${escapeHtml(version.tanggal || "-")}
+                      ${
+                        version.catatan
+                          ? `<br>${escapeHtml(version.catatan)}`
+                          : ""
+                      }
+                    </div>
+
+                    ${
+                      version.link
+                        ? `
+                          <a
+                            class="version-open"
+                            href="${escapeHtml(version.link)}"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            👁️ Buka versi ini
+                          </a>
+                        `
+                        : ""
+                    }
+                  </div>
+                `
+              )
+              .join("")
+          }
+        </div>
+      `;
+    }
+
+
+    async function showVersionHistory(item) {
+      try {
+        const history =
+          await fetchVersionHistory(
+            item.id
+          );
+
+        const result =
+          await Swal.fire({
+            title:
+              `🕘 Riwayat Versi — ${escapeHtml(item.id)}`,
+
+            html:
+              renderVersionHistoryHtml(
+                history
+              ),
+
+            width: 680,
+            showDenyButton: true,
+            confirmButtonText: "Tutup",
+            denyButtonText:
+              "＋ Tambah Revisi",
+            confirmButtonColor:
+              "#7c3aed",
+            denyButtonColor:
+              "#0d9488",
+          });
+
+        if (result.isDenied) {
+          await addRevision(item);
+        }
+      }
+      catch (error) {
+        await Swal.fire({
+          icon: "error",
+          title:
+            "Riwayat versi gagal dibuka",
+          text:
+            error.message,
+        });
+      }
+    }
+
+
+    async function addRevision(item) {
+      const result =
+        await Swal.fire({
+          title:
+            "＋ Tambah Revisi",
+
+          html:
+            `
+            <div style="display:grid;gap:10px;text-align:left">
+
+              <div style="font-size:11px;color:#746d82">
+                ${escapeHtml(item.judul)}
+                <br>
+                ${escapeHtml(item.id)}
+              </div>
+
+              <label>
+                <small>File revisi</small>
+                <input
+                  id="revisionFileInput"
+                  class="swal2-file"
+                  type="file"
+                  style="width:100%;margin:5px 0 0"
+                >
+              </label>
+
+              <label>
+                <small>Catatan revisi (opsional)</small>
+                <textarea
+                  id="revisionNoteInput"
+                  class="swal2-textarea"
+                  style="width:100%;margin:5px 0 0"
+                  placeholder="Contoh: Perbaikan halaman tanda tangan"
+                ></textarea>
+              </label>
+
+            </div>
+            `,
+
+          showCancelButton: true,
+          confirmButtonText:
+            "Upload Revisi",
+          cancelButtonText:
+            "Batal",
+          confirmButtonColor:
+            "#0d9488",
+
+          preConfirm: () => {
+            const file =
+              $("revisionFileInput")
+                .files[0];
+
+            if (!file) {
+              Swal.showValidationMessage(
+                "Pilih file revisi."
+              );
+
+              return false;
+            }
+
+            if (
+              file.size <= 0 ||
+              file.size >
+                50 * 1024 * 1024
+            ) {
+              Swal.showValidationMessage(
+                "Ukuran file maksimal 50 MB."
+              );
+
+              return false;
+            }
+
+            return {
+              file,
+
+              catatan:
+                $("revisionNoteInput")
+                  .value
+                  .trim(),
+            };
+          },
+        });
+
+      if (!result.isConfirmed) {
+        return;
+      }
+
+      const form =
+        new FormData();
+
+      form.append(
+        "id",
+        item.id
+      );
+
+      form.append(
+        "catatan",
+        result.value.catatan
+      );
+
+      form.append(
+        "file",
+        result.value.file,
+        result.value.file.name
+      );
+
+      Swal.fire({
+        title:
+          "Mengunggah revisi...",
+        allowOutsideClick:
+          false,
+        didOpen:
+          () => Swal.showLoading(),
+      });
+
+      try {
+        const response =
+          await fetch(
+            API_URL +
+            "/api/arsip/revision",
+            {
+              method: "POST",
+              body: form,
+            }
+          );
+
+        const data =
+          await response.json();
+
+        if (
+          !response.ok ||
+          !data.ok
+        ) {
+          throw new Error(
+            data.error ||
+            "Upload revisi gagal."
+          );
+        }
+
+        state.page = 1;
+
+        await loadArchives();
+
+        await Swal.fire({
+          icon: "success",
+          title:
+            `Revisi v${data.versi} tersimpan!`,
+          text:
+            "Versi lama tetap aman dan versi baru menjadi dokumen aktif.",
+          confirmButtonColor:
+            "#7c3aed",
+        });
+      }
+      catch (error) {
+        await Swal.fire({
+          icon: "error",
+          title:
+            "Revisi gagal",
+          text:
+            error.message,
+        });
+      }
+    }
+
+
     // ==================================================
     // EVENTS
     // ==================================================
@@ -4621,6 +5878,72 @@
         openModal(
           "chooserModal"
         );
+
+
+    $("chooseMulti").onclick =
+      () => {
+
+        closeModal(
+          "chooserModal"
+        );
+
+        resetMultiUpload();
+
+        openModal(
+          "multiUploadModal"
+        );
+      };
+
+
+    $("backMultiChooserBtn").onclick =
+      () => {
+
+        closeModal(
+          "multiUploadModal"
+        );
+
+        openModal(
+          "chooserModal"
+        );
+      };
+
+
+    $("multiFilesInput")
+      .addEventListener(
+        "change",
+        function() {
+
+          multiFiles =
+            [
+              ...this.files,
+            ].map(
+              file => ({
+                file,
+
+                judul:
+                  baseTitleFromFileName(
+                    file.name
+                  ),
+
+                tahun:
+                  String(
+                    new Date()
+                      .getFullYear()
+                  ),
+
+                kategori: "",
+                sensitif: false,
+              })
+            );
+
+          renderMultiFiles();
+        }
+      );
+
+
+    $("submitMultiBtn").onclick =
+      () =>
+        processMultiUpload();
 
 
     $("chooseSingle").onclick =

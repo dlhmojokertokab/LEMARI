@@ -2,14 +2,23 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
-  <title>LEMARI DLH</title>
+  <title>
+    LEMARI DLH
+  </title>
 
   <meta
     name="description"
     content="Layanan Elektronik Manajemen Arsip Ringkas dan Integratif — DLH Kabupaten Mojokerto"
   >
+
+  <script
+    src="https://cdn.jsdelivr.net/npm/sweetalert2@11"
+  ></script>
 
   <style>
     :root {
@@ -43,7 +52,6 @@
         0 18px 45px rgba(64,42,90,.10);
 
       --radius: 18px;
-      --radius-sm: 12px;
     }
 
     * {
@@ -98,15 +106,16 @@
       cursor: pointer;
     }
 
-    a {
-      color: inherit;
-    }
-
     .app {
-      width: min(1360px, calc(100% - 32px));
+      width: min(
+        1360px,
+        calc(100% - 32px)
+      );
+
       margin: 0 auto;
       padding: 24px 0 46px;
     }
+
 
     /* ==================================================
        HEADER
@@ -176,7 +185,11 @@
       margin: 0;
 
       font-size:
-        clamp(24px, 3vw, 34px);
+        clamp(
+          24px,
+          3vw,
+          34px
+        );
 
       line-height: 1;
       font-weight: 950;
@@ -221,29 +234,60 @@
     .status-dot {
       width: 8px;
       height: 8px;
+
       border-radius: 50%;
+
       background: var(--teal);
-      box-shadow: 0 0 0 4px rgba(13,148,136,.10);
+
+      box-shadow:
+        0 0 0 4px rgba(13,148,136,.10);
     }
 
-    .read-pill {
+    .btn {
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       gap: 7px;
 
-      min-height: 38px;
-      padding: 8px 13px;
+      min-height: 43px;
+      padding: 10px 14px;
 
-      border: 1px solid rgba(124,58,237,.12);
-      border-radius: 999px;
+      border: 0;
+      border-radius: 11px;
 
-      background: rgba(243,232,255,.76);
-      color: var(--primary-dark);
-
-      font-size: 12px;
       font-weight: 850;
-      white-space: nowrap;
+      text-decoration: none;
+
+      transition:
+        transform .14s ease,
+        box-shadow .14s ease,
+        background .14s ease;
     }
+
+    .btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn-primary {
+      color: white;
+
+      background:
+        linear-gradient(
+          135deg,
+          var(--primary),
+          var(--pink)
+        );
+
+      box-shadow:
+        0 10px 22px rgba(124,58,237,.20);
+    }
+
+    .btn-secondary {
+      border: 1px solid #ded7e8;
+      background: white;
+      color: #5c5468;
+    }
+
 
     /* ==================================================
        MAIN
@@ -266,7 +310,11 @@
       margin: 0;
 
       font-size:
-        clamp(22px, 3vw, 30px);
+        clamp(
+          22px,
+          3vw,
+          30px
+        );
 
       font-weight: 950;
       letter-spacing: -.025em;
@@ -297,6 +345,7 @@
       white-space: nowrap;
     }
 
+
     /* ==================================================
        TOOLBAR
     ================================================== */
@@ -307,6 +356,7 @@
         minmax(260px, 1.5fr)
         repeat(3, minmax(150px, .65fr))
         auto;
+
       gap: 10px;
 
       padding: 14px;
@@ -323,15 +373,13 @@
         blur(12px);
     }
 
-    .field {
-      position: relative;
-    }
-
     .field-label {
       display: block;
+
       margin: 0 0 6px 2px;
 
       color: var(--muted);
+
       font-size: 10px;
       font-weight: 850;
       letter-spacing: .04em;
@@ -342,26 +390,24 @@
     .select {
       width: 100%;
       min-height: 43px;
+
       padding: 10px 12px;
 
       border: 1px solid #ddd5e8;
       border-radius: 11px;
 
       outline: 0;
+
       background: rgba(255,255,255,.94);
       color: var(--text);
-
-      transition:
-        border-color .15s ease,
-        box-shadow .15s ease,
-        background .15s ease;
     }
 
     .input:focus,
     .select:focus {
       border-color: rgba(124,58,237,.55);
-      box-shadow: 0 0 0 4px rgba(124,58,237,.08);
-      background: white;
+
+      box-shadow:
+        0 0 0 4px rgba(124,58,237,.08);
     }
 
     .reset-wrap {
@@ -369,40 +415,6 @@
       align-items: flex-end;
     }
 
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 7px;
-
-      min-height: 43px;
-      padding: 10px 14px;
-
-      border: 0;
-      border-radius: 11px;
-
-      font-weight: 850;
-      text-decoration: none;
-
-      transition:
-        transform .14s ease,
-        box-shadow .14s ease,
-        background .14s ease;
-    }
-
-    .btn:hover {
-      transform: translateY(-1px);
-    }
-
-    .btn-secondary {
-      border: 1px solid #ded7e8;
-      background: white;
-      color: #5c5468;
-    }
-
-    .btn-secondary:hover {
-      background: #faf8fc;
-    }
 
     /* ==================================================
        TABLE
@@ -459,11 +471,12 @@
       gap: 5px;
 
       padding: 0;
+
       border: 0;
       background: transparent;
       color: inherit;
+
       font: inherit;
-      cursor: pointer;
     }
 
     tbody td {
@@ -479,10 +492,6 @@
       border-bottom: 0;
     }
 
-    tbody tr {
-      transition: background .14s ease;
-    }
-
     tbody tr:hover {
       background: #fcfaff;
     }
@@ -493,14 +502,17 @@
 
     .doc-title {
       margin: 0;
+
       font-weight: 900;
       line-height: 1.35;
     }
 
     .doc-id {
       margin-top: 4px;
+
       color: var(--muted);
       font-size: 10px;
+
       font-family:
         ui-monospace,
         SFMono-Regular,
@@ -514,6 +526,7 @@
       align-items: center;
       gap: 6px;
       flex-wrap: wrap;
+
       margin-top: 7px;
     }
 
@@ -530,7 +543,6 @@
 
       font-size: 9px;
       font-weight: 900;
-      line-height: 1;
       white-space: nowrap;
     }
 
@@ -575,21 +587,11 @@
 
       background: white;
       color: var(--text);
-
-      transition:
-        transform .14s ease,
-        border-color .14s ease,
-        background .14s ease;
     }
 
-    .icon-btn:hover {
-      transform: translateY(-1px);
-      border-color: #cbb8e8;
-      background: #fcf9ff;
-    }
 
     /* ==================================================
-       STATES
+       STATES / PAGINATION
     ================================================== */
 
     .state {
@@ -604,18 +606,20 @@
 
     .state-icon {
       font-size: 34px;
-      line-height: 1;
     }
 
     .state-title {
       margin: 12px 0 5px;
+
       font-size: 17px;
       font-weight: 950;
     }
 
     .state-desc {
       margin: 0;
+
       color: var(--muted);
+
       font-size: 12px;
       line-height: 1.55;
     }
@@ -623,13 +627,15 @@
     .spinner {
       width: 30px;
       height: 30px;
+
       margin: 0 auto;
 
       border: 3px solid #e9e1f1;
       border-top-color: var(--primary);
       border-radius: 50%;
 
-      animation: spin .75s linear infinite;
+      animation:
+        spin .75s linear infinite;
     }
 
     @keyframes spin {
@@ -637,10 +643,6 @@
         transform: rotate(360deg);
       }
     }
-
-    /* ==================================================
-       PAGINATION
-    ================================================== */
 
     .pagination-bar {
       display: flex;
@@ -652,11 +654,13 @@
       padding: 13px 14px;
 
       border-top: 1px solid var(--border);
+
       background: #fcfbfd;
     }
 
     .pagination-info {
       color: var(--muted);
+
       font-size: 11px;
       font-weight: 750;
     }
@@ -667,9 +671,9 @@
       gap: 7px;
     }
 
-    .page-size {
+    .page-size,
+    .page-btn {
       min-height: 36px;
-      padding: 6px 8px;
 
       border: 1px solid #ddd5e8;
       border-radius: 9px;
@@ -681,84 +685,262 @@
       font-weight: 800;
     }
 
+    .page-size {
+      padding: 6px 8px;
+    }
+
     .page-btn {
-      display: inline-grid;
-      place-items: center;
-
       min-width: 36px;
-      height: 36px;
-
       padding: 0 9px;
-
-      border: 1px solid #ddd5e8;
-      border-radius: 9px;
-
-      background: white;
-      color: var(--text);
-
-      font-size: 11px;
-      font-weight: 900;
     }
 
     .page-btn:disabled {
       opacity: .4;
       cursor: default;
-      transform: none;
     }
 
     .page-current {
       min-width: 38px;
+
       text-align: center;
+
       font-size: 11px;
       font-weight: 900;
+
       color: var(--primary-dark);
     }
 
+
     /* ==================================================
-       TOAST
+       MODAL
     ================================================== */
 
-    .toast {
+    .modal-backdrop {
       position: fixed;
-      right: 18px;
-      top: 18px;
-      z-index: 9999;
+      inset: 0;
+      z-index: 1000;
 
-      display: flex;
+      display: none;
       align-items: center;
-      gap: 9px;
+      justify-content: center;
 
-      max-width: min(420px, calc(100vw - 36px));
+      padding: 20px;
 
-      padding: 11px 13px;
+      background:
+        rgba(33,26,47,.46);
 
-      border: 1px solid rgba(21,128,61,.18);
-      border-radius: 12px;
+      backdrop-filter:
+        blur(7px);
+    }
 
-      background: rgba(240,253,244,.97);
-      color: #166534;
+    .modal-backdrop.show {
+      display: flex;
+    }
+
+    .modal-card {
+      width: min(
+        720px,
+        100%
+      );
+
+      max-height:
+        calc(100vh - 40px);
+
+      overflow: auto;
+
+      border: 1px solid rgba(124,58,237,.13);
+      border-radius: 22px;
+
+      background:
+        linear-gradient(
+          145deg,
+          #fff,
+          #fbf7ff
+        );
 
       box-shadow:
-        0 15px 35px rgba(37,70,44,.15);
+        0 28px 80px rgba(40,24,60,.24);
+    }
 
+    .modal-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 14px;
+
+      padding: 18px 20px;
+
+      border-bottom:
+        1px solid var(--border);
+    }
+
+    .modal-title {
+      margin: 0;
+
+      font-size: 22px;
+      font-weight: 950;
+    }
+
+    .modal-desc {
+      margin: 4px 0 0;
+
+      color: var(--muted);
       font-size: 12px;
-      font-weight: 850;
-
-      transform: translateY(-120px);
-      opacity: 0;
-
-      transition:
-        transform .22s ease,
-        opacity .22s ease;
     }
 
-    .toast.show {
-      transform: translateY(0);
-      opacity: 1;
+    .close-btn {
+      width: 38px;
+      height: 38px;
+
+      border: 1px solid #e2dce9;
+      border-radius: 10px;
+
+      background: white;
+      color: #6b6474;
+
+      font-size: 18px;
     }
+
+    .modal-body {
+      padding: 18px 20px 20px;
+    }
+
+    .chooser-grid {
+      display: grid;
+      grid-template-columns:
+        repeat(
+          2,
+          minmax(
+            0,
+            1fr
+          )
+        );
+
+      gap: 12px;
+    }
+
+    .choice-card {
+      padding: 16px;
+
+      border: 1px solid #dfd4ed;
+      border-radius: 16px;
+
+      background: rgba(255,255,255,.75);
+
+      text-align: left;
+    }
+
+    .choice-card:hover {
+      border-color:
+        rgba(124,58,237,.45);
+
+      background:
+        #fdfaff;
+    }
+
+    .choice-icon {
+      font-size: 26px;
+    }
+
+    .choice-title {
+      margin-top: 8px;
+
+      font-weight: 950;
+      font-size: 16px;
+    }
+
+    .choice-desc {
+      margin-top: 4px;
+
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.5;
+    }
+
+    .choice-disabled {
+      opacity: .46;
+      cursor: not-allowed;
+    }
+
+    .upload-form {
+      display: grid;
+      gap: 13px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns:
+        repeat(
+          2,
+          minmax(
+            0,
+            1fr
+          )
+        );
+
+      gap: 12px;
+    }
+
+    .form-group-full {
+      grid-column:
+        1 / -1;
+    }
+
+    .sensitive-box {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+
+      padding: 13px;
+
+      border: 1px solid #e2d8ec;
+      border-radius: 13px;
+
+      background: #faf7fd;
+    }
+
+    .sensitive-box input {
+      margin-top: 3px;
+    }
+
+    .sensitive-title {
+      font-weight: 900;
+      font-size: 12px;
+    }
+
+    .sensitive-desc {
+      margin-top: 3px;
+
+      color: var(--muted);
+
+      font-size: 10px;
+      line-height: 1.5;
+    }
+
+    .file-box {
+      padding: 14px;
+
+      border: 1px dashed #cfc1df;
+      border-radius: 13px;
+
+      background: white;
+    }
+
+    .file-box input {
+      width: 100%;
+    }
+
+    .form-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 9px;
+
+      margin-top: 4px;
+    }
+
 
     /* ==================================================
-       MOBILE CARDS
+       MOBILE
     ================================================== */
 
     .mobile-list {
@@ -768,17 +950,21 @@
     .mobile-item {
       padding: 14px;
 
-      border-bottom: 1px solid var(--border);
-    }
-
-    .mobile-item:last-child {
-      border-bottom: 0;
+      border-bottom:
+        1px solid var(--border);
     }
 
     .mobile-meta {
       display: grid;
       grid-template-columns:
-        repeat(2, minmax(0,1fr));
+        repeat(
+          2,
+          minmax(
+            0,
+            1fr
+          )
+        );
+
       gap: 8px;
 
       margin-top: 11px;
@@ -788,19 +974,22 @@
       padding: 9px;
 
       border-radius: 10px;
+
       background: #faf8fc;
     }
 
     .meta-label {
       color: var(--muted);
+
       font-size: 8px;
       font-weight: 900;
-      letter-spacing: .04em;
+
       text-transform: uppercase;
     }
 
     .meta-value {
       margin-top: 3px;
+
       font-size: 11px;
       font-weight: 850;
     }
@@ -808,6 +997,7 @@
     .mobile-actions {
       display: flex;
       gap: 8px;
+
       margin-top: 12px;
     }
 
@@ -815,18 +1005,28 @@
       flex: 1;
     }
 
+
     /* ==================================================
        RESPONSIVE
     ================================================== */
 
-    @media (max-width: 980px) {
+    @media (
+      max-width: 980px
+    ) {
       .toolbar {
         grid-template-columns:
-          repeat(2, minmax(0,1fr));
+          repeat(
+            2,
+            minmax(
+              0,
+              1fr
+            )
+          );
       }
 
       .field-search {
-        grid-column: 1 / -1;
+        grid-column:
+          1 / -1;
       }
 
       .reset-wrap {
@@ -838,9 +1038,16 @@
       }
     }
 
-    @media (max-width: 720px) {
+    @media (
+      max-width: 720px
+    ) {
       .app {
-        width: min(100% - 20px, 1360px);
+        width:
+          min(
+            100% - 20px,
+            1360px
+          );
+
         padding-top: 10px;
       }
 
@@ -853,7 +1060,9 @@
         flex-basis: 50px;
         width: 50px;
         height: 50px;
+
         border-radius: 15px;
+
         font-size: 23px;
       }
 
@@ -862,6 +1071,10 @@
       }
 
       .header-actions {
+        gap: 7px;
+      }
+
+      .status-pill {
         display: none;
       }
 
@@ -870,7 +1083,9 @@
       }
 
       .toolbar {
-        grid-template-columns: 1fr;
+        grid-template-columns:
+          1fr;
+
         padding: 11px;
       }
 
@@ -894,23 +1109,16 @@
         width: 100%;
         justify-content: space-between;
       }
-    }
 
-    @media (max-width: 460px) {
-      .brand {
-        gap: 11px;
+      .chooser-grid,
+      .form-grid {
+        grid-template-columns:
+          1fr;
       }
 
-      .brand-title {
-        font-size: 23px;
-      }
-
-      .mobile-meta {
-        grid-template-columns: 1fr;
-      }
-
-      .section-desc {
-        font-size: 11px;
+      .form-group-full {
+        grid-column:
+          auto;
       }
     }
   </style>
@@ -918,31 +1126,15 @@
 
 <body>
 
-  <div
-    id="toast"
-    class="toast"
-  >
-    ✅ Link dokumen tersalin
-  </div>
-
-
   <div class="app">
-
-    <!-- =================================================
-         HEADER
-    ================================================== -->
 
     <header class="hero">
 
       <div class="brand">
 
-        <div
-          class="brand-mark"
-          aria-hidden="true"
-        >
+        <div class="brand-mark">
           🗄️
         </div>
-
 
         <div class="brand-copy">
 
@@ -969,18 +1161,19 @@
           Memeriksa sistem...
         </div>
 
-        <div class="read-pill">
-          👁️ Mode Baca
-        </div>
+
+        <button
+          id="uploadBtn"
+          class="btn btn-primary"
+          type="button"
+        >
+          📤 Upload Arsip
+        </button>
 
       </div>
 
     </header>
 
-
-    <!-- =================================================
-         MAIN
-    ================================================== -->
 
     <main class="main">
 
@@ -1009,14 +1202,9 @@
       </div>
 
 
-      <!-- FILTER -->
+      <section class="toolbar">
 
-      <section
-        class="toolbar"
-        aria-label="Pencarian dan filter arsip"
-      >
-
-        <div class="field field-search">
+        <div class="field-search">
 
           <label
             class="field-label"
@@ -1036,7 +1224,7 @@
         </div>
 
 
-        <div class="field">
+        <div>
 
           <label
             class="field-label"
@@ -1057,7 +1245,7 @@
         </div>
 
 
-        <div class="field">
+        <div>
 
           <label
             class="field-label"
@@ -1078,7 +1266,7 @@
         </div>
 
 
-        <div class="field">
+        <div>
 
           <label
             class="field-label"
@@ -1114,11 +1302,7 @@
       </section>
 
 
-      <!-- ARCHIVE -->
-
       <section class="archive-card">
-
-        <!-- LOADING -->
 
         <div
           id="loadingState"
@@ -1138,8 +1322,6 @@
         </div>
 
 
-        <!-- ERROR -->
-
         <div
           id="errorState"
           class="state"
@@ -1156,9 +1338,7 @@
           <p
             id="errorMessage"
             class="state-desc"
-          >
-            Terjadi kesalahan saat mengambil arsip.
-          </p>
+          ></p>
 
           <button
             id="retryBtn"
@@ -1171,8 +1351,6 @@
 
         </div>
 
-
-        <!-- EMPTY -->
 
         <div
           id="emptyState"
@@ -1188,13 +1366,11 @@
           </h3>
 
           <p class="state-desc">
-            Coba ubah kata pencarian atau filter yang digunakan.
+            Coba ubah kata pencarian atau filter.
           </p>
 
         </div>
 
-
-        <!-- DESKTOP TABLE -->
 
         <div
           id="tableWrap"
@@ -1258,16 +1434,13 @@
                   </button>
                 </th>
 
-                <th
-                  style="text-align:right"
-                >
+                <th style="text-align:right">
                   Aksi
                 </th>
 
               </tr>
 
             </thead>
-
 
             <tbody id="archiveTableBody"></tbody>
 
@@ -1276,16 +1449,12 @@
         </div>
 
 
-        <!-- MOBILE -->
-
         <div
           id="mobileList"
           class="mobile-list"
           hidden
         ></div>
 
-
-        <!-- PAGINATION -->
 
         <div
           id="paginationBar"
@@ -1296,9 +1465,7 @@
           <div
             id="paginationInfo"
             class="pagination-info"
-          >
-            -
-          </div>
+          ></div>
 
 
           <div class="pagination-actions">
@@ -1306,11 +1473,18 @@
             <select
               id="pageSizeSelect"
               class="page-size"
-              title="Jumlah arsip per halaman"
             >
-              <option value="25">25 / halaman</option>
-              <option value="50">50 / halaman</option>
-              <option value="100">100 / halaman</option>
+              <option value="25">
+                25 / halaman
+              </option>
+
+              <option value="50">
+                50 / halaman
+              </option>
+
+              <option value="100">
+                100 / halaman
+              </option>
             </select>
 
 
@@ -1318,7 +1492,6 @@
               id="prevPageBtn"
               class="page-btn"
               type="button"
-              title="Halaman sebelumnya"
             >
               ←
             </button>
@@ -1336,7 +1509,6 @@
               id="nextPageBtn"
               class="page-btn"
               type="button"
-              title="Halaman berikutnya"
             >
               →
             </button>
@@ -1352,145 +1524,380 @@
   </div>
 
 
+  <!-- =================================================
+       CHOOSER UPLOAD
+  ================================================== -->
+
+  <div
+    id="chooserModal"
+    class="modal-backdrop"
+  >
+
+    <div class="modal-card">
+
+      <div class="modal-head">
+
+        <div>
+
+          <h2 class="modal-title">
+            Mau upload bagaimana?
+          </h2>
+
+          <p class="modal-desc">
+            Pilih jenis upload arsip.
+          </p>
+
+        </div>
+
+
+        <button
+          class="close-btn"
+          type="button"
+          data-close="chooserModal"
+        >
+          ×
+        </button>
+
+      </div>
+
+
+      <div class="modal-body">
+
+        <div class="chooser-grid">
+
+          <button
+            id="chooseSingle"
+            class="choice-card"
+            type="button"
+          >
+
+            <div class="choice-icon">
+              📄
+            </div>
+
+            <div class="choice-title">
+              Single File
+            </div>
+
+            <div class="choice-desc">
+              Upload satu dokumen dan isi metadata arsip.
+            </div>
+
+          </button>
+
+
+          <button
+            class="choice-card choice-disabled"
+            type="button"
+            disabled
+          >
+
+            <div class="choice-icon">
+              🗂️
+            </div>
+
+            <div class="choice-title">
+              Banyak File
+            </div>
+
+            <div class="choice-desc">
+              Segera hadir di tahap berikutnya.
+            </div>
+
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =================================================
+       SINGLE UPLOAD
+  ================================================== -->
+
+  <div
+    id="uploadModal"
+    class="modal-backdrop"
+  >
+
+    <div class="modal-card">
+
+      <div class="modal-head">
+
+        <div>
+
+          <h2 class="modal-title">
+            Masukkan Arsip Baru
+          </h2>
+
+          <p class="modal-desc">
+            LEMARI akan menata folder Google Drive secara otomatis.
+          </p>
+
+        </div>
+
+
+        <button
+          class="close-btn"
+          type="button"
+          data-close="uploadModal"
+        >
+          ×
+        </button>
+
+      </div>
+
+
+      <div class="modal-body">
+
+        <form
+          id="uploadForm"
+          class="upload-form"
+        >
+
+          <div class="form-grid">
+
+            <div class="form-group-full">
+
+              <label
+                class="field-label"
+                for="uploadTitle"
+              >
+                Judul Dokumen
+              </label>
+
+              <input
+                id="uploadTitle"
+                class="input"
+                name="judul"
+                type="text"
+                required
+                placeholder="Contoh: Surat Keputusan Tim Pengelola Media Informasi"
+              >
+
+            </div>
+
+
+            <div>
+
+              <label
+                class="field-label"
+                for="uploadYear"
+              >
+                Tahun
+              </label>
+
+              <input
+                id="uploadYear"
+                class="input"
+                name="tahun"
+                type="number"
+                min="1900"
+                max="2100"
+                required
+              >
+
+            </div>
+
+
+            <div>
+
+              <label
+                class="field-label"
+                for="uploadDivision"
+              >
+                Bidang
+              </label>
+
+              <select
+                id="uploadDivision"
+                class="select"
+                name="bidang"
+                required
+              >
+                <option value="">
+                  Pilih Bidang
+                </option>
+              </select>
+
+            </div>
+
+
+            <div class="form-group-full">
+
+              <label
+                class="field-label"
+                for="uploadCategory"
+              >
+                Kategori
+              </label>
+
+              <select
+                id="uploadCategory"
+                class="select"
+                name="kategori"
+                required
+              >
+                <option value="">
+                  Pilih Kategori
+                </option>
+              </select>
+
+            </div>
+
+
+            <div class="form-group-full">
+
+              <label class="sensitive-box">
+
+                <input
+                  id="uploadSensitive"
+                  type="checkbox"
+                >
+
+                <span>
+
+                  <div class="sensitive-title">
+                    🔒 Dokumen sensitif / akses terbatas
+                  </div>
+
+                  <div class="sensitive-desc">
+                    Centang jika dokumen hanya boleh dibuka akun yang diberi akses. Tidak dicentang = Viewer by Link.
+                  </div>
+
+                </span>
+
+              </label>
+
+            </div>
+
+
+            <div class="form-group-full">
+
+              <label class="field-label">
+                File Dokumen
+              </label>
+
+              <div class="file-box">
+
+                <input
+                  id="uploadFile"
+                  name="file"
+                  type="file"
+                  required
+                >
+
+                <div
+                  class="sensitive-desc"
+                  style="margin-top:8px"
+                >
+                  Maksimal 50 MB.
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="form-actions">
+
+            <button
+              id="backChooserBtn"
+              class="btn btn-secondary"
+              type="button"
+            >
+              ← Ganti Jenis Upload
+            </button>
+
+
+            <button
+              id="submitUploadBtn"
+              class="btn btn-primary"
+              type="submit"
+            >
+              Simpan ke LEMARI
+            </button>
+
+          </div>
+
+        </form>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
   <script>
     const API_URL =
       "https://lemari-api.sialif.workers.dev";
 
 
     const state = {
-      page: 1,
-      pageSize: 25,
+      page:
+        1,
 
-      q: "",
-      tahun: "",
-      bidang: "",
-      kategori: "",
+      pageSize:
+        25,
 
-      sortBy: "tanggal",
-      sortDir: "desc",
+      q:
+        "",
 
-      total: 0,
-      totalPages: 1,
+      tahun:
+        "",
 
-      loading: false,
+      bidang:
+        "",
+
+      kategori:
+        "",
+
+      sortBy:
+        "tanggal",
+
+      sortDir:
+        "desc",
+
+      total:
+        0,
+
+      totalPages:
+        1,
+
+      loading:
+        false,
     };
+
+
+    let bootstrapData =
+      {
+        bidang:
+          [],
+
+        kategori:
+          [],
+
+        tahun:
+          [],
+      };
 
 
     let searchTimer =
       null;
 
 
-    const els = {
-      backendStatus:
+    const $ =
+      id =>
         document.getElementById(
-          "backendStatus"
-        ),
-
-      archiveCount:
-        document.getElementById(
-          "archiveCount"
-        ),
-
-      searchInput:
-        document.getElementById(
-          "searchInput"
-        ),
-
-      yearFilter:
-        document.getElementById(
-          "yearFilter"
-        ),
-
-      divisionFilter:
-        document.getElementById(
-          "divisionFilter"
-        ),
-
-      categoryFilter:
-        document.getElementById(
-          "categoryFilter"
-        ),
-
-      resetBtn:
-        document.getElementById(
-          "resetBtn"
-        ),
-
-      loadingState:
-        document.getElementById(
-          "loadingState"
-        ),
-
-      errorState:
-        document.getElementById(
-          "errorState"
-        ),
-
-      errorMessage:
-        document.getElementById(
-          "errorMessage"
-        ),
-
-      emptyState:
-        document.getElementById(
-          "emptyState"
-        ),
-
-      retryBtn:
-        document.getElementById(
-          "retryBtn"
-        ),
-
-      tableWrap:
-        document.getElementById(
-          "tableWrap"
-        ),
-
-      archiveTableBody:
-        document.getElementById(
-          "archiveTableBody"
-        ),
-
-      mobileList:
-        document.getElementById(
-          "mobileList"
-        ),
-
-      paginationBar:
-        document.getElementById(
-          "paginationBar"
-        ),
-
-      paginationInfo:
-        document.getElementById(
-          "paginationInfo"
-        ),
-
-      pageSizeSelect:
-        document.getElementById(
-          "pageSizeSelect"
-        ),
-
-      prevPageBtn:
-        document.getElementById(
-          "prevPageBtn"
-        ),
-
-      nextPageBtn:
-        document.getElementById(
-          "nextPageBtn"
-        ),
-
-      pageCurrent:
-        document.getElementById(
-          "pageCurrent"
-        ),
-
-      toast:
-        document.getElementById(
-          "toast"
-        ),
-    };
+          id
+        );
 
 
     // ==================================================
@@ -1521,6 +1928,45 @@
           "'",
           "&#039;"
         );
+    }
+
+
+    function fillSelect(
+      select,
+      values
+    ) {
+      const first =
+        select.options[0];
+
+
+      select.innerHTML =
+        "";
+
+      select.appendChild(
+        first
+      );
+
+
+      values.forEach(
+        value => {
+
+          const option =
+            document.createElement(
+              "option"
+            );
+
+          option.value =
+            value;
+
+          option.textContent =
+            value;
+
+          select.appendChild(
+            option
+          );
+
+        }
+      );
     }
 
 
@@ -1559,80 +2005,6 @@
     }
 
 
-    function fillSelect(
-      select,
-      values
-    ) {
-      const first =
-        select.options[0];
-
-
-      select.innerHTML =
-        "";
-
-
-      select.appendChild(
-        first
-      );
-
-
-      values.forEach(
-        value => {
-
-          const option =
-            document.createElement(
-              "option"
-            );
-
-          option.value =
-            value;
-
-          option.textContent =
-            value;
-
-          select.appendChild(
-            option
-          );
-
-        }
-      );
-    }
-
-
-    function showToast(
-      message
-    ) {
-      els.toast.textContent =
-        "✅ " +
-        message;
-
-
-      els.toast.classList.add(
-        "show"
-      );
-
-
-      clearTimeout(
-        showToast.timer
-      );
-
-
-      showToast.timer =
-        setTimeout(
-          () => {
-
-            els.toast
-              .classList
-              .remove(
-                "show"
-              );
-
-          },
-          1800
-        );
-    }
-
-
     async function copyText(
       text
     ) {
@@ -1644,82 +2016,71 @@
         return true;
       }
       catch (error) {
-        const temp =
-          document.createElement(
-            "textarea"
-          );
-
-        temp.value =
-          text;
-
-        temp.setAttribute(
-          "readonly",
-          ""
-        );
-
-        temp.style.position =
-          "fixed";
-
-        temp.style.opacity =
-          "0";
-
-        document.body.appendChild(
-          temp
-        );
-
-        temp.select();
+        return false;
+      }
+    }
 
 
-        let copied =
-          false;
+    function openModal(
+      id
+    ) {
+      $(
+        id
+      ).classList.add(
+        "show"
+      );
+
+      document.body.style.overflow =
+        "hidden";
+    }
 
 
-        try {
-          copied =
-            document.execCommand(
-              "copy"
-            );
-        }
-        catch (e) {
-          copied =
-            false;
-        }
+    function closeModal(
+      id
+    ) {
+      $(
+        id
+      ).classList.remove(
+        "show"
+      );
 
-
-        temp.remove();
-
-        return copied;
+      if (
+        !document.querySelector(
+          ".modal-backdrop.show"
+        )
+      ) {
+        document.body.style.overflow =
+          "";
       }
     }
 
 
     // ==================================================
-    // STATE DISPLAY
+    // STATES
     // ==================================================
 
     function hideAllStates() {
       [
-        els.loadingState,
-        els.errorState,
-        els.emptyState,
+        $("loadingState"),
+        $("errorState"),
+        $("emptyState"),
       ].forEach(
-        element => {
-
-          element.classList.remove(
-            "active"
-          );
-
-        }
+        element =>
+          element
+            .classList
+            .remove(
+              "active"
+            )
       );
 
 
-      els.tableWrap.hidden =
+      $("tableWrap").hidden =
         true;
 
-      els.mobileList.hidden =
+      $("mobileList").hidden =
         true;
 
-      els.paginationBar.hidden =
+      $("paginationBar").hidden =
         true;
     }
 
@@ -1727,9 +2088,11 @@
     function showLoading() {
       hideAllStates();
 
-      els.loadingState.classList.add(
-        "active"
-      );
+      $("loadingState")
+        .classList
+        .add(
+          "active"
+        );
     }
 
 
@@ -1738,26 +2101,30 @@
     ) {
       hideAllStates();
 
-      els.errorMessage.textContent =
+      $("errorMessage").textContent =
         message;
 
-      els.errorState.classList.add(
-        "active"
-      );
+      $("errorState")
+        .classList
+        .add(
+          "active"
+        );
     }
 
 
     function showEmpty() {
       hideAllStates();
 
-      els.emptyState.classList.add(
-        "active"
-      );
+      $("emptyState")
+        .classList
+        .add(
+          "active"
+        );
     }
 
 
     // ==================================================
-    // BACKEND HEALTH
+    // BOOTSTRAP
     // ==================================================
 
     async function checkBackend() {
@@ -1767,7 +2134,8 @@
             API_URL +
             "/health",
             {
-              cache: "no-store",
+              cache:
+                "no-store",
             }
           );
 
@@ -1780,32 +2148,19 @@
           !response.ok ||
           !data.ok
         ) {
-          throw new Error(
-            "Backend tidak siap"
-          );
+          throw new Error();
         }
 
 
-        els.backendStatus.innerHTML =
-          '<span class="status-dot"></span>' +
-          "Sistem Aktif";
+        $("backendStatus").innerHTML =
+          '<span class="status-dot"></span>Sistem Aktif';
       }
       catch (error) {
-        els.backendStatus.innerHTML =
+        $("backendStatus").innerHTML =
           "⚠️ Sistem Bermasalah";
-
-        els.backendStatus.style.background =
-          "var(--red-soft)";
-
-        els.backendStatus.style.color =
-          "#991b1b";
       }
     }
 
-
-    // ==================================================
-    // BOOTSTRAP
-    // ==================================================
 
     async function loadBootstrap() {
       const response =
@@ -1813,7 +2168,8 @@
           API_URL +
           "/api/bootstrap",
           {
-            cache: "no-store",
+            cache:
+              "no-store",
           }
         );
 
@@ -1833,44 +2189,68 @@
       }
 
 
+      bootstrapData = {
+        bidang:
+          data.bidang ||
+          [],
+
+        kategori:
+          data.kategori ||
+          [],
+
+        tahun:
+          data.tahun ||
+          [],
+      };
+
+
       fillSelect(
-        els.yearFilter,
-        data.tahun || []
+        $("yearFilter"),
+        bootstrapData.tahun
       );
 
 
       fillSelect(
-        els.divisionFilter,
-        data.bidang || []
+        $("divisionFilter"),
+        bootstrapData.bidang
       );
 
 
       fillSelect(
-        els.categoryFilter,
-        data.kategori || []
+        $("categoryFilter"),
+        bootstrapData.kategori
+      );
+
+
+      fillSelect(
+        $("uploadDivision"),
+        bootstrapData.bidang
+      );
+
+
+      fillSelect(
+        $("uploadCategory"),
+        bootstrapData.kategori
       );
     }
 
 
     // ==================================================
-    // ARCHIVE RENDER
+    // ARSIP
     // ==================================================
 
-    function renderTable(
+    function renderArchive(
       items
     ) {
-      els.archiveTableBody.innerHTML =
+      $("archiveTableBody").innerHTML =
+        "";
+
+      $("mobileList").innerHTML =
         "";
 
 
       items.forEach(
         item => {
-
-          const row =
-            document.createElement(
-              "tr"
-            );
-
 
           const accessClass =
             item.sensitif
@@ -1882,6 +2262,12 @@
             item.sensitif
               ? "🔒"
               : "🌐";
+
+
+          const row =
+            document.createElement(
+              "tr"
+            );
 
 
           row.innerHTML =
@@ -1896,6 +2282,7 @@
               </div>
 
               <div class="doc-badges">
+
                 <span class="badge ${accessClass}">
                   ${accessIcon}
                   ${escapeHtml(item.aksesLabel)}
@@ -1904,6 +2291,7 @@
                 <span class="badge badge-category">
                   ${escapeHtml(item.kategori)}
                 </span>
+
               </div>
             </td>
 
@@ -1924,17 +2312,14 @@
             </td>
 
             <td class="aksi-cell">
+
               <div class="actions">
 
                 <button
                   class="icon-btn"
                   type="button"
-                  title="${
-                    item.sensitif
-                      ? "Buka dokumen (akses terbatas)"
-                      : "Buka dokumen"
-                  }"
                   data-open="${escapeHtml(item.link)}"
+                  title="Buka dokumen"
                 >
                   👁️
                 </button>
@@ -1942,50 +2327,22 @@
                 <button
                   class="icon-btn"
                   type="button"
-                  title="${
-                    item.sensitif
-                      ? "Salin link (akses tetap terbatas)"
-                      : "Salin link untuk dibagikan"
-                  }"
                   data-share="${escapeHtml(item.link)}"
+                  title="Salin link"
                 >
                   🔗
                 </button>
 
               </div>
+
             </td>
             `;
 
 
-          els.archiveTableBody.appendChild(
-            row
-          );
-
-        }
-      );
-    }
-
-
-    function renderMobile(
-      items
-    ) {
-      els.mobileList.innerHTML =
-        "";
-
-
-      items.forEach(
-        item => {
-
-          const accessClass =
-            item.sensitif
-              ? "badge-restricted"
-              : "badge-open";
-
-
-          const accessIcon =
-            item.sensitif
-              ? "🔒"
-              : "🌐";
+          $("archiveTableBody")
+            .appendChild(
+              row
+            );
 
 
           const card =
@@ -2009,6 +2366,7 @@
             </div>
 
             <div class="doc-badges">
+
               <span class="badge ${accessClass}">
                 ${accessIcon}
                 ${escapeHtml(item.aksesLabel)}
@@ -2017,45 +2375,61 @@
               <span class="badge badge-category">
                 ${escapeHtml(item.kategori)}
               </span>
+
             </div>
 
 
             <div class="mobile-meta">
 
               <div class="meta-box">
+
                 <div class="meta-label">
                   Tahun
                 </div>
+
                 <div class="meta-value">
                   ${escapeHtml(item.tahun)}
                 </div>
+
               </div>
 
+
               <div class="meta-box">
+
                 <div class="meta-label">
                   Bidang
                 </div>
+
                 <div class="meta-value">
                   ${escapeHtml(item.bidang)}
                 </div>
+
               </div>
 
+
               <div class="meta-box">
+
                 <div class="meta-label">
                   Kategori
                 </div>
+
                 <div class="meta-value">
                   ${escapeHtml(item.kategori)}
                 </div>
+
               </div>
 
+
               <div class="meta-box">
+
                 <div class="meta-label">
                   Tanggal
                 </div>
+
                 <div class="meta-value">
                   ${escapeHtml(item.tanggalUpload)}
                 </div>
+
               </div>
 
             </div>
@@ -2083,12 +2457,16 @@
             `;
 
 
-          els.mobileList.appendChild(
-            card
-          );
+          $("mobileList")
+            .appendChild(
+              card
+            );
 
         }
       );
+
+
+      bindArchiveActions();
     }
 
 
@@ -2100,27 +2478,16 @@
         .forEach(
           button => {
 
-            button.addEventListener(
-              "click",
+            button.onclick =
               function() {
 
-                const link =
-                  this.dataset.open;
-
-
-                if (!link) {
-                  return;
-                }
-
-
                 window.open(
-                  link,
+                  this.dataset.open,
                   "_blank",
                   "noopener,noreferrer"
                 );
 
-              }
-            );
+              };
 
           }
         );
@@ -2133,33 +2500,32 @@
         .forEach(
           button => {
 
-            button.addEventListener(
-              "click",
+            button.onclick =
               async function() {
-
-                const link =
-                  this.dataset.share;
-
-
-                if (!link) {
-                  return;
-                }
-
 
                 const copied =
                   await copyText(
-                    link
+                    this.dataset.share
                   );
 
 
                 if (copied) {
-                  showToast(
-                    "Link dokumen tersalin"
-                  );
+                  Swal.fire({
+                    icon:
+                      "success",
+
+                    title:
+                      "Link tersalin",
+
+                    timer:
+                      1200,
+
+                    showConfirmButton:
+                      false,
+                  });
                 }
 
-              }
-            );
+              };
 
           }
         );
@@ -2171,9 +2537,13 @@
         state.total === 0
           ? 0
           : (
-              (state.page - 1) *
+              (
+                state.page -
+                1
+              ) *
               state.pageSize
-            ) + 1;
+            ) +
+            1;
 
 
       const end =
@@ -2184,24 +2554,25 @@
         );
 
 
-      els.paginationInfo.textContent =
+      $("paginationInfo").textContent =
         `${start}–${end} dari ${state.total} arsip`;
 
 
-      els.pageCurrent.textContent =
+      $("pageCurrent").textContent =
         `${state.page} / ${state.totalPages}`;
 
 
-      els.prevPageBtn.disabled =
-        state.page <= 1;
+      $("prevPageBtn").disabled =
+        state.page <=
+        1;
 
 
-      els.nextPageBtn.disabled =
+      $("nextPageBtn").disabled =
         state.page >=
         state.totalPages;
 
 
-      els.pageSizeSelect.value =
+      $("pageSizeSelect").value =
         String(
           state.pageSize
         );
@@ -2217,8 +2588,7 @@
           icon => {
 
             const field =
-              icon.dataset
-                .sortIcon;
+              icon.dataset.sortIcon;
 
 
             if (
@@ -2243,12 +2613,10 @@
     }
 
 
-    // ==================================================
-    // LOAD ARCHIVE
-    // ==================================================
-
     async function loadArchives() {
-      if (state.loading) {
+      if (
+        state.loading
+      ) {
         return;
       }
 
@@ -2260,43 +2628,40 @@
       showLoading();
 
 
-      const url =
-        buildApiUrl(
-          "/api/arsip",
-          {
-            page:
-              state.page,
-
-            pageSize:
-              state.pageSize,
-
-            q:
-              state.q,
-
-            tahun:
-              state.tahun,
-
-            bidang:
-              state.bidang,
-
-            kategori:
-              state.kategori,
-
-            sortBy:
-              state.sortBy,
-
-            sortDir:
-              state.sortDir,
-          }
-        );
-
-
       try {
         const response =
           await fetch(
-            url,
+            buildApiUrl(
+              "/api/arsip",
+              {
+                page:
+                  state.page,
+
+                pageSize:
+                  state.pageSize,
+
+                q:
+                  state.q,
+
+                tahun:
+                  state.tahun,
+
+                bidang:
+                  state.bidang,
+
+                kategori:
+                  state.kategori,
+
+                sortBy:
+                  state.sortBy,
+
+                sortDir:
+                  state.sortDir,
+              }
+            ),
             {
-              cache: "no-store",
+              cache:
+                "no-store",
             }
           );
 
@@ -2329,15 +2694,18 @@
           data.pagination.totalPages;
 
 
-        els.archiveCount.textContent =
+        $("archiveCount").textContent =
           `${state.total} arsip`;
 
 
         const items =
-          data.items || [];
+          data.items ||
+          [];
 
 
-        if (!items.length) {
+        if (
+          !items.length
+        ) {
           showEmpty();
           return;
         }
@@ -2346,17 +2714,9 @@
         hideAllStates();
 
 
-        renderTable(
+        renderArchive(
           items
         );
-
-
-        renderMobile(
-          items
-        );
-
-
-        bindArchiveActions();
 
 
         renderPagination();
@@ -2365,21 +2725,23 @@
         updateSortIcons();
 
 
-        els.tableWrap.hidden =
+        $("tableWrap").hidden =
           false;
 
-        els.mobileList.hidden =
+        $("mobileList").hidden =
           false;
 
-        els.paginationBar.hidden =
+        $("paginationBar").hidden =
           false;
       }
+
       catch (error) {
         showError(
           error.message ||
-          "Terjadi kesalahan saat membuka LEMARI."
+          "Gagal membuka LEMARI."
         );
       }
+
       finally {
         state.loading =
           false;
@@ -2388,10 +2750,448 @@
 
 
     // ==================================================
+    // UPLOAD
+    // ==================================================
+
+    function resetUploadForm() {
+      $("uploadForm").reset();
+
+
+      $("uploadYear").value =
+        String(
+          new Date()
+            .getFullYear()
+        );
+    }
+
+
+    function prepareUploadForm() {
+      resetUploadForm();
+
+
+      $("uploadDivision").value =
+        "";
+
+      $("uploadCategory").value =
+        "";
+    }
+
+
+    async function sendSingleUpload(
+      allowDuplicate =
+        false
+    ) {
+      const file =
+        $("uploadFile").files[0];
+
+
+      if (
+        !file
+      ) {
+        throw new Error(
+          "Pilih file dokumen terlebih dahulu."
+        );
+      }
+
+
+      const form =
+        new FormData();
+
+
+      form.append(
+        "judul",
+        $("uploadTitle").value.trim()
+      );
+
+
+      form.append(
+        "tahun",
+        $("uploadYear").value.trim()
+      );
+
+
+      form.append(
+        "bidang",
+        $("uploadDivision").value
+      );
+
+
+      form.append(
+        "kategori",
+        $("uploadCategory").value
+      );
+
+
+      form.append(
+        "sensitif",
+        $("uploadSensitive").checked
+          ? "YA"
+          : "TIDAK"
+      );
+
+
+      form.append(
+        "allowDuplicate",
+        allowDuplicate
+          ? "YA"
+          : "TIDAK"
+      );
+
+
+      form.append(
+        "file",
+        file,
+        file.name
+      );
+
+
+      const response =
+        await fetch(
+          API_URL +
+          "/api/upload/single",
+          {
+            method:
+              "POST",
+
+            body:
+              form,
+          }
+        );
+
+
+      const data =
+        await response.json();
+
+
+      return {
+        response,
+        data,
+      };
+    }
+
+
+    async function processSingleUpload(
+      allowDuplicate =
+        false
+    ) {
+      const button =
+        $("submitUploadBtn");
+
+
+      const originalText =
+        button.textContent;
+
+
+      button.disabled =
+        true;
+
+      button.textContent =
+        "Menyimpan...";
+
+
+      try {
+        const {
+          response,
+          data,
+        } =
+          await sendSingleUpload(
+            allowDuplicate
+          );
+
+
+        if (
+          response.status ===
+            409 &&
+          data.code ===
+            "DUPLICATE"
+        ) {
+          const result =
+            await Swal.fire({
+              icon:
+                "warning",
+
+              title:
+                "Arsip mirip sudah ada",
+
+              html:
+                `
+                <b>${escapeHtml(
+                  data.duplicate?.judul ||
+                  "Arsip lama"
+                )}</b>
+                <br><br>
+                ID: ${escapeHtml(
+                  data.duplicate?.id ||
+                  "-"
+                )}
+                `,
+
+              showCancelButton:
+                true,
+
+              showDenyButton:
+                Boolean(
+                  data.duplicate?.link
+                ),
+
+              confirmButtonText:
+                "Tetap Simpan",
+
+              denyButtonText:
+                "Lihat Arsip Lama",
+
+              cancelButtonText:
+                "Batal",
+
+              confirmButtonColor:
+                "#7c3aed",
+            });
+
+
+          if (
+            result.isConfirmed
+          ) {
+            return processSingleUpload(
+              true
+            );
+          }
+
+
+          if (
+            result.isDenied &&
+            data.duplicate?.link
+          ) {
+            window.open(
+              data.duplicate.link,
+              "_blank",
+              "noopener,noreferrer"
+            );
+          }
+
+
+          return;
+        }
+
+
+        if (
+          !response.ok ||
+          !data.ok
+        ) {
+          throw new Error(
+            data.error ||
+            "Upload gagal."
+          );
+        }
+
+
+        closeModal(
+          "uploadModal"
+        );
+
+
+        resetUploadForm();
+
+
+        await loadBootstrap();
+
+
+        state.page =
+          1;
+
+
+        await loadArchives();
+
+
+        await Swal.fire({
+          icon:
+            "success",
+
+          title:
+            "Masuk LEMARI!",
+
+          html:
+            `
+            <b>${escapeHtml(
+              data.arsip.judul
+            )}</b>
+            <br>
+            ${escapeHtml(
+              data.arsip.id
+            )}
+            <br><br>
+            ${
+              data.arsip.sensitif
+                ? "🔒 Akses terbatas"
+                : "🌐 Viewer by Link"
+            }
+            `,
+
+          confirmButtonColor:
+            "#7c3aed",
+        });
+      }
+
+      catch (error) {
+        await Swal.fire({
+          icon:
+            "error",
+
+          title:
+            "Upload gagal",
+
+          text:
+            error.message ||
+            "Terjadi kesalahan saat upload.",
+
+          confirmButtonColor:
+            "#7c3aed",
+        });
+      }
+
+      finally {
+        button.disabled =
+          false;
+
+        button.textContent =
+          originalText;
+      }
+    }
+
+
+    // ==================================================
     // EVENTS
     // ==================================================
 
-    els.searchInput.addEventListener(
+    $("uploadBtn").onclick =
+      () =>
+        openModal(
+          "chooserModal"
+        );
+
+
+    $("chooseSingle").onclick =
+      () => {
+
+        closeModal(
+          "chooserModal"
+        );
+
+
+        prepareUploadForm();
+
+
+        openModal(
+          "uploadModal"
+        );
+
+      };
+
+
+    $("backChooserBtn").onclick =
+      () => {
+
+        closeModal(
+          "uploadModal"
+        );
+
+
+        openModal(
+          "chooserModal"
+        );
+
+      };
+
+
+    document
+      .querySelectorAll(
+        "[data-close]"
+      )
+      .forEach(
+        button => {
+
+          button.onclick =
+            () =>
+              closeModal(
+                button.dataset.close
+              );
+
+        }
+      );
+
+
+    document
+      .querySelectorAll(
+        ".modal-backdrop"
+      )
+      .forEach(
+        modal => {
+
+          modal.addEventListener(
+            "click",
+            event => {
+
+              if (
+                event.target ===
+                modal
+              ) {
+                closeModal(
+                  modal.id
+                );
+              }
+
+            }
+          );
+
+        }
+      );
+
+
+    $("uploadFile").addEventListener(
+      "change",
+      function() {
+
+        const file =
+          this.files[0];
+
+
+        if (
+          !file
+        ) {
+          return;
+        }
+
+
+        if (
+          !$("uploadTitle")
+            .value
+            .trim()
+        ) {
+          $("uploadTitle").value =
+            file.name.replace(
+              /\.[^.]+$/,
+              ""
+            );
+        }
+
+      }
+    );
+
+
+    $("uploadForm").addEventListener(
+      "submit",
+      event => {
+
+        event.preventDefault();
+
+        processSingleUpload(
+          false
+        );
+
+      }
+    );
+
+
+    $("searchInput").addEventListener(
       "input",
       function() {
 
@@ -2405,8 +3205,7 @@
             () => {
 
               state.q =
-                this.value
-                  .trim();
+                this.value.trim();
 
               state.page =
                 1;
@@ -2421,8 +3220,7 @@
     );
 
 
-    els.yearFilter.addEventListener(
-      "change",
+    $("yearFilter").onchange =
       function() {
 
         state.tahun =
@@ -2433,12 +3231,10 @@
 
         loadArchives();
 
-      }
-    );
+      };
 
 
-    els.divisionFilter.addEventListener(
-      "change",
+    $("divisionFilter").onchange =
       function() {
 
         state.bidang =
@@ -2449,12 +3245,10 @@
 
         loadArchives();
 
-      }
-    );
+      };
 
 
-    els.categoryFilter.addEventListener(
-      "change",
+    $("categoryFilter").onchange =
       function() {
 
         state.kategori =
@@ -2465,12 +3259,10 @@
 
         loadArchives();
 
-      }
-    );
+      };
 
 
-    els.resetBtn.addEventListener(
-      "click",
+    $("resetBtn").onclick =
       function() {
 
         state.q =
@@ -2495,27 +3287,25 @@
           "desc";
 
 
-        els.searchInput.value =
+        $("searchInput").value =
           "";
 
-        els.yearFilter.value =
+        $("yearFilter").value =
           "";
 
-        els.divisionFilter.value =
+        $("divisionFilter").value =
           "";
 
-        els.categoryFilter.value =
+        $("categoryFilter").value =
           "";
 
 
         loadArchives();
 
-      }
-    );
+      };
 
 
-    els.pageSizeSelect.addEventListener(
-      "change",
+    $("pageSizeSelect").onchange =
       function() {
 
         state.pageSize =
@@ -2528,47 +3318,39 @@
 
         loadArchives();
 
-      }
-    );
+      };
 
 
-    els.prevPageBtn.addEventListener(
-      "click",
+    $("prevPageBtn").onclick =
       function() {
 
         if (
-          state.page <= 1
+          state.page >
+          1
         ) {
-          return;
+          state.page -=
+            1;
+
+          loadArchives();
         }
 
-        state.page -=
-          1;
-
-        loadArchives();
-
-      }
-    );
+      };
 
 
-    els.nextPageBtn.addEventListener(
-      "click",
+    $("nextPageBtn").onclick =
       function() {
 
         if (
-          state.page >=
+          state.page <
           state.totalPages
         ) {
-          return;
+          state.page +=
+            1;
+
+          loadArchives();
         }
 
-        state.page +=
-          1;
-
-        loadArchives();
-
-      }
-    );
+      };
 
 
     document
@@ -2578,8 +3360,7 @@
       .forEach(
         button => {
 
-          button.addEventListener(
-            "click",
+          button.onclick =
             function() {
 
               const field =
@@ -2596,6 +3377,7 @@
                     ? "desc"
                     : "asc";
               }
+
               else {
                 state.sortBy =
                   field;
@@ -2614,21 +3396,15 @@
 
               loadArchives();
 
-            }
-          );
+            };
 
         }
       );
 
 
-    els.retryBtn.addEventListener(
-      "click",
-      async function() {
-
-        await init();
-
-      }
-    );
+    $("retryBtn").onclick =
+      () =>
+        init();
 
 
     // ==================================================
@@ -2646,6 +3422,7 @@
 
         await loadArchives();
       }
+
       catch (error) {
         showError(
           error.message ||

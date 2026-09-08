@@ -4,11 +4,108 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>LEMARI DLH</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 900px;
+      margin: 60px auto;
+      padding: 0 20px;
+      background: #f8fafc;
+      color: #1f2937;
+    }
+
+    .card {
+      background: white;
+      padding: 24px;
+      border-radius: 16px;
+      box-shadow: 0 12px 30px rgba(0,0,0,.08);
+    }
+
+    .ok {
+      color: #15803d;
+      font-weight: 700;
+    }
+
+    .error {
+      color: #b91c1c;
+      font-weight: 700;
+    }
+  </style>
 </head>
 
 <body>
-  <h1>🗄️ LEMARI DLH</h1>
-  <p>Layanan Elektronik Manajemen Arsip Ringkas dan Integratif</p>
-  <p>GitHub Edition berhasil hidup 🎉</p>
+
+  <div class="card">
+    <h1>🗄️ LEMARI DLH</h1>
+
+    <p>
+      Layanan Elektronik Manajemen Arsip Ringkas dan Integratif
+    </p>
+
+    <hr>
+
+    <p>
+      Status backend:
+      <span id="status">Memeriksa...</span>
+    </p>
+
+    <pre id="detail"></pre>
+  </div>
+
+  <script>
+    const API_URL =
+      "https://lemari-api.sialif.workers.dev";
+
+    async function checkBackend() {
+      const status =
+        document.getElementById("status");
+
+      const detail =
+        document.getElementById("detail");
+
+      try {
+        const response =
+          await fetch(
+            API_URL + "/health"
+          );
+
+        const data =
+          await response.json();
+
+        if (data.ok) {
+          status.textContent =
+            "TERHUBUNG ✅";
+
+          status.className =
+            "ok";
+
+          detail.textContent =
+            JSON.stringify(
+              data,
+              null,
+              2
+            );
+        } else {
+          throw new Error(
+            "Backend merespons tetapi status tidak OK."
+          );
+        }
+      }
+      catch (error) {
+        status.textContent =
+          "GAGAL TERHUBUNG ❌";
+
+        status.className =
+          "error";
+
+        detail.textContent =
+          error.message;
+      }
+    }
+
+    checkBackend();
+  </script>
+
 </body>
 </html>

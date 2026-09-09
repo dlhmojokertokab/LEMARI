@@ -1,0 +1,28 @@
+{
+  "id": "/LEMARI/",
+  "name": "LEMARI DLH",
+  "short_name": "LEMARI",
+  "description": "Layanan Elektronik Manajemen Arsip Ringkas dan Integratif — DLH Kabupaten Mojokerto",
+  "start_url": "/LEMARI/",
+  "scope": "/LEMARI/",
+  "display": "standalone",
+  "background_color": "#f8f7fb",
+  "theme_color": "#7c3aed",
+  "lang": "id-ID",
+  "categories": [
+    "productivity",
+    "utilities"
+  ],
+  "icons": [
+    {
+      "src": "assets/pwa/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/pwa/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

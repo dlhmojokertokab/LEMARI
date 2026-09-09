@@ -1,18 +1,24 @@
-# LEMARI DLH — Asset Pack
+# LEMARI DLH — Assets 02
 
-Asset hasil pemisahan dari brand board LEMARI yang sudah disetujui di chat.
+Versi final-polish asset pack untuk GitHub Pages.
 
-Struktur:
-- assets/logo — logo utama, square, minimal, favicon
-- assets/pwa — icon 192/512, Apple Touch, splash
-- assets/hero — hero/banner
-- assets/icons — icon UI raster
-- assets/illustrations — empty/success/error
-- manifest.json — metadata ikon aplikasi
+## Prinsip
+- Asset gambar hanya dipakai untuk branding/ilustrasi yang memang perlu.
+- Ikon UI biasa TIDAK memakai PNG hasil crop.
+- Tombol dan aksi memakai icon bawaan/emoji ringan agar tetap tajam dan konsisten.
 
-Urutan deploy ke GitHub:
+## Struktur
+- `assets/logo/` — logo utama, square, minimal, favicon
+- `assets/pwa/` — icon 192/512, Apple Touch, splash
+- `assets/hero/` — hero/banner
+- `assets/illustrations/` — empty/success/error
+- `manifest.json` — metadata PWA
+- `index.html` — frontend LEMARI yang sudah memakai asset branded + icon UI bawaan
+
+## Urutan GitHub
 1. Upload folder `assets/` dan `manifest.json` ke root repo LEMARI.
-2. Setelah semua asset ada, replace root `index.html` dengan `index_LEMARI_ASSETS_01.html`.
-3. Hard refresh GitHub Pages (Ctrl+F5).
+2. Replace root `index.html` dengan `index.html` dari paket ini.
+3. Commit.
+4. Hard refresh GitHub Pages (`Ctrl+F5`).
 
-Catatan: jangan rename path asset tanpa ikut mengubah referensi di index.html.
+Tidak ada folder `assets/icons/` pada versi ini.

@@ -195,26 +195,6 @@
       display: block;
     }
 
-    .ui-icon {
-      width: 20px;
-      height: 20px;
-      object-fit: contain;
-      display: inline-block;
-      flex: 0 0 auto;
-    }
-
-    .icon-btn .ui-icon {
-      width: 21px;
-      height: 21px;
-    }
-
-    .choice-icon img {
-      width: 42px;
-      height: 42px;
-      object-fit: contain;
-      display: block;
-    }
-
     .state-illustration {
       width: min(320px, 82%);
       height: auto;
@@ -1502,8 +1482,7 @@
           class="admin-mode-btn"
           type="button"
         >
-          <img class="ui-icon" src="assets/icons/user.png" alt="">
-          Mode Pengguna
+          🔒 Mode Pengguna
         </button>
 
 
@@ -1512,8 +1491,7 @@
           class="btn btn-secondary admin-only"
           type="button"
         >
-          <img class="ui-icon" src="assets/icons/settings.png" alt="">
-          Pengaturan
+          ⚙️ Pengaturan
         </button>
 
 
@@ -1522,8 +1500,7 @@
           class="btn btn-primary"
           type="button"
         >
-          <img class="ui-icon" src="assets/icons/upload.png" alt="">
-          Upload Arsip
+          📤 Upload Arsip
         </button>
 
       </div>
@@ -1930,7 +1907,7 @@
           >
 
             <div class="choice-icon">
-              <img src="assets/icons/upload.png" alt="">
+              📄
             </div>
 
             <div class="choice-title">
@@ -1951,7 +1928,7 @@
           >
 
             <div class="choice-icon">
-              <img src="assets/icons/upload-multi.png" alt="">
+              🗂️
             </div>
 
             <div class="choice-title">
@@ -2208,8 +2185,7 @@
       <div class="modal-head">
         <div>
           <h2 class="modal-title">
-            <img class="ui-icon" src="assets/icons/upload-multi.png" alt="">
-            Upload Banyak File
+            🗂️ Upload Banyak File
           </h2>
           <p class="modal-desc">
             Bidang berlaku untuk satu batch. Judul, Tahun, Kategori, dan Sensitif diatur per file.
@@ -2791,8 +2767,8 @@
       $("adminModeBtn")
         .innerHTML =
           isAdmin
-            ? '<img class="ui-icon" src="assets/icons/admin.png" alt=""> Mode Admin'
-            : '<img class="ui-icon" src="assets/icons/user.png" alt=""> Mode Pengguna';
+            ? "🔓 Mode Admin"
+            : "🔒 Mode Pengguna";
 
 
       if (
@@ -3978,7 +3954,7 @@
                   data-open="${escapeHtml(item.link)}"
                   title="Buka dokumen"
                 >
-                  <img class="ui-icon" src="assets/icons/view.png" alt="">
+                  👁️
                 </button>
 
                 <button
@@ -3987,7 +3963,7 @@
                   data-share="${escapeHtml(item.link)}"
                   title="Salin link"
                 >
-                  <img class="ui-icon" src="assets/icons/info.png" alt="">
+                  🔗
                 </button>
 
                 <button
@@ -3996,7 +3972,7 @@
                   data-version="${escapeHtml(item.id)}"
                   title="Riwayat versi"
                 >
-                  <img class="ui-icon" src="assets/icons/history.png" alt="">
+                  🕘
                 </button>
 
                 ${
@@ -4008,7 +3984,7 @@
                         data-edit="${escapeHtml(item.id)}"
                         title="Edit arsip"
                       >
-                        <img class="ui-icon" src="assets/icons/edit.png" alt="">
+                        ✏️
                       </button>
 
                       <button
@@ -4017,7 +3993,7 @@
                         data-delete="${escapeHtml(item.id)}"
                         title="Hapus arsip"
                       >
-                        <img class="ui-icon" src="assets/icons/delete.png" alt="">
+                        🗑️
                       </button>
                     `
                     : ""
@@ -4141,7 +4117,7 @@
                 type="button"
                 data-open="${escapeHtml(item.link)}"
               >
-                <img class="ui-icon" src="assets/icons/view.png" alt=""> Buka
+                👁️ Buka
               </button>
 
               <button
@@ -4149,7 +4125,7 @@
                 type="button"
                 data-share="${escapeHtml(item.link)}"
               >
-                <img class="ui-icon" src="assets/icons/info.png" alt=""> Salin Link
+                🔗 Salin Link
               </button>
 
               <button
@@ -4157,7 +4133,7 @@
                 type="button"
                 data-version="${escapeHtml(item.id)}"
               >
-                <img class="ui-icon" src="assets/icons/history.png" alt=""> v${escapeHtml(item.versiTerbaru || 1)}
+                🕘 v${escapeHtml(item.versiTerbaru || 1)}
               </button>
 
               ${
@@ -4168,7 +4144,7 @@
                       type="button"
                       data-edit="${escapeHtml(item.id)}"
                     >
-                      <img class="ui-icon" src="assets/icons/edit.png" alt=""> Edit
+                      ✏️ Edit
                     </button>
 
                     <button
@@ -4176,7 +4152,7 @@
                       type="button"
                       data-delete="${escapeHtml(item.id)}"
                     >
-                      <img class="ui-icon" src="assets/icons/delete.png" alt=""> Hapus
+                      🗑️ Hapus
                     </button>
                   `
                   : ""
@@ -5559,7 +5535,7 @@
         const result =
           await Swal.fire({
             title:
-              `<img src="assets/icons/history.png" style="width:28px;height:28px;vertical-align:middle;margin-right:8px" alt=""> Riwayat Versi — ${escapeHtml(item.id)}`,
+              `🕘 Riwayat Versi — ${escapeHtml(item.id)}`,
 
             html:
               renderVersionHistoryHtml(

@@ -2122,7 +2122,7 @@
 
 
   <!-- =================================================
-       SINGLE UPLOAD
+       SINGLE UPLOAD — KLASIFIKASI ARSIP
   ================================================== -->
 
   <div
@@ -2141,7 +2141,7 @@
           </h2>
 
           <p class="modal-desc">
-            LEMARI akan menata folder Google Drive secara otomatis.
+            Masukkan nomor dokumen. LEMARI akan membaca kode klasifikasi dan tahun secara otomatis.
           </p>
 
         </div>
@@ -2171,9 +2171,94 @@
 
               <label
                 class="field-label"
+                for="uploadDocumentNumber"
+              >
+                Nomor Surat / Dokumen
+              </label>
+
+              <input
+                id="uploadDocumentNumber"
+                class="input"
+                name="nomorDokumen"
+                type="text"
+                autocomplete="off"
+                required
+                placeholder="Contoh: 500.12.13/3006/416-110/2026"
+              >
+
+              <div
+                class="sensitive-desc"
+                style="margin-top:7px"
+              >
+                LEMARI membaca bagian pertama sebagai kode klasifikasi, bagian kedua sebagai nomor surat, dan bagian terakhir sebagai tahun.
+              </div>
+
+            </div>
+
+
+            <div
+              id="classificationPreview"
+              class="form-group-full"
+              style="
+                display:none;
+                border:1px solid #d8cbbd;
+                border-radius:14px;
+                padding:14px 16px;
+                background:#fbf8f2;
+              "
+            >
+
+              <div
+                id="classificationPreviewTitle"
+                style="
+                  font-weight:800;
+                  color:#2f6b45;
+                  margin-bottom:6px;
+                "
+              >
+                Membaca klasifikasi...
+              </div>
+
+              <div
+                id="classificationPreviewText"
+                class="sensitive-desc"
+                style="line-height:1.65"
+              ></div>
+
+              <div
+                id="classificationChoiceWrap"
+                style="
+                  display:none;
+                  margin-top:12px;
+                "
+              >
+                <label
+                  class="field-label"
+                  for="uploadClassificationChoice"
+                >
+                  Pilih Uraian Klasifikasi
+                </label>
+
+                <select
+                  id="uploadClassificationChoice"
+                  class="select"
+                >
+                  <option value="">
+                    Pilih klasifikasi yang sesuai
+                  </option>
+                </select>
+              </div>
+
+            </div>
+
+
+            <div class="form-group-full">
+
+              <label
+                class="field-label"
                 for="uploadTitle"
               >
-                Judul Dokumen
+                Judul / Perihal Dokumen
               </label>
 
               <input
@@ -2182,29 +2267,7 @@
                 name="judul"
                 type="text"
                 required
-                placeholder="Contoh: Surat Keputusan Tim Pengelola Media Informasi"
-              >
-
-            </div>
-
-
-            <div>
-
-              <label
-                class="field-label"
-                for="uploadYear"
-              >
-                Tahun
-              </label>
-
-              <input
-                id="uploadYear"
-                class="input"
-                name="tahun"
-                type="number"
-                min="1900"
-                max="2100"
-                required
+                placeholder="Contoh: SK Tim Media Sosial DLH"
               >
 
             </div>
@@ -2233,23 +2296,69 @@
             </div>
 
 
-            <div class="form-group-full">
+            <div>
 
               <label
                 class="field-label"
-                for="uploadCategory"
+                for="uploadAgendaDirection"
               >
-                Kategori
+                Arah Agenda
               </label>
 
               <select
-                id="uploadCategory"
+                id="uploadAgendaDirection"
                 class="select"
-                name="kategori"
+                name="arahAgenda"
                 required
               >
                 <option value="">
-                  Pilih Kategori
+                  Pilih Arah Agenda
+                </option>
+              </select>
+
+            </div>
+
+
+            <div>
+
+              <label
+                class="field-label"
+                for="uploadLetterType"
+              >
+                Jenis Surat
+              </label>
+
+              <select
+                id="uploadLetterType"
+                class="select"
+                name="jenisSurat"
+                required
+              >
+                <option value="">
+                  Pilih Jenis Surat
+                </option>
+              </select>
+
+            </div>
+
+
+            <div>
+
+              <label
+                class="field-label"
+                for="uploadAgendaType"
+              >
+                Jenis Agenda
+              </label>
+
+              <select
+                id="uploadAgendaType"
+                class="select"
+                name="jenisAgenda"
+                required
+              >
+                <option value="">
+                  Pilih Jenis Agenda
                 </option>
               </select>
 
@@ -2676,7 +2785,40 @@
 
         tahun:
           [],
+
+        arahAgenda:
+          [],
+
+        jenisSurat:
+          [],
+
+        jenisAgenda:
+          [],
       };
+
+
+    let singleClassificationState =
+      {
+        status:
+          "idle",
+
+        nomorDokumen:
+          "",
+
+        uraianKlasifikasi:
+          "",
+
+        data:
+          null,
+      };
+
+
+    let classificationTimer =
+      null;
+
+
+    let classificationRequestId =
+      0;
 
 
     let searchTimer =
@@ -3986,6 +4128,18 @@
         tahun:
           data.tahun ||
           [],
+
+        arahAgenda:
+          data.arahAgenda ||
+          [],
+
+        jenisSurat:
+          data.jenisSurat ||
+          [],
+
+        jenisAgenda:
+          data.jenisAgenda ||
+          [],
       };
 
 
@@ -4014,8 +4168,20 @@
 
 
       fillSelect(
-        $("uploadCategory"),
-        bootstrapData.kategori
+        $("uploadAgendaDirection"),
+        bootstrapData.arahAgenda
+      );
+
+
+      fillSelect(
+        $("uploadLetterType"),
+        bootstrapData.jenisSurat
+      );
+
+
+      fillSelect(
+        $("uploadAgendaType"),
+        bootstrapData.jenisAgenda
       );
 
 
@@ -4717,26 +4883,425 @@
     // UPLOAD
     // ==================================================
 
+    function setClassificationPreview(
+      mode,
+      title,
+      htmlText
+    ) {
+      const box =
+        $("classificationPreview");
+
+      const titleEl =
+        $("classificationPreviewTitle");
+
+      const textEl =
+        $("classificationPreviewText");
+
+
+      box.style.display =
+        "block";
+
+      titleEl.textContent =
+        title;
+
+      textEl.innerHTML =
+        htmlText;
+
+
+      if (
+        mode ===
+          "success"
+      ) {
+        box.style.borderColor =
+          "#b7d4bf";
+
+        box.style.background =
+          "#f1f8f3";
+
+        titleEl.style.color =
+          "#2f6b45";
+      }
+
+      else if (
+        mode ===
+          "warning"
+      ) {
+        box.style.borderColor =
+          "#e6c98f";
+
+        box.style.background =
+          "#fff8e8";
+
+        titleEl.style.color =
+          "#8a5a3b";
+      }
+
+      else if (
+        mode ===
+          "error"
+      ) {
+        box.style.borderColor =
+          "#efb6b6";
+
+        box.style.background =
+          "#fff3f3";
+
+        titleEl.style.color =
+          "#b42318";
+      }
+
+      else {
+        box.style.borderColor =
+          "#d8cbbd";
+
+        box.style.background =
+          "#fbf8f2";
+
+        titleEl.style.color =
+          "#766b60";
+      }
+    }
+
+
+    function resetClassificationPreview() {
+      singleClassificationState =
+        {
+          status:
+            "idle",
+
+          nomorDokumen:
+            "",
+
+          uraianKlasifikasi:
+            "",
+
+          data:
+            null,
+        };
+
+
+      $("classificationPreview")
+        .style
+        .display =
+          "none";
+
+
+      $("classificationChoiceWrap")
+        .style
+        .display =
+          "none";
+
+
+      $("uploadClassificationChoice")
+        .innerHTML =
+          '<option value="">Pilih klasifikasi yang sesuai</option>';
+    }
+
+
+    function classificationReady() {
+      return (
+        singleClassificationState
+          .status ===
+        "ready"
+      );
+    }
+
+
+    async function parseSingleDocumentNumber(
+      force =
+        false
+    ) {
+      const raw =
+        $("uploadDocumentNumber")
+          .value
+          .trim();
+
+
+      resetClassificationPreview();
+
+
+      if (!raw) {
+        return false;
+      }
+
+
+      const parts =
+        raw
+          .split("/")
+          .map(
+            item =>
+              item.trim()
+          )
+          .filter(
+            Boolean
+          );
+
+
+      if (
+        !force &&
+        (
+          parts.length <
+            3 ||
+          !/^\d{4}$/.test(
+            parts[
+              parts.length - 1
+            ] ||
+            ""
+          )
+        )
+      ) {
+        setClassificationPreview(
+          "neutral",
+          "Lengkapi nomor dokumen",
+          "LEMARI akan membaca klasifikasi setelah nomor dokumen lengkap."
+        );
+
+        return false;
+      }
+
+
+      const requestId =
+        ++classificationRequestId;
+
+
+      singleClassificationState
+        .status =
+          "loading";
+
+
+      setClassificationPreview(
+        "neutral",
+        "Membaca klasifikasi...",
+        "Sedang mencocokkan kode dengan MASTER_KLASIFIKASI."
+      );
+
+
+      try {
+        const response =
+          await fetch(
+            API_URL +
+            "/api/klasifikasi/parse?nomorDokumen=" +
+            encodeURIComponent(
+              raw
+            )
+          );
+
+
+        const data =
+          await response.json();
+
+
+        if (
+          requestId !==
+          classificationRequestId
+        ) {
+          return false;
+        }
+
+
+        if (
+          !response.ok ||
+          !data.valid
+        ) {
+          singleClassificationState
+            .status =
+              "error";
+
+          setClassificationPreview(
+            "error",
+            "Nomor dokumen belum valid",
+            escapeHtml(
+              data.error ||
+              "Format nomor dokumen tidak dapat dibaca."
+            )
+          );
+
+          return false;
+        }
+
+
+        if (
+          !data.ditemukan
+        ) {
+          singleClassificationState
+            .status =
+              "error";
+
+          setClassificationPreview(
+            "error",
+            "Kode klasifikasi tidak ditemukan",
+            `
+              Kode <b>${escapeHtml(
+                data.kodeKlasifikasi ||
+                "-"
+              )}</b> tidak ada di MASTER_KLASIFIKASI.
+            `
+          );
+
+          return false;
+        }
+
+
+        if (
+          data.ambigu
+        ) {
+          singleClassificationState =
+            {
+              status:
+                "ambiguous",
+
+              nomorDokumen:
+                data.nomorDokumen,
+
+              uraianKlasifikasi:
+                "",
+
+              data,
+            };
+
+
+          const select =
+            $("uploadClassificationChoice");
+
+
+          select.innerHTML =
+            '<option value="">Pilih klasifikasi yang sesuai</option>' +
+            (
+              data.pilihan ||
+              []
+            )
+              .map(
+                item =>
+                  `
+                  <option value="${escapeHtml(
+                    item.uraian
+                  )}">
+                    ${escapeHtml(
+                      item.kode
+                    )} — ${escapeHtml(
+                      item.uraian
+                    )}
+                  </option>
+                  `
+              )
+              .join("");
+
+
+          $("classificationChoiceWrap")
+            .style
+            .display =
+              "block";
+
+
+          setClassificationPreview(
+            "warning",
+            "Kode klasifikasi punya lebih dari satu uraian",
+            `
+              Kode <b>${escapeHtml(
+                data.kodeKlasifikasi
+              )}</b> ditemukan lebih dari sekali.
+              Pilih uraian yang sesuai sebelum menyimpan.
+              <br>
+              Nomor: <b>${escapeHtml(
+                data.nomorSurat
+              )}</b>
+              &nbsp;•&nbsp;
+              Tahun: <b>${escapeHtml(
+                data.tahunSurat
+              )}</b>
+            `
+          );
+
+          return false;
+        }
+
+
+        singleClassificationState =
+          {
+            status:
+              "ready",
+
+            nomorDokumen:
+              data.nomorDokumen,
+
+            uraianKlasifikasi:
+              data.uraianKlasifikasi,
+
+            data,
+          };
+
+
+        setClassificationPreview(
+          "success",
+          "✓ Kode klasifikasi dikenali",
+          `
+            <b>${escapeHtml(
+              data.kodeKlasifikasi
+            )} — ${escapeHtml(
+              data.uraianKlasifikasi
+            )}</b>
+            <br>
+            Nomor: <b>${escapeHtml(
+              data.nomorSurat
+            )}</b>
+            &nbsp;•&nbsp;
+            Tahun: <b>${escapeHtml(
+              data.tahunSurat
+            )}</b>
+          `
+        );
+
+        return true;
+      }
+
+      catch (error) {
+        if (
+          requestId !==
+          classificationRequestId
+        ) {
+          return false;
+        }
+
+
+        singleClassificationState
+          .status =
+            "error";
+
+
+        setClassificationPreview(
+          "error",
+          "Gagal membaca klasifikasi",
+          escapeHtml(
+            error.message ||
+            "Tidak dapat menghubungi server."
+          )
+        );
+
+        return false;
+      }
+    }
+
+
     function resetUploadForm() {
       $("uploadForm").reset();
 
-
-      $("uploadYear").value =
-        String(
-          new Date()
-            .getFullYear()
-        );
+      resetClassificationPreview();
     }
 
 
     function prepareUploadForm() {
       resetUploadForm();
 
-
       $("uploadDivision").value =
         "";
 
-      $("uploadCategory").value =
+      $("uploadAgendaDirection").value =
+        "";
+
+      $("uploadLetterType").value =
+        "";
+
+      $("uploadAgendaType").value =
         "";
     }
 
@@ -4769,20 +5334,42 @@
 
 
       form.append(
-        "tahun",
-        $("uploadYear").value.trim()
-      );
-
-
-      form.append(
         "bidang",
         $("uploadDivision").value
       );
 
 
       form.append(
-        "kategori",
-        $("uploadCategory").value
+        "nomorDokumen",
+        $("uploadDocumentNumber")
+          .value
+          .trim()
+      );
+
+
+      form.append(
+        "uraianKlasifikasi",
+        singleClassificationState
+          .uraianKlasifikasi ||
+        ""
+      );
+
+
+      form.append(
+        "arahAgenda",
+        $("uploadAgendaDirection").value
+      );
+
+
+      form.append(
+        "jenisSurat",
+        $("uploadLetterType").value
+      );
+
+
+      form.append(
+        "jenisAgenda",
+        $("uploadAgendaType").value
       );
 
 
@@ -4838,6 +5425,41 @@
       allowDuplicate =
         false
     ) {
+      if (
+        !classificationReady()
+      ) {
+        const parsed =
+          await parseSingleDocumentNumber(
+            true
+          );
+
+
+        if (
+          !parsed ||
+          !classificationReady()
+        ) {
+          await Swal.fire({
+            icon:
+              "warning",
+
+            title:
+              "Periksa nomor dokumen",
+
+            text:
+              singleClassificationState.status ===
+                "ambiguous"
+                ? "Pilih uraian klasifikasi yang sesuai terlebih dahulu."
+                : "Nomor dokumen harus terbaca dan kode klasifikasinya harus dikenali.",
+
+            confirmButtonColor:
+              "#2f6b45",
+          });
+
+          return;
+        }
+      }
+
+
       const button =
         $("submitUploadBtn");
 
@@ -4866,8 +5488,12 @@
         if (
           response.status ===
             409 &&
-          data.code ===
-            "DUPLICATE"
+          (
+            data.code ===
+              "DUPLICATE" ||
+            data.code ===
+              "DUPLICATE_DOCUMENT_NUMBER"
+          )
         ) {
           const result =
             await Swal.fire({
@@ -4875,7 +5501,10 @@
                 "warning",
 
               title:
-                "Arsip mirip sudah ada",
+                data.code ===
+                  "DUPLICATE_DOCUMENT_NUMBER"
+                  ? "Nomor dokumen sudah ada"
+                  : "Arsip mirip sudah ada",
 
               html:
                 `
@@ -4982,6 +5611,22 @@
             ${escapeHtml(
               data.arsip.id
             )}
+            ${
+              data.arsip.nomorDokumen
+                ? `
+                  <br>
+                  ${escapeHtml(
+                    data.arsip.nomorDokumen
+                  )}
+                  <br>
+                  <b>${escapeHtml(
+                    data.arsip.kodeKlasifikasi
+                  )} — ${escapeHtml(
+                    data.arsip.uraianKlasifikasi
+                  )}</b>
+                `
+                : ""
+            }
             <br><br>
             ${
               data.arsip.sensitif
@@ -6220,6 +6865,109 @@
 
             }
           );
+
+        }
+      );
+
+
+    $("uploadDocumentNumber")
+      .addEventListener(
+        "input",
+        function() {
+
+          clearTimeout(
+            classificationTimer
+          );
+
+
+          singleClassificationState
+            .status =
+              "idle";
+
+
+          classificationTimer =
+            setTimeout(
+              () =>
+                parseSingleDocumentNumber(
+                  false
+                ),
+              450
+            );
+
+        }
+      );
+
+
+    $("uploadDocumentNumber")
+      .addEventListener(
+        "blur",
+        () =>
+          parseSingleDocumentNumber(
+            false
+          )
+      );
+
+
+    $("uploadClassificationChoice")
+      .addEventListener(
+        "change",
+        function() {
+
+          const selected =
+            this.value;
+
+
+          if (
+            !selected ||
+            !singleClassificationState.data
+          ) {
+            singleClassificationState
+              .status =
+                "ambiguous";
+
+            return;
+          }
+
+
+          singleClassificationState
+            .uraianKlasifikasi =
+              selected;
+
+          singleClassificationState
+            .status =
+              "ready";
+
+
+          const data =
+            singleClassificationState
+              .data;
+
+
+          setClassificationPreview(
+            "success",
+            "✓ Klasifikasi dipilih",
+            `
+              <b>${escapeHtml(
+                data.kodeKlasifikasi
+              )} — ${escapeHtml(
+                selected
+              )}</b>
+              <br>
+              Nomor: <b>${escapeHtml(
+                data.nomorSurat
+              )}</b>
+              &nbsp;•&nbsp;
+              Tahun: <b>${escapeHtml(
+                data.tahunSurat
+              )}</b>
+            `
+          );
+
+
+          $("classificationChoiceWrap")
+            .style
+            .display =
+              "block";
 
         }
       );

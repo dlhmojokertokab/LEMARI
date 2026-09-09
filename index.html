@@ -11,6 +11,12 @@
     LEMARI DLH
   </title>
 
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/logo/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/logo/favicon-16.png">
+  <link rel="apple-touch-icon" href="assets/pwa/apple-touch-icon.png">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#7c3aed">
+
   <meta
     name="description"
     content="Layanan Elektronik Manajemen Arsip Ringkas dan Integratif — DLH Kabupaten Mojokerto"
@@ -175,6 +181,46 @@
 
       box-shadow:
         0 12px 25px rgba(124,58,237,.24);
+    }
+
+    .brand-mark {
+      overflow: hidden;
+      background: #ede3ff;
+    }
+
+    .brand-mark img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .ui-icon {
+      width: 20px;
+      height: 20px;
+      object-fit: contain;
+      display: inline-block;
+      flex: 0 0 auto;
+    }
+
+    .icon-btn .ui-icon {
+      width: 21px;
+      height: 21px;
+    }
+
+    .choice-icon img {
+      width: 42px;
+      height: 42px;
+      object-fit: contain;
+      display: block;
+    }
+
+    .state-illustration {
+      width: min(320px, 82%);
+      height: auto;
+      display: block;
+      margin: 0 auto 12px;
+      border-radius: 16px;
     }
 
     .brand-copy {
@@ -1419,7 +1465,10 @@
       <div class="brand">
 
         <div class="brand-mark">
-          🗄️
+          <img
+            src="assets/pwa/icon-192.png"
+            alt="Logo LEMARI DLH"
+          >
         </div>
 
         <div class="brand-copy">
@@ -1453,7 +1502,8 @@
           class="admin-mode-btn"
           type="button"
         >
-          🔒 Mode Pengguna
+          <img class="ui-icon" src="assets/icons/user.png" alt="">
+          Mode Pengguna
         </button>
 
 
@@ -1462,7 +1512,8 @@
           class="btn btn-secondary admin-only"
           type="button"
         >
-          ⚙️ Pengaturan
+          <img class="ui-icon" src="assets/icons/settings.png" alt="">
+          Pengaturan
         </button>
 
 
@@ -1471,7 +1522,8 @@
           class="btn btn-primary"
           type="button"
         >
-          📤 Upload Arsip
+          <img class="ui-icon" src="assets/icons/upload.png" alt="">
+          Upload Arsip
         </button>
 
       </div>
@@ -1661,9 +1713,11 @@
           class="state"
         >
 
-          <div class="state-icon">
-            🗂️
-          </div>
+          <img
+            class="state-illustration"
+            src="assets/illustrations/empty.png"
+            alt="Belum ada arsip"
+          >
 
           <h3 class="state-title">
             Arsip tidak ditemukan
@@ -1876,7 +1930,7 @@
           >
 
             <div class="choice-icon">
-              📄
+              <img src="assets/icons/upload.png" alt="">
             </div>
 
             <div class="choice-title">
@@ -1897,7 +1951,7 @@
           >
 
             <div class="choice-icon">
-              🗂️
+              <img src="assets/icons/upload-multi.png" alt="">
             </div>
 
             <div class="choice-title">
@@ -2154,7 +2208,8 @@
       <div class="modal-head">
         <div>
           <h2 class="modal-title">
-            🗂️ Upload Banyak File
+            <img class="ui-icon" src="assets/icons/upload-multi.png" alt="">
+            Upload Banyak File
           </h2>
           <p class="modal-desc">
             Bidang berlaku untuk satu batch. Judul, Tahun, Kategori, dan Sensitif diatur per file.
@@ -2734,10 +2789,10 @@
 
 
       $("adminModeBtn")
-        .textContent =
+        .innerHTML =
           isAdmin
-            ? "🔓 Mode Admin"
-            : "🔒 Mode Pengguna";
+            ? '<img class="ui-icon" src="assets/icons/admin.png" alt=""> Mode Admin'
+            : '<img class="ui-icon" src="assets/icons/user.png" alt=""> Mode Pengguna';
 
 
       if (
@@ -3923,7 +3978,7 @@
                   data-open="${escapeHtml(item.link)}"
                   title="Buka dokumen"
                 >
-                  👁️
+                  <img class="ui-icon" src="assets/icons/view.png" alt="">
                 </button>
 
                 <button
@@ -3932,7 +3987,7 @@
                   data-share="${escapeHtml(item.link)}"
                   title="Salin link"
                 >
-                  🔗
+                  <img class="ui-icon" src="assets/icons/info.png" alt="">
                 </button>
 
                 <button
@@ -3941,7 +3996,7 @@
                   data-version="${escapeHtml(item.id)}"
                   title="Riwayat versi"
                 >
-                  🕘
+                  <img class="ui-icon" src="assets/icons/history.png" alt="">
                 </button>
 
                 ${
@@ -3953,7 +4008,7 @@
                         data-edit="${escapeHtml(item.id)}"
                         title="Edit arsip"
                       >
-                        ✏️
+                        <img class="ui-icon" src="assets/icons/edit.png" alt="">
                       </button>
 
                       <button
@@ -3962,7 +4017,7 @@
                         data-delete="${escapeHtml(item.id)}"
                         title="Hapus arsip"
                       >
-                        🗑️
+                        <img class="ui-icon" src="assets/icons/delete.png" alt="">
                       </button>
                     `
                     : ""
@@ -4086,7 +4141,7 @@
                 type="button"
                 data-open="${escapeHtml(item.link)}"
               >
-                👁️ Buka
+                <img class="ui-icon" src="assets/icons/view.png" alt=""> Buka
               </button>
 
               <button
@@ -4094,7 +4149,7 @@
                 type="button"
                 data-share="${escapeHtml(item.link)}"
               >
-                🔗 Salin Link
+                <img class="ui-icon" src="assets/icons/info.png" alt=""> Salin Link
               </button>
 
               <button
@@ -4102,7 +4157,7 @@
                 type="button"
                 data-version="${escapeHtml(item.id)}"
               >
-                🕘 v${escapeHtml(item.versiTerbaru || 1)}
+                <img class="ui-icon" src="assets/icons/history.png" alt=""> v${escapeHtml(item.versiTerbaru || 1)}
               </button>
 
               ${
@@ -4113,7 +4168,7 @@
                       type="button"
                       data-edit="${escapeHtml(item.id)}"
                     >
-                      ✏️ Edit
+                      <img class="ui-icon" src="assets/icons/edit.png" alt=""> Edit
                     </button>
 
                     <button
@@ -4121,7 +4176,7 @@
                       type="button"
                       data-delete="${escapeHtml(item.id)}"
                     >
-                      🗑️ Hapus
+                      <img class="ui-icon" src="assets/icons/delete.png" alt=""> Hapus
                     </button>
                   `
                   : ""
@@ -5504,7 +5559,7 @@
         const result =
           await Swal.fire({
             title:
-              `🕘 Riwayat Versi — ${escapeHtml(item.id)}`,
+              `<img src="assets/icons/history.png" style="width:28px;height:28px;vertical-align:middle;margin-right:8px" alt=""> Riwayat Versi — ${escapeHtml(item.id)}`,
 
             html:
               renderVersionHistoryHtml(

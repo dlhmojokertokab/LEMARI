@@ -1746,55 +1746,76 @@
     .landing-visual {
       position: relative;
       z-index: 1;
-      min-height: 310px;
+      min-height: 250px;
       display: grid;
       place-items: center;
     }
 
     .landing-visual-card {
       position: relative;
-      width: min(100%, 360px);
-      aspect-ratio: 1 / 1;
-      display: grid;
-      place-items: center;
+      width: 100%;
+      max-width: 470px;
+      aspect-ratio: 2.5 / 1;
+      overflow: hidden;
       border: 1px solid rgba(138,90,59,.12);
       border-radius: 26px;
-      background: rgba(255,255,255,.58);
-      box-shadow: 0 20px 45px rgba(79,58,41,.10);
-      backdrop-filter: blur(8px);
+      background: #eef3e8;
+      box-shadow: 0 20px 45px rgba(79,58,41,.12);
+      isolation: isolate;
     }
 
     .landing-visual-card img {
-      width: 90%;
-      height: 90%;
-      object-fit: contain;
-      filter: drop-shadow(0 18px 18px rgba(81,60,42,.10));
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .landing-visual-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      background:
+        linear-gradient(
+          180deg,
+          rgba(255,255,255,.02) 0%,
+          rgba(255,255,255,0) 55%,
+          rgba(47,41,36,.08) 100%
+        );
     }
 
     .landing-float {
       position: absolute;
+      z-index: 2;
       display: inline-flex;
       align-items: center;
       gap: 7px;
       padding: 8px 11px;
       border: 1px solid rgba(47,107,69,.15);
       border-radius: 999px;
-      background: rgba(255,255,255,.90);
+      background: rgba(255,255,255,.93);
       color: #5f554c;
-      box-shadow: 0 10px 24px rgba(75,58,43,.08);
+      box-shadow: 0 10px 24px rgba(75,58,43,.12);
+      backdrop-filter: blur(8px);
       font-size: 10px;
       font-weight: 900;
       white-space: nowrap;
     }
 
     .landing-float.one {
-      left: -8px;
-      top: 42px;
+      left: 12px;
+      top: 12px;
     }
 
     .landing-float.two {
-      right: -12px;
-      bottom: 50px;
+      right: 12px;
+      bottom: 12px;
     }
 
     .home-benefits {
@@ -1855,6 +1876,11 @@
       grid-template-columns: repeat(3, minmax(0, 1fr)) auto;
       gap: 12px;
       align-items: end;
+    }
+
+
+    #archiveResultsSection {
+      scroll-margin-top: 110px;
     }
 
     .results-head {
@@ -2362,12 +2388,18 @@
 
           <div class="results-title-wrap">
 
-            <h2 class="results-title">
-              Hasil pencarian
+            <h2
+              id="resultsTitle"
+              class="results-title"
+            >
+              Ini lho arsip yang kamu cari
             </h2>
 
-            <p class="results-subtitle">
-              Pilih arsip dari tabel di bawah.
+            <p
+              id="resultsSubtitle"
+              class="results-subtitle"
+            >
+              Pilih arsip yang kamu butuhkan dari tabel di bawah.
             </p>
 
           </div>
@@ -5240,6 +5272,97 @@
     }
 
 
+    function updateResultsHeading() {
+      const title =
+        $("resultsTitle");
+
+      const subtitle =
+        $("resultsSubtitle");
+
+      if (
+        state.q
+      ) {
+        title.textContent =
+          `Ini lho arsip yang kamu cari sesuai keyword “${state.q}”`;
+      }
+
+      else {
+        title.textContent =
+          "Ini lho arsip yang sesuai filter kamu";
+      }
+
+      subtitle.textContent =
+        state.total > 0
+          ? `${state.total} arsip ditemukan. Pilih yang kamu butuhkan dari tabel di bawah.`
+          : "Belum ada arsip yang cocok.";
+    }
+
+
+    function scrollToResults() {
+      const section =
+        $("archiveResultsSection");
+
+      if (
+        !section ||
+        section.hidden
+      ) {
+        return;
+      }
+
+      requestAnimationFrame(
+        () => {
+          section.scrollIntoView({
+            behavior:
+              "smooth",
+
+            block:
+              "start",
+          });
+        }
+      );
+    }
+
+
+    async function runEnterSearch() {
+      clearTimeout(
+        searchTimer
+      );
+
+      state.q =
+        $("searchInput")
+          .value
+          .trim();
+
+      state.page =
+        1;
+
+      if (
+        !hasActiveSearch()
+      ) {
+        showSearchReady();
+        return;
+      }
+
+      // Kalau live-search sebelumnya masih jalan,
+      // tunggu sebentar supaya query Enter tidak dilewatkan.
+      while (
+        state.loading
+      ) {
+        await new Promise(
+          resolve =>
+            setTimeout(
+              resolve,
+              40
+            )
+        );
+      }
+
+      await loadArchives();
+
+      scrollToResults();
+    }
+
+
     async function loadArchives() {
       if (
         !hasActiveSearch()
@@ -5336,6 +5459,8 @@
 
         $("archiveCount").hidden =
           false;
+
+        updateResultsHeading();
 
 
         const items =
@@ -7553,7 +7678,11 @@
               state.page =
                 1;
 
-              loadArchives();
+              loadArchives()
+                .then(
+                  () =>
+                    scrollToResults()
+                );
 
             };
 
@@ -7578,6 +7707,27 @@
         );
 
       };
+
+
+    $("searchInput").addEventListener(
+      "keydown",
+      function(
+        event
+      ) {
+
+        if (
+          event.key !==
+          "Enter"
+        ) {
+          return;
+        }
+
+        event.preventDefault();
+
+        runEnterSearch();
+
+      }
+    );
 
 
     $("searchInput").addEventListener(

@@ -2824,6 +2824,103 @@
       }
     }
 
+
+    /* ==================================================
+       V16 — HEADER BALANCE + HERO CONTRAST
+    ================================================== */
+
+    .hero {
+      min-height: 96px;
+      padding: 13px 18px 13px 20px;
+    }
+
+    .brand-horizontal-lockup {
+      gap: 3px;
+    }
+
+    .brand-logo-horizontal {
+      width: clamp(300px, 29vw, 445px);
+      max-height: 76px;
+    }
+
+    .brand-subtitle-lockup {
+      margin: 1px 0 0 9px;
+      font-size: 12.5px;
+      line-height: 1.35;
+      color: #74685e;
+      white-space: nowrap;
+    }
+
+    .header-actions {
+      gap: 8px;
+      margin-left: auto;
+    }
+
+    .status-pill,
+    .admin-mode-btn {
+      min-height: 36px;
+      padding: 7px 12px;
+    }
+
+    .header-actions .btn {
+      min-height: 40px;
+      padding: 9px 15px;
+    }
+
+    .editorial-brand-main {
+      color: #214f35;
+      text-shadow: 0 1px 0 rgba(255,255,255,.5);
+    }
+
+    .editorial-brand-accent {
+      color: #241e19;
+      font-weight: 600;
+      background:
+        linear-gradient(
+          180deg,
+          transparent 58%,
+          rgba(138, 90, 59, .16) 58%
+        );
+    }
+
+    @media (max-width: 1180px) {
+      .brand-logo-horizontal {
+        width: clamp(275px, 31vw, 390px);
+      }
+
+      .brand-subtitle-lockup {
+        white-space: normal;
+        max-width: 390px;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .hero {
+        gap: 12px;
+      }
+
+      .brand-logo-horizontal {
+        width: clamp(255px, 40vw, 350px);
+        max-height: 68px;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .brand-logo-horizontal {
+        width: min(300px, 74vw);
+        max-height: 62px;
+      }
+
+      .brand-subtitle-lockup {
+        margin-left: 6px;
+        font-size: 10.5px;
+      }
+
+      .editorial-brand-accent {
+        font-weight: 600;
+      }
+    }
+
   </style>
 </head>
 

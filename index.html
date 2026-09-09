@@ -16,6 +16,10 @@
   <link rel="apple-touch-icon" href="assets/pwa/apple-touch-icon.png">
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#2f6b45">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="LEMARI">
 
   <meta
     name="description"
@@ -6506,6 +6510,39 @@
           "Gagal membuka LEMARI."
         );
       }
+    }
+
+
+    // ==================================================
+    // PWA
+    // ==================================================
+
+    if (
+      "serviceWorker" in navigator
+    ) {
+      window.addEventListener(
+        "load",
+        async () => {
+
+          try {
+            await navigator.serviceWorker.register(
+              "./sw.js",
+              {
+                scope:
+                  "./",
+              }
+            );
+          }
+
+          catch (error) {
+            console.warn(
+              "Service Worker LEMARI gagal didaftarkan:",
+              error
+            );
+          }
+
+        }
+      );
     }
 
 

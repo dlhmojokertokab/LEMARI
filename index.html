@@ -1605,28 +1605,78 @@
     }
 
 
+
     /* ==================================================
-       V10 — SEARCH FIRST
+       V11 — LANDING + FULL SEARCH TABLE
     ================================================== */
 
-    .search-home {
-      max-width: 980px;
-      margin: 30px auto 18px;
-      text-align: center;
+    .landing-hero {
+      position: relative;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(280px, .75fr);
+      gap: 28px;
+      align-items: center;
+      margin-top: 26px;
+      padding: clamp(24px, 4vw, 44px);
+      border: 1px solid rgba(138, 90, 59, .14);
+      border-radius: 28px;
+      background:
+        radial-gradient(circle at 15% 15%, rgba(47,107,69,.13), transparent 34%),
+        radial-gradient(circle at 85% 15%, rgba(138,90,59,.16), transparent 35%),
+        linear-gradient(135deg, rgba(255,253,249,.97), rgba(246,239,228,.95));
+      box-shadow:
+        0 26px 60px rgba(76, 57, 40, .10);
     }
 
-    .search-home-title {
+    .landing-hero::after {
+      content: "";
+      position: absolute;
+      width: 250px;
+      height: 250px;
+      right: -90px;
+      bottom: -120px;
+      border-radius: 50%;
+      background: rgba(47,107,69,.08);
+      pointer-events: none;
+    }
+
+    .landing-copy {
+      position: relative;
+      z-index: 1;
+    }
+
+    .landing-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      margin-bottom: 12px;
+      padding: 6px 10px;
+      border: 1px solid rgba(47,107,69,.16);
+      border-radius: 999px;
+      background: rgba(232,242,234,.78);
+      color: var(--primary-dark);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: .055em;
+      text-transform: uppercase;
+    }
+
+    .landing-title {
+      max-width: 680px;
       margin: 0;
-      font-size: clamp(26px, 4vw, 42px);
-      line-height: 1.12;
-      letter-spacing: -0.035em;
+      font-size: clamp(31px, 5vw, 56px);
+      line-height: 1.03;
+      letter-spacing: -0.045em;
       color: var(--text);
     }
 
-    .search-home-desc {
-      margin: 8px 0 22px;
+    .landing-desc {
+      max-width: 650px;
+      margin: 14px 0 24px;
       color: var(--muted);
       font-size: 15px;
+      line-height: 1.65;
     }
 
     .search-command {
@@ -1634,13 +1684,13 @@
       grid-template-columns: minmax(0, 1fr) auto;
       gap: 10px;
       align-items: center;
-      padding: 9px;
-      border: 1px solid var(--line);
-      border-radius: 20px;
-      background: rgba(255, 255, 255, .78);
+      max-width: 760px;
+      padding: 8px;
+      border: 1px solid #d8cbbb;
+      border-radius: 18px;
+      background: rgba(255,255,255,.92);
       box-shadow:
-        0 18px 45px rgba(75, 58, 43, .10);
-      backdrop-filter: blur(12px);
+        0 16px 38px rgba(75, 58, 43, .10);
     }
 
     .search-command-input {
@@ -1650,9 +1700,9 @@
       outline: 0;
       background: transparent;
       padding: 12px 14px;
-      font: inherit;
-      font-size: 18px;
       color: var(--text);
+      font: inherit;
+      font-size: 17px;
     }
 
     .search-command-input::placeholder {
@@ -1660,37 +1710,144 @@
     }
 
     .filter-toggle {
+      min-height: 44px;
       white-space: nowrap;
     }
 
     .search-hints {
       display: flex;
       gap: 7px;
-      justify-content: center;
       flex-wrap: wrap;
-      margin-top: 13px;
-      color: var(--muted);
-      font-size: 12px;
+      margin-top: 12px;
     }
 
     .search-hint-chip {
+      appearance: none;
       display: inline-flex;
       align-items: center;
-      min-height: 26px;
-      padding: 4px 9px;
+      min-height: 28px;
+      padding: 5px 10px;
+      border: 1px solid rgba(138,90,59,.14);
       border-radius: 999px;
+      background: rgba(255,255,255,.66);
+      color: #74685d;
+      font: inherit;
+      font-size: 11px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .search-hint-chip:hover {
+      border-color: rgba(47,107,69,.28);
+      background: rgba(232,242,234,.84);
+      color: var(--primary-dark);
+    }
+
+    .landing-visual {
+      position: relative;
+      z-index: 1;
+      min-height: 310px;
+      display: grid;
+      place-items: center;
+    }
+
+    .landing-visual-card {
+      position: relative;
+      width: min(100%, 360px);
+      aspect-ratio: 1 / 1;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(138,90,59,.12);
+      border-radius: 26px;
       background: rgba(255,255,255,.58);
+      box-shadow: 0 20px 45px rgba(79,58,41,.10);
+      backdrop-filter: blur(8px);
+    }
+
+    .landing-visual-card img {
+      width: 90%;
+      height: 90%;
+      object-fit: contain;
+      filter: drop-shadow(0 18px 18px rgba(81,60,42,.10));
+    }
+
+    .landing-float {
+      position: absolute;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 8px 11px;
+      border: 1px solid rgba(47,107,69,.15);
+      border-radius: 999px;
+      background: rgba(255,255,255,.90);
+      color: #5f554c;
+      box-shadow: 0 10px 24px rgba(75,58,43,.08);
+      font-size: 10px;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .landing-float.one {
+      left: -8px;
+      top: 42px;
+    }
+
+    .landing-float.two {
+      right: -12px;
+      bottom: 50px;
+    }
+
+    .home-benefits {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .home-benefit {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      min-height: 78px;
+      padding: 14px 16px;
       border: 1px solid var(--line);
+      border-radius: 17px;
+      background: rgba(255,255,255,.68);
+      box-shadow: 0 8px 24px rgba(75,58,43,.05);
+    }
+
+    .home-benefit-icon {
+      flex: 0 0 auto;
+      display: grid;
+      place-items: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      background: var(--primary-soft);
+      color: var(--primary);
+    }
+
+    .home-benefit strong {
+      display: block;
+      margin-bottom: 3px;
+      color: var(--text);
+      font-size: 12px;
+    }
+
+    .home-benefit span {
+      display: block;
+      color: var(--muted);
+      font-size: 10px;
+      line-height: 1.45;
     }
 
     .filter-panel {
-      max-width: 980px;
-      margin: 12px auto 0;
+      margin-top: 14px;
       padding: 16px;
       border: 1px solid var(--line);
       border-radius: 18px;
-      background: rgba(255,255,255,.72);
-      box-shadow: 0 12px 35px rgba(75, 58, 43, .07);
+      background: rgba(255,255,255,.78);
+      box-shadow: 0 12px 34px rgba(75,58,43,.07);
     }
 
     .filter-panel-grid {
@@ -1708,108 +1865,173 @@
       margin: 30px 0 12px;
     }
 
+    .results-title-wrap {
+      min-width: 0;
+    }
+
     .results-title {
       margin: 0;
-      font-size: 18px;
       color: var(--text);
+      font-size: 20px;
     }
 
-    .search-results {
-      display: grid;
-      gap: 10px;
-    }
-
-    .result-card {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
-      gap: 18px;
-      align-items: center;
-      padding: 18px 18px 17px;
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      background: rgba(255,255,255,.78);
-      box-shadow: 0 8px 26px rgba(75, 58, 43, .055);
-    }
-
-    .result-card:hover {
-      border-color: #cfc1b3;
-      box-shadow: 0 12px 30px rgba(75, 58, 43, .085);
-    }
-
-    .result-title {
-      margin: 0;
-      font-size: 16px;
-      font-weight: 800;
-      line-height: 1.35;
-      color: var(--text);
-    }
-
-    .result-number {
-      margin-top: 5px;
-      font-size: 14px;
-      font-weight: 700;
-      color: var(--secondary);
-      overflow-wrap: anywhere;
-    }
-
-    .result-classification {
-      display: flex;
-      align-items: baseline;
-      gap: 7px;
-      flex-wrap: wrap;
-      margin-top: 9px;
-      color: var(--text);
-      font-size: 13px;
-    }
-
-    .result-code {
-      font-weight: 800;
-      color: var(--primary);
-    }
-
-    .result-legacy {
-      margin-top: 8px;
-      font-size: 13px;
+    .results-subtitle {
+      margin: 4px 0 0;
       color: var(--muted);
-    }
-
-    .result-meta {
-      display: flex;
-      align-items: center;
-      gap: 7px;
-      flex-wrap: wrap;
-      margin-top: 10px;
-    }
-
-    .result-meta-text {
-      color: var(--muted);
-      font-size: 12px;
-      font-weight: 700;
-    }
-
-    .result-actions {
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      gap: 7px;
-      flex-wrap: wrap;
-    }
-
-    .result-card .icon-btn {
-      background: rgba(255,255,255,.72);
+      font-size: 11px;
     }
 
     .archive-card.search-result-shell {
-      background: transparent;
+      overflow: visible;
       border: 0;
+      background: transparent;
       box-shadow: none;
-      padding: 0;
+    }
+
+    .results-table-card {
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: rgba(255,253,250,.95);
+      box-shadow: 0 18px 42px rgba(75,54,39,.08);
+    }
+
+    .results-table-card .table-scroll {
+      max-width: 100%;
+      overflow-x: auto;
+    }
+
+    .results-table {
+      min-width: 1180px;
+    }
+
+    .results-table th,
+    .results-table td {
+      vertical-align: top;
+    }
+
+    .results-table tbody td {
+      padding-top: 16px;
+      padding-bottom: 16px;
+    }
+
+    .result-doc-title {
+      max-width: 330px;
+      margin: 0;
+      color: var(--text);
+      font-size: 13px;
+      font-weight: 900;
+      line-height: 1.4;
+    }
+
+    .result-doc-badges {
+      display: flex;
+      gap: 5px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+
+    .result-number-main {
+      max-width: 245px;
+      color: #6c4d37;
+      font-size: 12px;
+      font-weight: 850;
+      line-height: 1.45;
+      overflow-wrap: anywhere;
+    }
+
+    .result-subtle {
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 9px;
+      line-height: 1.4;
+    }
+
+    .result-code {
+      color: var(--primary);
+      font-size: 11px;
+      font-weight: 950;
+    }
+
+    .result-classification-text {
+      max-width: 265px;
+      margin-top: 4px;
+      color: #5f554c;
+      font-size: 11px;
+      line-height: 1.45;
+    }
+
+    .direction-badge {
+      display: inline-flex;
+      align-items: center;
+      min-height: 25px;
+      padding: 5px 8px;
+      border-radius: 999px;
+      background: var(--primary-soft);
+      color: var(--primary-dark);
+      font-size: 9px;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .type-stack {
+      display: grid;
+      gap: 5px;
+      min-width: 150px;
+    }
+
+    .type-main {
+      color: var(--text);
+      font-size: 11px;
+      font-weight: 850;
+      line-height: 1.35;
+    }
+
+    .type-sub {
+      color: var(--muted);
+      font-size: 9px;
+      line-height: 1.35;
+    }
+
+    .table-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 6px;
+      min-width: 124px;
+    }
+
+    .table-actions .icon-btn {
+      width: 34px;
+      height: 34px;
+      border-radius: 9px;
+    }
+
+    @media (max-width: 980px) {
+      .landing-hero {
+        grid-template-columns: 1fr;
+      }
+
+      .landing-visual {
+        min-height: 240px;
+      }
+
+      .landing-visual-card {
+        width: min(100%, 300px);
+      }
+
+      .home-benefits {
+        grid-template-columns: 1fr;
+      }
     }
 
     @media (max-width: 760px) {
-      .search-home {
-        margin-top: 18px;
-        text-align: left;
+      .landing-hero {
+        padding: 22px 18px;
+        border-radius: 22px;
+      }
+
+      .landing-title {
+        font-size: clamp(30px, 12vw, 44px);
       }
 
       .search-command {
@@ -1820,20 +2042,12 @@
         width: 100%;
       }
 
-      .search-hints {
-        justify-content: flex-start;
+      .landing-visual {
+        display: none;
       }
 
       .filter-panel-grid {
         grid-template-columns: 1fr;
-      }
-
-      .result-card {
-        grid-template-columns: 1fr;
-      }
-
-      .result-actions {
-        justify-content: flex-start;
       }
 
       .results-head {
@@ -1917,49 +2131,166 @@
 
 
 
+
     <main class="main">
 
-      <section class="search-home">
+      <section class="landing-hero">
 
-        <h1 class="search-home-title">
-          Mau cari arsip apa hari ini?
-        </h1>
+        <div class="landing-copy">
 
-        <p class="search-home-desc">
-          Ketik yang kamu ingat. Judul, nomor surat, kode klasifikasi, atau jenis dokumen.
-        </p>
+          <div class="landing-eyebrow">
+            🗄️ Temu Kembali Arsip DLH
+          </div>
 
-        <div class="search-command">
+          <h1 class="landing-title">
+            Mau cari arsip apa hari ini?
+          </h1>
 
-          <input
-            id="searchInput"
-            class="search-command-input"
-            type="search"
-            placeholder="Contoh: SK, 500.12.13, 3006, media..."
-            autocomplete="off"
-          >
+          <p class="landing-desc">
+            Ketik apa yang kamu ingat. Judul, nomor surat, kode klasifikasi, atau jenis dokumen — LEMARI yang nyari sisanya.
+          </p>
 
-          <button
-            id="filterToggleBtn"
-            class="btn btn-secondary filter-toggle"
-            type="button"
-            aria-expanded="false"
-          >
-            <svg class='ic' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'>
-              <path d='M4 6h16'/>
-              <path d='M7 12h10'/>
-              <path d='M10 18h4'/>
-            </svg>
-            Filter
-          </button>
+          <div class="search-command">
+
+            <input
+              id="searchInput"
+              class="search-command-input"
+              type="search"
+              placeholder="Contoh: SK, 500.12.13, 3006, media..."
+              autocomplete="off"
+            >
+
+            <button
+              id="filterToggleBtn"
+              class="btn btn-secondary filter-toggle"
+              type="button"
+              aria-expanded="false"
+            >
+              <svg class='ic' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'>
+                <path d='M4 6h16'/>
+                <path d='M7 12h10'/>
+                <path d='M10 18h4'/>
+              </svg>
+              Filter
+            </button>
+
+          </div>
+
+          <div class="search-hints">
+
+            <button
+              type="button"
+              class="search-hint-chip"
+              data-search-chip="SK"
+            >
+              SK → Surat Keputusan
+            </button>
+
+            <button
+              type="button"
+              class="search-hint-chip"
+              data-search-chip="SE"
+            >
+              SE → Surat Edaran
+            </button>
+
+            <button
+              type="button"
+              class="search-hint-chip"
+              data-search-chip="BA"
+            >
+              BA → Berita Acara
+            </button>
+
+            <button
+              type="button"
+              class="search-hint-chip"
+              data-search-chip="SPPD"
+            >
+              SPPD
+            </button>
+
+            <button
+              type="button"
+              class="search-hint-chip"
+              data-search-chip="Nota Dinas"
+            >
+              Nota Dinas
+            </button>
+
+          </div>
 
         </div>
 
-        <div class="search-hints">
-          <span class="search-hint-chip">SK → Surat Keputusan</span>
-          <span class="search-hint-chip">SE → Surat Edaran</span>
-          <span class="search-hint-chip">BA → Berita Acara</span>
-          <span class="search-hint-chip">SPPD → Surat Perintah Perjalanan Dinas</span>
+
+        <div class="landing-visual">
+
+          <div class="landing-visual-card">
+
+            <img
+              src="assets/hero/hero.png"
+              alt="Ilustrasi LEMARI DLH"
+            >
+
+            <div class="landing-float one">
+              🌿 Klasifikasi otomatis
+            </div>
+
+            <div class="landing-float two">
+              🔎 Cari dari yang kamu ingat
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <section
+        id="homeBenefits"
+        class="home-benefits"
+      >
+
+        <div class="home-benefit">
+
+          <div class="home-benefit-icon">
+            🔎
+          </div>
+
+          <div>
+            <strong>Cari dari yang kamu ingat</strong>
+            <span>Judul, nomor surat, kode klasifikasi, sampai singkatan dokumen.</span>
+          </div>
+
+        </div>
+
+
+        <div class="home-benefit">
+
+          <div class="home-benefit-icon">
+            🧭
+          </div>
+
+          <div>
+            <strong>Klasifikasi lebih rapi</strong>
+            <span>Nomor dokumen dibaca otomatis dan disambungkan ke master klasifikasi.</span>
+          </div>
+
+        </div>
+
+
+        <div class="home-benefit">
+
+          <div class="home-benefit-icon">
+            ☁️
+          </div>
+
+          <div>
+            <strong>Tetap terhubung ke Drive</strong>
+            <span>Dokumen tersimpan di Google Drive, LEMARI membantu temu kembali.</span>
+          </div>
+
         </div>
 
       </section>
@@ -2029,16 +2360,24 @@
 
         <div class="results-head">
 
-          <h2 class="results-title">
-            Hasil pencarian
-          </h2>
+          <div class="results-title-wrap">
+
+            <h2 class="results-title">
+              Hasil pencarian
+            </h2>
+
+            <p class="results-subtitle">
+              Pilih arsip dari tabel di bawah.
+            </p>
+
+          </div>
 
           <div
             id="archiveCount"
             class="count-badge"
             hidden
           >
-            0 arsip
+            0 hasil
           </div>
 
         </div>
@@ -2110,10 +2449,36 @@
 
 
         <div
-          id="resultsList"
-          class="search-results"
+          id="resultsTableWrap"
+          class="results-table-card"
           hidden
-        ></div>
+        >
+
+          <div class="table-scroll">
+
+            <table class="results-table">
+
+              <thead>
+
+                <tr>
+                  <th>Dokumen</th>
+                  <th>Nomor Dokumen</th>
+                  <th>Klasifikasi</th>
+                  <th>Bidang</th>
+                  <th>Arah</th>
+                  <th>Jenis</th>
+                  <th style="text-align:right">Aksi</th>
+                </tr>
+
+              </thead>
+
+              <tbody id="resultsTableBody"></tbody>
+
+            </table>
+
+          </div>
+
+        </div>
 
 
         <div
@@ -4131,7 +4496,7 @@
             )
       );
 
-      $("resultsList").hidden =
+      $("resultsTableWrap").hidden =
         true;
 
       $("paginationBar").hidden =
@@ -4147,11 +4512,17 @@
 
       $("archiveCount").hidden =
         true;
+
+      $("homeBenefits").hidden =
+        false;
     }
 
 
     function showLoading() {
       hideAllStates();
+
+      $("homeBenefits").hidden =
+        true;
 
       $("archiveResultsSection").hidden =
         false;
@@ -4169,6 +4540,9 @@
     ) {
       hideAllStates();
 
+      $("homeBenefits").hidden =
+        true;
+
       $("archiveResultsSection").hidden =
         false;
 
@@ -4185,6 +4559,9 @@
 
     function showEmpty() {
       hideAllStates();
+
+      $("homeBenefits").hidden =
+        true;
 
       $("archiveResultsSection").hidden =
         false;
@@ -4359,10 +4736,10 @@
       currentItems =
         items;
 
-      const list =
-        $("resultsList");
+      const body =
+        $("resultsTableBody");
 
-      list.innerHTML =
+      body.innerHTML =
         "";
 
       items.forEach(
@@ -4384,75 +4761,122 @@
               item.nomorDokumen
             );
 
-          const classificationHtml =
+          const nomorHtml =
             hasArchiveMetadata
               ? `
-                <div class="result-number">
-                  ${escapeHtml(item.nomorDokumen)}
-                </div>
+                  <div class="result-number-main">
+                    ${escapeHtml(item.nomorDokumen)}
+                  </div>
 
-                <div class="result-classification">
-                  <span class="result-code">
-                    ${escapeHtml(item.kodeKlasifikasi || "—")}
-                  </span>
-
-                  <span>
-                    ${escapeHtml(item.uraianKlasifikasi || "Klasifikasi belum terisi")}
-                  </span>
-                </div>
-              `
+                  ${
+                    item.nomorSurat
+                      ? `
+                        <div class="result-subtle">
+                          Nomor: ${escapeHtml(item.nomorSurat)}
+                          ${
+                            item.tahunSurat
+                              ? ` • Tahun ${escapeHtml(item.tahunSurat)}`
+                              : ""
+                          }
+                        </div>
+                      `
+                      : ""
+                  }
+                `
               : `
-                <div class="result-legacy">
-                  Arsip lama • ${escapeHtml(item.kategori || "Tanpa kategori")}
-                </div>
-              `;
+                  <div class="result-number-main">
+                    —
+                  </div>
 
-          const typeBadges =
-            [
-              item.jenisSurat,
-              item.jenisAgenda,
-            ]
-              .filter(Boolean)
-              .map(
-                value =>
-                  `
-                    <span class="badge badge-category">
-                      ${escapeHtml(value)}
-                    </span>
-                  `
-              )
-              .join("");
+                  <div class="result-subtle">
+                    Metadata nomor belum tersedia
+                  </div>
+                `;
 
-          const direction =
+          const klasifikasiHtml =
+            hasArchiveMetadata
+              ? `
+                  <div class="result-code">
+                    ${escapeHtml(item.kodeKlasifikasi || "—")}
+                  </div>
+
+                  <div class="result-classification-text">
+                    ${escapeHtml(item.uraianKlasifikasi || "Klasifikasi belum terisi")}
+                  </div>
+                `
+              : `
+                  <div class="result-code">
+                    —
+                  </div>
+
+                  <div class="result-classification-text">
+                    Arsip lama • ${escapeHtml(item.kategori || "Tanpa kategori")}
+                  </div>
+                `;
+
+          const directionHtml =
             item.arahAgenda
-              ? ` • ${escapeHtml(item.arahAgenda)}`
-              : "";
+              ? `
+                  <span class="direction-badge">
+                    ${escapeHtml(item.arahAgenda)}
+                  </span>
+                `
+              : `
+                  <span class="result-subtle">
+                    —
+                  </span>
+                `;
 
-          const card =
+          const jenisHtml =
+            (
+              item.jenisSurat ||
+              item.jenisAgenda
+            )
+              ? `
+                  <div class="type-stack">
+
+                    ${
+                      item.jenisSurat
+                        ? `
+                          <div class="type-main">
+                            ${escapeHtml(item.jenisSurat)}
+                          </div>
+                        `
+                        : ""
+                    }
+
+                    ${
+                      item.jenisAgenda
+                        ? `
+                          <div class="type-sub">
+                            ${escapeHtml(item.jenisAgenda)}
+                          </div>
+                        `
+                        : ""
+                    }
+
+                  </div>
+                `
+              : `
+                  <span class="result-subtle">
+                    —
+                  </span>
+                `;
+
+          const row =
             document.createElement(
-              "article"
+              "tr"
             );
 
-          card.className =
-            "result-card";
-
-          card.innerHTML =
+          row.innerHTML =
             `
-              <div>
+              <td class="document-cell">
 
-                <h3 class="result-title">
+                <h3 class="result-doc-title">
                   ${escapeHtml(item.judul)}
                 </h3>
 
-                ${classificationHtml}
-
-                <div class="result-meta">
-
-                  <span class="result-meta-text">
-                    ${escapeHtml(item.bidang || "Bidang belum terisi")}${direction}
-                  </span>
-
-                  ${typeBadges}
+                <div class="result-doc-badges">
 
                   <span class="badge ${accessClass}">
                     ${accessIcon}
@@ -4465,86 +4889,117 @@
 
                 </div>
 
-              </div>
+              </td>
 
 
-              <div class="result-actions">
+              <td>
+                ${nomorHtml}
+              </td>
 
-                <button
-                  class="icon-btn"
-                  type="button"
-                  data-open="${escapeHtml(item.link)}"
-                  title="Buka dokumen"
-                >
-                  <svg class='ic' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'>
-                    <path d='M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z'/>
-                    <circle cx='12' cy='12' r='3'/>
-                  </svg>
-                </button>
 
-                <button
-                  class="icon-btn"
-                  type="button"
-                  data-share="${escapeHtml(item.link)}"
-                  title="Salin link"
-                >
-                  <svg class='ic' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'>
-                    <path d='M8 12l-2 2a3 3 0 0 0 4 4l2-2'/>
-                    <path d='M16 12l2-2a3 3 0 0 0-4-4l-2 2'/>
-                    <path d='M9.5 14.5l5-5'/>
-                  </svg>
-                </button>
+              <td>
+                ${klasifikasiHtml}
+              </td>
 
-                <button
-                  class="icon-btn"
-                  type="button"
-                  data-version="${escapeHtml(item.id)}"
-                  title="Riwayat versi"
-                >
-                  <svg class='ic' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'>
-                    <circle cx='12' cy='12' r='9'/>
-                    <path d='M12 7v5l3 2'/>
-                  </svg>
-                </button>
 
-                ${
-                  isAdmin
-                    ? `
-                      <button
-                        class="icon-btn"
-                        type="button"
-                        data-edit="${escapeHtml(item.id)}"
-                        title="Edit arsip"
-                      >
-                        <svg class='ic' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'>
-                          <path d='M12 20h9'/>
-                          <path d='M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z'/>
-                        </svg>
-                      </button>
+              <td>
+                <strong style="font-size:11px">
+                  ${escapeHtml(item.bidang || "—")}
+                </strong>
+              </td>
 
-                      <button
-                        class="icon-btn"
-                        type="button"
-                        data-delete="${escapeHtml(item.id)}"
-                        title="Hapus arsip"
-                      >
-                        <svg class='ic' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'>
-                          <path d='M4 7h16'/>
-                          <path d='M10 11v6'/>
-                          <path d='M14 11v6'/>
-                          <path d='M6 7l1 13a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-13'/>
-                          <path d='M9 7V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v3'/>
-                        </svg>
-                      </button>
-                    `
-                    : ""
-                }
 
-              </div>
+              <td>
+                ${directionHtml}
+              </td>
+
+
+              <td>
+                ${jenisHtml}
+              </td>
+
+
+              <td class="aksi-cell">
+
+                <div class="table-actions">
+
+                  <button
+                    class="icon-btn"
+                    type="button"
+                    data-open="${escapeHtml(item.link)}"
+                    title="Buka dokumen"
+                  >
+                    <svg class='ic' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'>
+                      <path d='M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z'/>
+                      <circle cx='12' cy='12' r='3'/>
+                    </svg>
+                  </button>
+
+                  <button
+                    class="icon-btn"
+                    type="button"
+                    data-share="${escapeHtml(item.link)}"
+                    title="Salin link"
+                  >
+                    <svg class='ic' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'>
+                      <path d='M8 12l-2 2a3 3 0 0 0 4 4l2-2'/>
+                      <path d='M16 12l2-2a3 3 0 0 0-4-4l-2 2'/>
+                      <path d='M9.5 14.5l5-5'/>
+                    </svg>
+                  </button>
+
+                  <button
+                    class="icon-btn"
+                    type="button"
+                    data-version="${escapeHtml(item.id)}"
+                    title="Riwayat versi"
+                  >
+                    <svg class='ic' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'>
+                      <circle cx='12' cy='12' r='9'/>
+                      <path d='M12 7v5l3 2'/>
+                    </svg>
+                  </button>
+
+                  ${
+                    isAdmin
+                      ? `
+                        <button
+                          class="icon-btn"
+                          type="button"
+                          data-edit="${escapeHtml(item.id)}"
+                          title="Edit arsip"
+                        >
+                          <svg class='ic' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'>
+                            <path d='M12 20h9'/>
+                            <path d='M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z'/>
+                          </svg>
+                        </button>
+
+                        <button
+                          class="icon-btn"
+                          type="button"
+                          data-delete="${escapeHtml(item.id)}"
+                          title="Hapus arsip"
+                        >
+                          <svg class='ic' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'>
+                            <path d='M4 7h16'/>
+                            <path d='M10 11v6'/>
+                            <path d='M14 11v6'/>
+                            <path d='M6 7l1 13a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-13'/>
+                            <path d='M9 7V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v3'/>
+                          </svg>
+                        </button>
+                      `
+                      : ""
+                  }
+
+                </div>
+
+              </td>
             `;
 
-          list.appendChild(
-            card
+          body.appendChild(
+            row
           );
 
         }
@@ -4898,6 +5353,9 @@
 
         hideAllStates();
 
+        $("homeBenefits").hidden =
+          true;
+
         $("archiveResultsSection").hidden =
           false;
 
@@ -4910,7 +5368,7 @@
         renderPagination();
 
 
-        $("resultsList").hidden =
+        $("resultsTableWrap").hidden =
           false;
 
         $("paginationBar").hidden =
@@ -7069,6 +7527,38 @@
       }
     );
 
+
+
+
+    document
+      .querySelectorAll(
+        "[data-search-chip]"
+      )
+      .forEach(
+        button => {
+
+          button.onclick =
+            function() {
+
+              const value =
+                this.dataset.searchChip ||
+                "";
+
+              $("searchInput").value =
+                value;
+
+              state.q =
+                value;
+
+              state.page =
+                1;
+
+              loadArchives();
+
+            };
+
+        }
+      );
 
 
     $("filterToggleBtn").onclick =

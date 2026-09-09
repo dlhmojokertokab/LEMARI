@@ -1681,7 +1681,7 @@
 
     .search-command {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
+      grid-template-columns: minmax(0, 1fr);
       gap: 10px;
       align-items: center;
       max-width: 760px;
@@ -2081,6 +2081,623 @@
       }
     }
 
+
+    /* ==================================================
+       V13 — FORMAL UI + ACCESSIBLE TYPE
+    ================================================== */
+
+    body {
+      font-size: 16px;
+    }
+
+    .landing-eyebrow {
+      font-size: 12px;
+    }
+
+    .landing-desc {
+      font-size: 17px;
+      line-height: 1.7;
+    }
+
+    .search-command-input {
+      min-height: 56px;
+      font-size: 20px;
+    }
+
+    .search-hint-chip {
+      min-height: 36px;
+      padding: 8px 13px;
+      font-size: 13px;
+    }
+
+    .home-benefit {
+      min-height: 92px;
+    }
+
+    .home-benefit strong {
+      font-size: 15px;
+    }
+
+    .home-benefit span {
+      font-size: 12px;
+      line-height: 1.55;
+    }
+
+    #archiveResultsSection {
+      scroll-margin-top: 110px;
+    }
+
+    .results-head {
+      margin-bottom: 14px;
+    }
+
+    .results-title {
+      font-size: 28px;
+      line-height: 1.25;
+    }
+
+    .results-subtitle {
+      font-size: 15px;
+      line-height: 1.55;
+    }
+
+    .count-badge {
+      font-size: 13px;
+      padding: 8px 12px;
+    }
+
+    .filter-panel {
+      margin: 0 0 16px;
+      padding: 18px;
+      background: rgba(255,255,255,.88);
+    }
+
+    .filter-panel-heading {
+      margin-bottom: 14px;
+    }
+
+    .filter-panel-heading h3 {
+      margin: 0;
+      color: var(--text);
+      font-size: 19px;
+      line-height: 1.3;
+    }
+
+    .filter-panel-heading p {
+      margin: 4px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .field-label {
+      font-size: 13px;
+    }
+
+    .filter-panel .select,
+    .filter-panel .btn {
+      min-height: 48px;
+      font-size: 15px;
+    }
+
+    .results-table th {
+      padding-top: 14px;
+      padding-bottom: 14px;
+      font-size: 12px;
+    }
+
+    .results-table tbody td {
+      padding-top: 19px;
+      padding-bottom: 19px;
+    }
+
+    .result-doc-title {
+      font-size: 16px;
+      line-height: 1.5;
+    }
+
+    .result-number-main {
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+    .result-subtle {
+      font-size: 11px;
+      line-height: 1.5;
+    }
+
+    .result-code {
+      font-size: 14px;
+    }
+
+    .result-classification-text {
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .direction-badge {
+      min-height: 31px;
+      padding: 6px 10px;
+      font-size: 11px;
+    }
+
+    .type-main {
+      font-size: 13px;
+    }
+
+    .type-sub {
+      font-size: 11px;
+    }
+
+    .badge {
+      font-size: 10px;
+    }
+
+    .table-actions .icon-btn {
+      width: 40px;
+      height: 40px;
+    }
+
+    @media (max-width: 760px) {
+      .landing-desc {
+        font-size: 15px;
+      }
+
+      .search-command-input {
+        font-size: 17px;
+      }
+
+      .results-title {
+        font-size: 23px;
+      }
+
+      .filter-panel {
+        padding: 15px;
+      }
+    }
+
+
+    /* ==================================================
+       V14 — EDITORIAL HOME
+    ================================================== */
+
+    .editorial-home {
+      position: relative;
+      overflow: hidden;
+      margin-top: 18px;
+      padding: clamp(34px, 5vw, 72px) clamp(20px, 4vw, 56px) 0;
+      border: 1px solid rgba(72, 57, 43, .12);
+      border-radius: 28px;
+      background:
+        radial-gradient(circle at 14% 10%, rgba(47,107,69,.08), transparent 24%),
+        radial-gradient(circle at 90% 16%, rgba(138,90,59,.08), transparent 25%),
+        linear-gradient(180deg, #fffdf8 0%, #f7f2e9 100%);
+      box-shadow: 0 22px 55px rgba(67, 50, 36, .10);
+    }
+
+    .editorial-home::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(47,107,69,.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(47,107,69,.025) 1px, transparent 1px);
+      background-size: 32px 32px;
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,.45), transparent 58%);
+    }
+
+    .editorial-kicker,
+    .editorial-brandline,
+    .editorial-lead,
+    .editorial-search-wrap,
+    .editorial-hints,
+    .activity-showcase,
+    .editorial-footerline {
+      position: relative;
+      z-index: 1;
+    }
+
+    .editorial-kicker {
+      text-align: center;
+      color: var(--primary-dark);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+
+    .editorial-brandline {
+      max-width: 1050px;
+      margin: 24px auto 0;
+      text-align: center;
+      color: #2d271f;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(42px, 5.2vw, 78px);
+      line-height: 1.04;
+      letter-spacing: -.035em;
+    }
+
+    .editorial-brand-main {
+      font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+      font-size: .84em;
+      font-weight: 900;
+      letter-spacing: -.055em;
+      color: var(--primary-dark);
+    }
+
+    .editorial-brand-separator {
+      font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+      font-weight: 800;
+      color: var(--pink);
+    }
+
+    .editorial-brand-accent {
+      display: inline;
+      padding: 0 .10em;
+      border-radius: .12em;
+      font-style: italic;
+      background:
+        linear-gradient(180deg, transparent 58%, rgba(138,90,59,.12) 58%);
+    }
+
+    .editorial-lead {
+      max-width: 760px;
+      margin: 20px auto 0;
+      text-align: center;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    .editorial-search-wrap {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 10px;
+      width: min(880px, 100%);
+      margin: 30px auto 0;
+      padding: 8px 9px 8px 16px;
+      border: 1px solid rgba(112,86,65,.20);
+      border-radius: 18px;
+      background: rgba(255,255,255,.94);
+      box-shadow: 0 16px 35px rgba(74,54,39,.10);
+    }
+
+    .editorial-search-icon {
+      width: 22px;
+      height: 22px;
+      color: var(--muted);
+    }
+
+    .editorial-search-input {
+      width: 100%;
+      min-width: 0;
+      height: 52px;
+      border: 0;
+      outline: 0;
+      background: transparent;
+      color: var(--text);
+      font-size: 17px;
+    }
+
+    .editorial-search-input::placeholder {
+      color: #9c9289;
+    }
+
+    .editorial-search-btn {
+      min-height: 46px;
+      padding: 0 18px;
+      border: 0;
+      border-radius: 13px;
+      background: var(--primary);
+      color: white;
+      font-weight: 800;
+      box-shadow: 0 10px 22px rgba(47,107,69,.22);
+    }
+
+    .editorial-search-btn:hover {
+      background: var(--primary-dark);
+    }
+
+    .editorial-hints {
+      justify-content: center;
+      width: min(920px, 100%);
+      margin: 13px auto 0;
+    }
+
+    .activity-showcase {
+      display: grid;
+      grid-template-columns: .9fr 1fr 1.12fr 1fr .9fr;
+      align-items: end;
+      gap: 8px;
+      width: calc(100% + clamp(40px, 8vw, 112px));
+      margin-left: calc(clamp(20px, 4vw, 56px) * -1);
+      margin-top: clamp(34px, 5vw, 62px);
+    }
+
+    .activity-card {
+      position: relative;
+      overflow: hidden;
+      min-height: 260px;
+      border-radius: 18px 18px 0 0;
+      background: #e8e2d7;
+      box-shadow: 0 16px 28px rgba(51, 42, 34, .12);
+      isolation: isolate;
+    }
+
+    .activity-card-1 { height: 285px; }
+    .activity-card-2 { height: 320px; }
+    .activity-card-3 { height: 355px; }
+    .activity-card-4 { height: 322px; }
+    .activity-card-5 { height: 282px; }
+
+    .activity-card > img {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .activity-card::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 0;
+      z-index: 3;
+      height: 35%;
+      pointer-events: none;
+      background: linear-gradient(to top, rgba(28,33,25,.20), transparent);
+    }
+
+    .activity-placeholder {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      display: grid;
+      place-content: center;
+      gap: 8px;
+      padding: 20px;
+      text-align: center;
+      color: var(--primary-dark);
+      background:
+        radial-gradient(circle at 20% 10%, rgba(47,107,69,.16), transparent 42%),
+        linear-gradient(145deg, #eee8dc, #dfe9df);
+    }
+
+    .activity-card:nth-child(even) .activity-placeholder {
+      background:
+        radial-gradient(circle at 82% 18%, rgba(138,90,59,.14), transparent 40%),
+        linear-gradient(145deg, #f2e7dc, #e9eee6);
+    }
+
+    .activity-placeholder > span {
+      font-size: 34px;
+      font-weight: 900;
+      letter-spacing: -.04em;
+    }
+
+    .activity-placeholder small {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    .activity-placeholder-feature {
+      background:
+        radial-gradient(circle at 50% 18%, rgba(47,107,69,.15), transparent 40%),
+        linear-gradient(145deg, #f7f2e9, #e8f2ea);
+    }
+
+    .activity-placeholder-feature strong {
+      font-size: 18px;
+    }
+
+    .activity-logo-mark {
+      width: 72px;
+      height: 72px;
+      margin: 0 auto 6px;
+      object-fit: contain;
+    }
+
+    .editorial-footerline {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      padding: 17px 0 20px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .editorial-dot {
+      color: var(--primary);
+    }
+
+    /* ==================================================
+       V14 — FILTER + RESULTS
+    ================================================== */
+
+    .filter-panel-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr)) auto;
+    }
+
+    /* ==================================================
+       V14 — ADAPTIVE SINGLE UPLOAD
+    ================================================== */
+
+    .modal-card-wide {
+      width: min(780px, calc(100vw - 28px));
+    }
+
+    .archive-type-picker {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .archive-type-option {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      width: 100%;
+      min-height: 104px;
+      padding: 16px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: #fffdfa;
+      color: var(--text);
+      text-align: left;
+      transition: .15s ease;
+    }
+
+    .archive-type-option:hover {
+      border-color: rgba(47,107,69,.35);
+      transform: translateY(-1px);
+    }
+
+    .archive-type-option.active {
+      border-color: rgba(47,107,69,.50);
+      background: linear-gradient(145deg, #f2f8f3, #fffdfa);
+      box-shadow: 0 10px 24px rgba(47,107,69,.10);
+    }
+
+    .archive-type-icon {
+      display: grid;
+      place-items: center;
+      flex: 0 0 42px;
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: var(--primary-soft);
+      color: var(--primary-dark);
+      font-size: 20px;
+    }
+
+    .archive-type-option strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 14px;
+    }
+
+    .archive-type-option small {
+      display: block;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.5;
+    }
+
+    .classification-preview-box {
+      border: 1px solid #d8cbbd;
+      border-radius: 14px;
+      padding: 14px 16px;
+      background: #fbf8f2;
+    }
+
+    .classification-preview-title {
+      margin-bottom: 6px;
+      color: #2f6b45;
+      font-weight: 800;
+    }
+
+    .common-archive-fields {
+      margin-top: 14px;
+      padding-top: 16px;
+      border-top: 1px dashed var(--border);
+    }
+
+    .non-letter-note {
+      display: grid;
+      gap: 5px;
+      padding: 14px 16px;
+      border: 1px solid rgba(47,107,69,.16);
+      border-radius: 14px;
+      background: var(--primary-soft);
+    }
+
+    .non-letter-note strong {
+      color: var(--primary-dark);
+      font-size: 13px;
+    }
+
+    .non-letter-note span {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.55;
+    }
+
+    @media (max-width: 980px) {
+      .filter-panel-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .activity-showcase {
+        grid-template-columns: repeat(5, minmax(180px, 1fr));
+        overflow-x: auto;
+        width: calc(100% + clamp(40px, 8vw, 112px));
+        padding-bottom: 1px;
+        scrollbar-width: thin;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .editorial-home {
+        padding-top: 30px;
+        border-radius: 22px;
+      }
+
+      .editorial-brandline {
+        font-size: clamp(34px, 10vw, 54px);
+      }
+
+      .editorial-brand-main,
+      .editorial-brand-separator,
+      .editorial-brand-accent {
+        display: block;
+      }
+
+      .editorial-brand-separator {
+        display: none;
+      }
+
+      .editorial-brand-accent {
+        margin-top: 5px;
+      }
+
+      .editorial-search-wrap {
+        grid-template-columns: auto minmax(0, 1fr);
+      }
+
+      .editorial-search-btn {
+        grid-column: 1 / -1;
+        width: 100%;
+      }
+
+      .activity-showcase {
+        grid-template-columns: repeat(5, minmax(150px, 72vw));
+      }
+
+      .activity-card-1,
+      .activity-card-2,
+      .activity-card-3,
+      .activity-card-4,
+      .activity-card-5 {
+        height: 260px;
+      }
+
+      .archive-type-picker {
+        grid-template-columns: 1fr;
+      }
+
+      .filter-panel-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
   </style>
 </head>
 
@@ -2094,7 +2711,7 @@
 
         <div class="brand-mark">
           <img
-            src="assets/pwa/icon-192.png"
+            src="assets/logo/logo-square.png"
             alt="Logo LEMARI DLH"
           >
         </div>
@@ -2160,219 +2777,142 @@
 
     <main class="main">
 
-      <section class="landing-hero">
+      <section class="editorial-home">
 
-        <div class="landing-copy">
+        <div class="editorial-kicker">
+          ARSIP DIGITAL • DINAS LINGKUNGAN HIDUP KABUPATEN MOJOKERTO
+        </div>
 
-          <div class="landing-eyebrow">
-            🗄️ Temu Kembali Arsip DLH
-          </div>
+        <div class="editorial-brandline">
+          <span class="editorial-brand-main">LEMARI DLH</span>
+          <span class="editorial-brand-separator">:</span>
+          <span class="editorial-brand-accent">Cari yang Anda butuhkan di sini.</span>
+        </div>
 
-          <h1 class="landing-title">
-            Mau cari arsip apa hari ini?
-          </h1>
+        <p class="editorial-lead">
+          Temukan arsip berdasarkan judul, nomor surat, kode klasifikasi, jenis dokumen, tahun, maupun bidang.
+        </p>
 
-          <p class="landing-desc">
-            Ketik apa yang kamu ingat. Judul, nomor surat, kode klasifikasi, atau jenis dokumen — LEMARI yang nyari sisanya.
-          </p>
+        <div class="editorial-search-wrap">
+          <svg class="editorial-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="11" cy="11" r="7"></circle>
+            <path d="M20 20l-3.6-3.6"></path>
+          </svg>
 
-          <div class="search-command">
+          <input
+            id="searchInput"
+            class="editorial-search-input"
+            type="search"
+            placeholder="Cari judul, nomor surat, kode klasifikasi, RENJA, LKjIP..."
+            autocomplete="off"
+          >
 
-            <input
-              id="searchInput"
-              class="search-command-input"
-              type="search"
-              placeholder="Contoh: SK, 500.12.13, 3006, media..."
-              autocomplete="off"
-            >
+          <button
+            id="homeSearchBtn"
+            class="editorial-search-btn"
+            type="button"
+          >
+            Cari Arsip
+          </button>
+        </div>
 
-            <button
-              id="filterToggleBtn"
-              class="btn btn-secondary filter-toggle"
-              type="button"
-              aria-expanded="false"
-            >
-              <svg class='ic' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'>
-                <path d='M4 6h16'/>
-                <path d='M7 12h10'/>
-                <path d='M10 18h4'/>
-              </svg>
-              Filter
-            </button>
+        <div class="search-hints editorial-hints">
 
-          </div>
+          <button type="button" class="search-hint-chip" data-search-chip="SK">
+            SK → Surat Keputusan
+          </button>
 
-          <div class="search-hints">
+          <button type="button" class="search-hint-chip" data-search-chip="SE">
+            SE → Surat Edaran
+          </button>
 
-            <button
-              type="button"
-              class="search-hint-chip"
-              data-search-chip="SK"
-            >
-              SK → Surat Keputusan
-            </button>
+          <button type="button" class="search-hint-chip" data-search-chip="RENJA">
+            RENJA
+          </button>
 
-            <button
-              type="button"
-              class="search-hint-chip"
-              data-search-chip="SE"
-            >
-              SE → Surat Edaran
-            </button>
+          <button type="button" class="search-hint-chip" data-search-chip="LKjIP">
+            LKjIP
+          </button>
 
-            <button
-              type="button"
-              class="search-hint-chip"
-              data-search-chip="BA"
-            >
-              BA → Berita Acara
-            </button>
-
-            <button
-              type="button"
-              class="search-hint-chip"
-              data-search-chip="SPPD"
-            >
-              SPPD
-            </button>
-
-            <button
-              type="button"
-              class="search-hint-chip"
-              data-search-chip="Nota Dinas"
-            >
-              Nota Dinas
-            </button>
-
-          </div>
+          <button type="button" class="search-hint-chip" data-search-chip="SPPD">
+            SPPD
+          </button>
 
         </div>
 
+        <div class="activity-showcase" aria-label="Galeri kegiatan DLH">
 
-        <div class="landing-visual">
-
-          <div class="landing-visual-card">
-
+          <article class="activity-card activity-card-1">
+            <div class="activity-placeholder">
+              <span>DLH</span>
+              <small>Kegiatan Lapangan</small>
+            </div>
             <img
-              src="assets/hero/hero.png"
-              alt="Ilustrasi LEMARI DLH"
+              src="assets/home/activity-01.jpg"
+              alt="Kegiatan DLH 1"
+              onerror="this.style.display='none'"
             >
+          </article>
 
-            <div class="landing-float one">
-              🌿 Klasifikasi otomatis
+          <article class="activity-card activity-card-2">
+            <div class="activity-placeholder">
+              <span>🌿</span>
+              <small>Lingkungan Hidup</small>
             </div>
-
-            <div class="landing-float two">
-              🔎 Cari dari yang kamu ingat
-            </div>
-
-          </div>
-
-        </div>
-
-      </section>
-
-
-      <section
-        id="homeBenefits"
-        class="home-benefits"
-      >
-
-        <div class="home-benefit">
-
-          <div class="home-benefit-icon">
-            🔎
-          </div>
-
-          <div>
-            <strong>Cari dari yang kamu ingat</strong>
-            <span>Judul, nomor surat, kode klasifikasi, sampai singkatan dokumen.</span>
-          </div>
-
-        </div>
-
-
-        <div class="home-benefit">
-
-          <div class="home-benefit-icon">
-            🧭
-          </div>
-
-          <div>
-            <strong>Klasifikasi lebih rapi</strong>
-            <span>Nomor dokumen dibaca otomatis dan disambungkan ke master klasifikasi.</span>
-          </div>
-
-        </div>
-
-
-        <div class="home-benefit">
-
-          <div class="home-benefit-icon">
-            ☁️
-          </div>
-
-          <div>
-            <strong>Tetap terhubung ke Drive</strong>
-            <span>Dokumen tersimpan di Google Drive, LEMARI membantu temu kembali.</span>
-          </div>
-
-        </div>
-
-      </section>
-
-
-      <section
-        id="filterPanel"
-        class="filter-panel"
-        hidden
-      >
-
-        <div class="filter-panel-grid">
-
-          <div>
-            <label class="field-label" for="yearFilter">
-              Tahun
-            </label>
-
-            <select id="yearFilter" class="select">
-              <option value="">Semua Tahun</option>
-            </select>
-          </div>
-
-
-          <div>
-            <label class="field-label" for="divisionFilter">
-              Bidang
-            </label>
-
-            <select id="divisionFilter" class="select">
-              <option value="">Semua Bidang</option>
-            </select>
-          </div>
-
-
-          <div>
-            <label class="field-label" for="agendaDirectionFilter">
-              Arah Agenda
-            </label>
-
-            <select id="agendaDirectionFilter" class="select">
-              <option value="">Semua Arah</option>
-            </select>
-          </div>
-
-
-          <div>
-            <button
-              id="resetBtn"
-              class="btn btn-secondary"
-              type="button"
+            <img
+              src="assets/home/activity-02.jpg"
+              alt="Kegiatan DLH 2"
+              onerror="this.style.display='none'"
             >
-              ↺ Reset
-            </button>
-          </div>
+          </article>
 
+          <article class="activity-card activity-card-3">
+            <div class="activity-placeholder activity-placeholder-feature">
+              <img
+                class="activity-logo-mark"
+                src="assets/logo/logo-square.png"
+                alt=""
+              >
+              <strong>Arsip tertata.</strong>
+              <small>Informasi mudah ditemukan kembali.</small>
+            </div>
+            <img
+              src="assets/home/activity-03.jpg"
+              alt="Kegiatan DLH 3"
+              onerror="this.style.display='none'"
+            >
+          </article>
+
+          <article class="activity-card activity-card-4">
+            <div class="activity-placeholder">
+              <span>DLH</span>
+              <small>Pelayanan & Pengawasan</small>
+            </div>
+            <img
+              src="assets/home/activity-04.jpg"
+              alt="Kegiatan DLH 4"
+              onerror="this.style.display='none'"
+            >
+          </article>
+
+          <article class="activity-card activity-card-5">
+            <div class="activity-placeholder">
+              <span>☁</span>
+              <small>Dokumentasi Kegiatan</small>
+            </div>
+            <img
+              src="assets/home/activity-05.jpg"
+              alt="Kegiatan DLH 5"
+              onerror="this.style.display='none'"
+            >
+          </article>
+
+        </div>
+
+        <div class="editorial-footerline">
+          <span>Layanan Elektronik Manajemen Arsip Ringkas dan Integratif</span>
+          <span class="editorial-dot">•</span>
+          <span>Terintegrasi dengan Google Drive</span>
         </div>
 
       </section>
@@ -2392,14 +2932,14 @@
               id="resultsTitle"
               class="results-title"
             >
-              Ini lho arsip yang kamu cari
+              Hasil Pencarian Arsip
             </h2>
 
             <p
               id="resultsSubtitle"
               class="results-subtitle"
             >
-              Pilih arsip yang kamu butuhkan dari tabel di bawah.
+              Pilih arsip yang sesuai dari tabel di bawah.
             </p>
 
           </div>
@@ -2422,11 +2962,11 @@
           <div class="spinner"></div>
 
           <h3 class="state-title">
-            Mencari di LEMARI...
+            Sedang mencari arsip...
           </h3>
 
           <p class="state-desc">
-            Sebentar, arsipnya lagi dicari.
+            Mohon tunggu, LEMARI sedang menelusuri arsip.
           </p>
         </div>
 
@@ -2471,14 +3011,86 @@
           >
 
           <h3 class="state-title">
-            Arsipnya belum ketemu
+            Arsip tidak ditemukan
           </h3>
 
           <p class="state-desc">
-            Coba kata lain, nomor surat, kode klasifikasi, atau ubah filter.
+            Gunakan kata kunci lain, nomor surat, kode klasifikasi, atau sesuaikan filter pencarian.
           </p>
         </div>
 
+
+      <section
+        id="filterPanel"
+        class="filter-panel"
+      >
+
+        <div class="filter-panel-heading">
+          <div>
+            <h3>Filter Arsip</h3>
+            <p>Saring hasil berdasarkan tahun, bidang, atau arah agenda.</p>
+          </div>
+        </div>
+
+        <div class="filter-panel-grid">
+
+          <div>
+            <label class="field-label" for="yearFilter">
+              Tahun
+            </label>
+
+            <select id="yearFilter" class="select">
+              <option value="">Semua Tahun</option>
+            </select>
+          </div>
+
+
+          <div>
+            <label class="field-label" for="divisionFilter">
+              Bidang
+            </label>
+
+            <select id="divisionFilter" class="select">
+              <option value="">Semua Bidang</option>
+            </select>
+          </div>
+
+
+          <div>
+            <label class="field-label" for="archiveTypeFilter">
+              Tipe Arsip
+            </label>
+
+            <select id="archiveTypeFilter" class="select">
+              <option value="">Semua Tipe</option>
+            </select>
+          </div>
+
+
+          <div>
+            <label class="field-label" for="agendaDirectionFilter">
+              Arah Agenda
+            </label>
+
+            <select id="agendaDirectionFilter" class="select">
+              <option value="">Semua Arah</option>
+            </select>
+          </div>
+
+
+          <div>
+            <button
+              id="resetBtn"
+              class="btn btn-secondary"
+              type="button"
+            >
+              ↺ Reset
+            </button>
+          </div>
+
+        </div>
+
+      </section>
 
         <div
           id="resultsTableWrap"
@@ -2571,11 +3183,11 @@
         <div>
 
           <h2 class="modal-title">
-            Mau upload bagaimana?
+            Pilih Metode Upload
           </h2>
 
           <p class="modal-desc">
-            Pilih jenis upload arsip.
+            Pilih satu arsip atau beberapa file sekaligus.
           </p>
 
         </div>
@@ -2607,7 +3219,7 @@
             </div>
 
             <div class="choice-title">
-              Single File
+              Satu Arsip
             </div>
 
             <div class="choice-desc">
@@ -2647,7 +3259,7 @@
 
 
   <!-- =================================================
-       SINGLE UPLOAD — KLASIFIKASI ARSIP
+       SINGLE UPLOAD — ADAPTIVE ARCHIVE TYPE
   ================================================== -->
 
   <div
@@ -2655,7 +3267,7 @@
     class="modal-backdrop"
   >
 
-    <div class="modal-card">
+    <div class="modal-card modal-card-wide">
 
       <div class="modal-head">
 
@@ -2665,12 +3277,14 @@
             Masukkan Arsip Baru
           </h2>
 
-          <p class="modal-desc">
-            Masukkan nomor dokumen. LEMARI akan membaca kode klasifikasi dan tahun secara otomatis.
+          <p
+            id="uploadModalDesc"
+            class="modal-desc"
+          >
+            Pilih tipe arsip terlebih dahulu. Form akan menyesuaikan otomatis.
           </p>
 
         </div>
-
 
         <button
           class="close-btn"
@@ -2690,7 +3304,58 @@
           class="upload-form"
         >
 
-          <div class="form-grid">
+          <div class="archive-type-picker">
+
+            <button
+              id="archiveTypeLetterBtn"
+              class="archive-type-option active"
+              type="button"
+              data-archive-type="Surat / Naskah Dinas"
+            >
+              <span class="archive-type-icon">
+                <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M7 3h7l4 4v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/>
+                  <path d="M14 3v4h4"/>
+                  <path d="M9 13h6M9 17h4"/>
+                </svg>
+              </span>
+              <span>
+                <strong>Surat / Naskah Dinas</strong>
+                <small>Nomor dokumen, klasifikasi, arah agenda, dan jenis surat.</small>
+              </span>
+            </button>
+
+            <button
+              id="archiveTypeDocumentBtn"
+              class="archive-type-option"
+              type="button"
+              data-archive-type="Dokumen Non-Surat"
+            >
+              <span class="archive-type-icon">
+                <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 4h16v16H4z"/>
+                  <path d="M8 8h8M8 12h8M8 16h5"/>
+                </svg>
+              </span>
+              <span>
+                <strong>Dokumen Non-Surat</strong>
+                <small>RENSTRA, RENJA, LKjIP, RKA/DPA, laporan, SPJ, dan dokumen lainnya.</small>
+              </span>
+            </button>
+
+          </div>
+
+          <input
+            id="uploadArchiveType"
+            type="hidden"
+            value="Surat / Naskah Dinas"
+          >
+
+
+          <div
+            id="letterArchiveFields"
+            class="form-grid archive-mode-fields"
+          >
 
             <div class="form-group-full">
 
@@ -2715,7 +3380,7 @@
                 class="sensitive-desc"
                 style="margin-top:7px"
               >
-                LEMARI membaca bagian pertama sebagai kode klasifikasi, bagian kedua sebagai nomor surat, dan bagian terakhir sebagai tahun.
+                Kode klasifikasi dibaca dari bagian pertama, nomor surat dari bagian kedua, dan tahun dari bagian terakhir.
               </div>
 
             </div>
@@ -2723,23 +3388,13 @@
 
             <div
               id="classificationPreview"
-              class="form-group-full"
-              style="
-                display:none;
-                border:1px solid #d8cbbd;
-                border-radius:14px;
-                padding:14px 16px;
-                background:#fbf8f2;
-              "
+              class="form-group-full classification-preview-box"
+              style="display:none"
             >
 
               <div
                 id="classificationPreviewTitle"
-                style="
-                  font-weight:800;
-                  color:#2f6b45;
-                  margin-bottom:6px;
-                "
+                class="classification-preview-title"
               >
                 Membaca klasifikasi...
               </div>
@@ -2752,10 +3407,7 @@
 
               <div
                 id="classificationChoiceWrap"
-                style="
-                  display:none;
-                  margin-top:12px;
-                "
+                style="display:none;margin-top:12px"
               >
                 <label
                   class="field-label"
@@ -2773,50 +3425,6 @@
                   </option>
                 </select>
               </div>
-
-            </div>
-
-
-            <div class="form-group-full">
-
-              <label
-                class="field-label"
-                for="uploadTitle"
-              >
-                Judul / Perihal Dokumen
-              </label>
-
-              <input
-                id="uploadTitle"
-                class="input"
-                name="judul"
-                type="text"
-                required
-                placeholder="Contoh: SK Tim Media Sosial DLH"
-              >
-
-            </div>
-
-
-            <div>
-
-              <label
-                class="field-label"
-                for="uploadDivision"
-              >
-                Bidang
-              </label>
-
-              <select
-                id="uploadDivision"
-                class="select"
-                name="bidang"
-                required
-              >
-                <option value="">
-                  Pilih Bidang
-                </option>
-              </select>
 
             </div>
 
@@ -2867,7 +3475,7 @@
             </div>
 
 
-            <div>
+            <div class="form-group-full">
 
               <label
                 class="field-label"
@@ -2889,6 +3497,116 @@
 
             </div>
 
+          </div>
+
+
+          <div
+            id="documentArchiveFields"
+            class="form-grid archive-mode-fields"
+            hidden
+          >
+
+            <div>
+
+              <label
+                class="field-label"
+                for="uploadDocumentType"
+              >
+                Jenis Dokumen
+              </label>
+
+              <select
+                id="uploadDocumentType"
+                class="select"
+                name="jenisDokumen"
+              >
+                <option value="">
+                  Pilih Jenis Dokumen
+                </option>
+              </select>
+
+            </div>
+
+
+            <div>
+
+              <label
+                class="field-label"
+                for="uploadYear"
+              >
+                Tahun
+              </label>
+
+              <input
+                id="uploadYear"
+                class="input"
+                name="tahun"
+                type="number"
+                min="1900"
+                max="2100"
+                inputmode="numeric"
+                placeholder="Contoh: 2027"
+              >
+
+            </div>
+
+
+            <div class="form-group-full non-letter-note">
+              <strong>Tidak perlu nomor surat atau klasifikasi.</strong>
+              <span>
+                Gunakan jalur ini untuk RENSTRA, RENJA, LKjIP, RKA/DPA, laporan, SPJ, dokumentasi, dan dokumen non-surat lainnya.
+              </span>
+            </div>
+
+          </div>
+
+
+          <div class="form-grid common-archive-fields">
+
+            <div class="form-group-full">
+
+              <label
+                id="uploadTitleLabel"
+                class="field-label"
+                for="uploadTitle"
+              >
+                Judul / Perihal Dokumen
+              </label>
+
+              <input
+                id="uploadTitle"
+                class="input"
+                name="judul"
+                type="text"
+                required
+                placeholder="Contoh: SK Tim Media Sosial DLH"
+              >
+
+            </div>
+
+
+            <div class="form-group-full">
+
+              <label
+                class="field-label"
+                for="uploadDivision"
+              >
+                Bidang
+              </label>
+
+              <select
+                id="uploadDivision"
+                class="select"
+                name="bidang"
+                required
+              >
+                <option value="">
+                  Pilih Bidang
+                </option>
+              </select>
+
+            </div>
+
 
             <div class="form-group-full">
 
@@ -2902,7 +3620,11 @@
                 <span>
 
                   <div class="sensitive-title">
-                    <svg class='ic' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' ><rect x='5' y='11' width='14' height='9' rx='2'/><path d='M8 11V7a4 4 0 0 1 8 0v4'/></svg> Dokumen sensitif / akses terbatas
+                    <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="5" y="11" width="14" height="9" rx="2"/>
+                      <path d="M8 11V7a4 4 0 0 1 8 0v4"/>
+                    </svg>
+                    Dokumen sensitif / akses terbatas
                   </div>
 
                   <div class="sensitive-desc">
@@ -2955,7 +3677,6 @@
               ← Ganti Jenis Upload
             </button>
 
-
             <button
               id="submitUploadBtn"
               class="btn btn-primary"
@@ -2973,8 +3694,6 @@
     </div>
 
   </div>
-
-
 
 
   <!-- =================================================
@@ -3286,6 +4005,9 @@
       arahAgenda:
         "",
 
+      tipeArsip:
+        "",
+
       sortBy:
         "judul",
 
@@ -3322,6 +4044,12 @@
 
         jenisAgenda:
           [],
+
+        tipeArsip:
+          [],
+
+        jenisDokumen:
+          [],
       };
 
 
@@ -3339,6 +4067,10 @@
         data:
           null,
       };
+
+
+    let singleUploadArchiveType =
+      "Surat / Naskah Dinas";
 
 
     let classificationTimer =
@@ -4553,9 +5285,6 @@
     function showLoading() {
       hideAllStates();
 
-      $("homeBenefits").hidden =
-        true;
-
       $("archiveResultsSection").hidden =
         false;
 
@@ -4571,9 +5300,6 @@
       message
     ) {
       hideAllStates();
-
-      $("homeBenefits").hidden =
-        true;
 
       $("archiveResultsSection").hidden =
         false;
@@ -4592,9 +5318,6 @@
     function showEmpty() {
       hideAllStates();
 
-      $("homeBenefits").hidden =
-        true;
-
       $("archiveResultsSection").hidden =
         false;
 
@@ -4611,7 +5334,8 @@
         state.q ||
         state.tahun ||
         state.bidang ||
-        state.arahAgenda
+        state.arahAgenda ||
+        state.tipeArsip
       );
     }
 
@@ -4706,6 +5430,14 @@
         jenisAgenda:
           data.jenisAgenda ||
           [],
+
+        tipeArsip:
+          data.tipeArsip ||
+          [],
+
+        jenisDokumen:
+          data.jenisDokumen ||
+          [],
       };
 
 
@@ -4752,6 +5484,18 @@
 
 
       fillSelect(
+        $("archiveTypeFilter"),
+        bootstrapData.tipeArsip
+      );
+
+
+      fillSelect(
+        $("uploadDocumentType"),
+        bootstrapData.jenisDokumen
+      );
+
+
+      fillSelect(
         $("multiDivision"),
         bootstrapData.bidang
       );
@@ -4787,6 +5531,10 @@
               ? "<svg class='ic' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect x='5' y='11' width='14' height='9' rx='2'/><path d='M8 11V7a4 4 0 0 1 8 0v4'/></svg>"
               : "<svg class='ic' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><circle cx='12' cy='12' r='9'/><path d='M3 12h18'/><path d='M12 3a15 15 0 0 1 0 18'/><path d='M12 3a15 15 0 0 0 0 18'/></svg>";
 
+          const isNonLetter =
+            item.tipeArsip ===
+              "Dokumen Non-Surat";
+
           const hasArchiveMetadata =
             Boolean(
               item.metadataKearsipan &&
@@ -4821,7 +5569,11 @@
                   </div>
 
                   <div class="result-subtle">
-                    Metadata nomor belum tersedia
+                    ${
+                      isNonLetter
+                        ? `Dokumen non-surat • Tahun ${escapeHtml(item.tahun || "—")}`
+                        : "Metadata nomor belum tersedia"
+                    }
                   </div>
                 `;
 
@@ -4836,15 +5588,25 @@
                     ${escapeHtml(item.uraianKlasifikasi || "Klasifikasi belum terisi")}
                   </div>
                 `
-              : `
-                  <div class="result-code">
-                    —
-                  </div>
+              : isNonLetter
+                ? `
+                    <div class="result-code">
+                      —
+                    </div>
 
-                  <div class="result-classification-text">
-                    Arsip lama • ${escapeHtml(item.kategori || "Tanpa kategori")}
-                  </div>
-                `;
+                    <div class="result-classification-text">
+                      Tidak menggunakan klasifikasi surat
+                    </div>
+                  `
+                : `
+                    <div class="result-code">
+                      —
+                    </div>
+
+                    <div class="result-classification-text">
+                      Arsip lama • ${escapeHtml(item.kategori || "Tanpa kategori")}
+                    </div>
+                  `;
 
           const directionHtml =
             item.arahAgenda
@@ -4859,41 +5621,54 @@
                   </span>
                 `;
 
-          const jenisHtml =
-            (
-              item.jenisSurat ||
-              item.jenisAgenda
-            )
-              ? `
-                  <div class="type-stack">
+          let jenisHtml =
+            '<span class="result-subtle">—</span>';
 
-                    ${
-                      item.jenisSurat
-                        ? `
-                          <div class="type-main">
-                            ${escapeHtml(item.jenisSurat)}
-                          </div>
-                        `
-                        : ""
-                    }
+          if (
+            item.jenisSurat ||
+            item.jenisAgenda
+          ) {
+            jenisHtml =
+              `
+                <div class="type-stack">
+                  ${
+                    item.jenisSurat
+                      ? `
+                        <div class="type-main">
+                          ${escapeHtml(item.jenisSurat)}
+                        </div>
+                      `
+                      : ""
+                  }
 
-                    ${
-                      item.jenisAgenda
-                        ? `
-                          <div class="type-sub">
-                            ${escapeHtml(item.jenisAgenda)}
-                          </div>
-                        `
-                        : ""
-                    }
-
+                  ${
+                    item.jenisAgenda
+                      ? `
+                        <div class="type-sub">
+                          ${escapeHtml(item.jenisAgenda)}
+                        </div>
+                      `
+                      : ""
+                  }
+                </div>
+              `;
+          }
+          else if (
+            item.jenisDokumen ||
+            isNonLetter
+          ) {
+            jenisHtml =
+              `
+                <div class="type-stack">
+                  <div class="type-main">
+                    ${escapeHtml(item.jenisDokumen || "Dokumen Non-Surat")}
                   </div>
-                `
-              : `
-                  <span class="result-subtle">
-                    —
-                  </span>
-                `;
+                  <div class="type-sub">
+                    Dokumen Non-Surat
+                  </div>
+                </div>
+              `;
+          }
 
           const row =
             document.createElement(
@@ -4915,6 +5690,16 @@
                     ${escapeHtml(item.aksesLabel)}
                   </span>
 
+                  ${
+                    item.tipeArsip
+                      ? `
+                        <span class="badge badge-version">
+                          ${escapeHtml(item.tipeArsip)}
+                        </span>
+                      `
+                      : ""
+                  }
+
                   <span class="badge badge-version">
                     v${escapeHtml(item.versiTerbaru || 1)}
                   </span>
@@ -4935,7 +5720,7 @@
 
 
               <td>
-                <strong style="font-size:11px">
+                <strong style="font-size:12px">
                   ${escapeHtml(item.bidang || "—")}
                 </strong>
               </td>
@@ -5039,7 +5824,6 @@
 
       bindArchiveActions();
     }
-
 
     function bindArchiveActions() {
       document
@@ -5279,22 +6063,24 @@
       const subtitle =
         $("resultsSubtitle");
 
+      title.textContent =
+        "Hasil Pencarian Arsip";
+
       if (
         state.q
       ) {
-        title.textContent =
-          `Ini lho arsip yang kamu cari sesuai keyword “${state.q}”`;
+        subtitle.textContent =
+          state.total > 0
+            ? `${state.total} arsip ditemukan untuk kata kunci “${state.q}”.`
+            : `Tidak ada arsip yang ditemukan untuk kata kunci “${state.q}”.`;
       }
 
       else {
-        title.textContent =
-          "Ini lho arsip yang sesuai filter kamu";
+        subtitle.textContent =
+          state.total > 0
+            ? `${state.total} arsip ditemukan berdasarkan filter yang dipilih.`
+            : "Tidak ada arsip yang sesuai dengan filter yang dipilih.";
       }
-
-      subtitle.textContent =
-        state.total > 0
-          ? `${state.total} arsip ditemukan. Pilih yang kamu butuhkan dari tabel di bawah.`
-          : "Belum ada arsip yang cocok.";
     }
 
 
@@ -5412,6 +6198,9 @@
                 arahAgenda:
                   state.arahAgenda,
 
+                tipeArsip:
+                  state.tipeArsip,
+
                 sortBy:
                   state.sortBy,
 
@@ -5477,9 +6266,6 @@
 
 
         hideAllStates();
-
-        $("homeBenefits").hidden =
-          true;
 
         $("archiveResultsSection").hidden =
           false;
@@ -5917,10 +6703,90 @@
     }
 
 
+    function setSingleUploadArchiveType(
+      type
+    ) {
+      const isLetter =
+        type ===
+          "Surat / Naskah Dinas";
+
+      singleUploadArchiveType =
+        isLetter
+          ? "Surat / Naskah Dinas"
+          : "Dokumen Non-Surat";
+
+      $("uploadArchiveType").value =
+        singleUploadArchiveType;
+
+      $("archiveTypeLetterBtn")
+        .classList
+        .toggle(
+          "active",
+          isLetter
+        );
+
+      $("archiveTypeDocumentBtn")
+        .classList
+        .toggle(
+          "active",
+          !isLetter
+        );
+
+      $("letterArchiveFields").hidden =
+        !isLetter;
+
+      $("documentArchiveFields").hidden =
+        isLetter;
+
+      $("uploadDocumentNumber").required =
+        isLetter;
+
+      $("uploadAgendaDirection").required =
+        isLetter;
+
+      $("uploadLetterType").required =
+        isLetter;
+
+      $("uploadAgendaType").required =
+        isLetter;
+
+      $("uploadDocumentType").required =
+        !isLetter;
+
+      $("uploadYear").required =
+        !isLetter;
+
+      $("uploadTitleLabel").textContent =
+        isLetter
+          ? "Judul / Perihal Dokumen"
+          : "Judul Dokumen";
+
+      $("uploadTitle").placeholder =
+        isLetter
+          ? "Contoh: SK Tim Media Sosial DLH"
+          : "Contoh: RENJA DLH Tahun 2027";
+
+      $("uploadModalDesc").textContent =
+        isLetter
+          ? "Nomor dokumen akan dibaca untuk menentukan klasifikasi dan tahun secara otomatis."
+          : "Dokumen non-surat tidak memerlukan nomor surat maupun klasifikasi.";
+
+      if (!isLetter) {
+        resetClassificationPreview();
+        $("uploadDocumentNumber").value =
+          "";
+      }
+    }
+
+
     function resetUploadForm() {
       $("uploadForm").reset();
 
       resetClassificationPreview();
+
+      setSingleUploadArchiveType(
+        "Surat / Naskah Dinas"
+      );
     }
 
 
@@ -5938,6 +6804,14 @@
 
       $("uploadAgendaType").value =
         "";
+
+      $("uploadDocumentType").value =
+        "";
+
+      $("uploadYear").value =
+        String(
+          new Date().getFullYear()
+        );
     }
 
 
@@ -5948,7 +6822,6 @@
       const file =
         $("uploadFile").files[0];
 
-
       if (
         !file
       ) {
@@ -5957,56 +6830,69 @@
         );
       }
 
+      const isLetter =
+        singleUploadArchiveType ===
+          "Surat / Naskah Dinas";
 
       const form =
         new FormData();
 
+      form.append(
+        "tipeArsip",
+        singleUploadArchiveType
+      );
 
       form.append(
         "judul",
         $("uploadTitle").value.trim()
       );
 
-
       form.append(
         "bidang",
         $("uploadDivision").value
       );
 
+      if (isLetter) {
+        form.append(
+          "nomorDokumen",
+          $("uploadDocumentNumber")
+            .value
+            .trim()
+        );
 
-      form.append(
-        "nomorDokumen",
-        $("uploadDocumentNumber")
-          .value
-          .trim()
-      );
+        form.append(
+          "uraianKlasifikasi",
+          singleClassificationState
+            .uraianKlasifikasi ||
+          ""
+        );
 
+        form.append(
+          "arahAgenda",
+          $("uploadAgendaDirection").value
+        );
 
-      form.append(
-        "uraianKlasifikasi",
-        singleClassificationState
-          .uraianKlasifikasi ||
-        ""
-      );
+        form.append(
+          "jenisSurat",
+          $("uploadLetterType").value
+        );
 
+        form.append(
+          "jenisAgenda",
+          $("uploadAgendaType").value
+        );
+      }
+      else {
+        form.append(
+          "tahun",
+          $("uploadYear").value.trim()
+        );
 
-      form.append(
-        "arahAgenda",
-        $("uploadAgendaDirection").value
-      );
-
-
-      form.append(
-        "jenisSurat",
-        $("uploadLetterType").value
-      );
-
-
-      form.append(
-        "jenisAgenda",
-        $("uploadAgendaType").value
-      );
-
+        form.append(
+          "jenisDokumen",
+          $("uploadDocumentType").value
+        );
+      }
 
       form.append(
         "sensitif",
@@ -6015,7 +6901,6 @@
           : "TIDAK"
       );
 
-
       form.append(
         "allowDuplicate",
         allowDuplicate
@@ -6023,13 +6908,11 @@
           : "TIDAK"
       );
 
-
       form.append(
         "file",
         file,
         file.name
       );
-
 
       const response =
         await fetch(
@@ -6044,10 +6927,8 @@
           }
         );
 
-
       const data =
         await response.json();
-
 
       return {
         response,
@@ -6055,19 +6936,22 @@
       };
     }
 
-
     async function processSingleUpload(
       allowDuplicate =
         false
     ) {
+      const isLetter =
+        singleUploadArchiveType ===
+          "Surat / Naskah Dinas";
+
       if (
+        isLetter &&
         !classificationReady()
       ) {
         const parsed =
           await parseSingleDocumentNumber(
             true
           );
-
 
         if (
           !parsed ||
@@ -6092,6 +6976,32 @@
 
           return;
         }
+      }
+
+      if (
+        !isLetter &&
+        (
+          !$("uploadDocumentType").value ||
+          !/^\d{4}$/.test(
+            $("uploadYear").value.trim()
+          )
+        )
+      ) {
+        await Swal.fire({
+          icon:
+            "warning",
+
+          title:
+            "Metadata belum lengkap",
+
+          text:
+            "Pilih Jenis Dokumen dan isi Tahun 4 digit.",
+
+          confirmButtonColor:
+            "#2f6b45",
+        });
+
+        return;
       }
 
 
@@ -6260,7 +7170,18 @@
                     data.arsip.uraianKlasifikasi
                   )}</b>
                 `
-                : ""
+                : data.arsip.jenisDokumen
+                  ? `
+                    <br>
+                    <b>${escapeHtml(
+                      data.arsip.jenisDokumen
+                    )}</b>
+                    &nbsp;•&nbsp;
+                    Tahun ${escapeHtml(
+                      data.arsip.tahun
+                    )}
+                  `
+                  : ""
             }
             <br><br>
             ${
@@ -7505,6 +8426,25 @@
       );
 
 
+    document
+      .querySelectorAll(
+        "[data-archive-type]"
+      )
+      .forEach(
+        button => {
+
+          button.addEventListener(
+            "click",
+            () =>
+              setSingleUploadArchiveType(
+                button.dataset.archiveType
+              )
+          );
+
+        }
+      );
+
+
     $("uploadDocumentNumber")
       .addEventListener(
         "input",
@@ -7655,6 +8595,11 @@
 
 
 
+    $("homeSearchBtn").onclick =
+      () =>
+        runEnterSearch();
+
+
     document
       .querySelectorAll(
         "[data-search-chip]"
@@ -7688,25 +8633,6 @@
 
         }
       );
-
-
-    $("filterToggleBtn").onclick =
-      function() {
-
-        const panel =
-          $("filterPanel");
-
-        panel.hidden =
-          !panel.hidden;
-
-        this.setAttribute(
-          "aria-expanded",
-          String(
-            !panel.hidden
-          )
-        );
-
-      };
 
 
     $("searchInput").addEventListener(
@@ -7801,6 +8727,20 @@
       };
 
 
+    $("archiveTypeFilter").onchange =
+      function() {
+
+        state.tipeArsip =
+          this.value;
+
+        state.page =
+          1;
+
+        loadArchives();
+
+      };
+
+
     $("resetBtn").onclick =
       function() {
 
@@ -7817,6 +8757,9 @@
           "";
 
         state.arahAgenda =
+          "";
+
+        state.tipeArsip =
           "";
 
         state.page =
@@ -7841,15 +8784,8 @@
         $("agendaDirectionFilter").value =
           "";
 
-        $("filterPanel").hidden =
-          true;
-
-        $("filterToggleBtn")
-          .setAttribute(
-            "aria-expanded",
-            "false"
-          );
-
+        $("archiveTypeFilter").value =
+          "";
 
         showSearchReady();
 

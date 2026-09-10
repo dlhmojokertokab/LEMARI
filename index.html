@@ -34,6 +34,10 @@
     src="https://cdn.jsdelivr.net/npm/sweetalert2@11"
   ></script>
 
+  <script
+    src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"
+  ></script>
+
   <style>
     :root {
       --primary: #2f6b45;
@@ -3457,6 +3461,22 @@
           type="button"
         >
           <svg class='ic' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' ><rect x='5' y='11' width='14' height='9' rx='2'/><path d='M8 11V7a4 4 0 0 1 8 0v4'/></svg> Mode Pengguna
+        </button>
+
+
+        <button
+          id="exportLettersBtn"
+          class="btn btn-secondary admin-only"
+          type="button"
+          title="Export seluruh metadata arsip surat ke Excel"
+        >
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 3v12"/>
+            <path d="M7 10l5 5 5-5"/>
+            <path d="M5 21h14a2 2 0 0 0 2-2v-3"/>
+            <path d="M3 16v3a2 2 0 0 0 2 2"/>
+          </svg>
+          Export Excel
         </button>
 
 
@@ -9657,6 +9677,315 @@
 
 
     // ==================================================
+    // EXPORT ARSIP SURAT KE EXCEL
+    // ==================================================
+
+    async function fetchAllLetterArchives() {
+      const allItems = [];
+      let page = 1;
+      let totalPages = 1;
+
+      do {
+        const response =
+          await fetch(
+            buildApiUrl(
+              "/api/arsip",
+              {
+                page,
+                pageSize:
+                  100,
+
+                tipeArsip:
+                  "Surat / Naskah Dinas",
+
+                sortBy:
+                  "tahun",
+
+                sortDir:
+                  "desc",
+              }
+            ),
+            {
+              cache:
+                "no-store",
+            }
+          );
+
+        const data =
+          await response.json();
+
+        if (
+          !response.ok ||
+          !data.ok
+        ) {
+          throw new Error(
+            data.error ||
+            "Gagal mengambil arsip surat."
+          );
+        }
+
+        allItems.push(
+          ...(data.items || [])
+        );
+
+        totalPages =
+          Math.max(
+            1,
+            Number(
+              data.pagination?.totalPages ||
+              1
+            )
+          );
+
+        page++;
+      }
+      while (
+        page <= totalPages
+      );
+
+      return allItems;
+    }
+
+
+    function buildLetterExportRows(items) {
+      return items.map(
+        (item, index) => ({
+          "Nomor":
+            index + 1,
+
+          "Nama Dokumen":
+            item.judul || "",
+
+          "Bidang":
+            item.bidang || "",
+
+          "Nomor Dokumen":
+            item.nomorDokumen || "",
+
+          "Nomor Surat":
+            item.nomorSurat || "",
+
+          "Kode Klasifikasi":
+            item.kodeKlasifikasi || "",
+
+          "Uraian Klasifikasi":
+            item.uraianKlasifikasi || "",
+
+          "Tahun Surat":
+            item.tahunSurat ||
+            item.tahun ||
+            "",
+
+          "Jenis Surat":
+            item.jenisSurat || "",
+
+          "Jenis Agenda":
+            item.jenisAgenda || "",
+        })
+      );
+    }
+
+
+    async function exportAllLettersToExcel() {
+      if (
+        typeof XLSX ===
+          "undefined"
+      ) {
+        await Swal.fire({
+          icon:
+            "error",
+
+          title:
+            "Modul Excel belum siap",
+
+          text:
+            "Muat ulang halaman lalu coba lagi.",
+
+          confirmButtonColor:
+            "#2f6b45",
+        });
+
+        return;
+      }
+
+      const button =
+        $("exportLettersBtn");
+
+      const originalHtml =
+        button.innerHTML;
+
+      button.disabled =
+        true;
+
+      button.textContent =
+        "Menyiapkan Excel...";
+
+      Swal.fire({
+        title:
+          "Menyiapkan arsip surat",
+
+        text:
+          "LEMARI sedang mengumpulkan seluruh metadata surat.",
+
+        allowOutsideClick:
+          false,
+
+        allowEscapeKey:
+          false,
+
+        didOpen:
+          () =>
+            Swal.showLoading(),
+      });
+
+      try {
+        const items =
+          await fetchAllLetterArchives();
+
+        if (
+          !items.length
+        ) {
+          await Swal.fire({
+            icon:
+              "info",
+
+            title:
+              "Belum ada arsip surat",
+
+            text:
+              "Tidak ada data Surat / Naskah Dinas yang dapat diekspor.",
+
+            confirmButtonColor:
+              "#2f6b45",
+          });
+
+          return;
+        }
+
+        const rows =
+          buildLetterExportRows(
+            items
+          );
+
+        const headers = [
+          "Nomor",
+          "Nama Dokumen",
+          "Bidang",
+          "Nomor Dokumen",
+          "Nomor Surat",
+          "Kode Klasifikasi",
+          "Uraian Klasifikasi",
+          "Tahun Surat",
+          "Jenis Surat",
+          "Jenis Agenda",
+        ];
+
+        const worksheet =
+          XLSX.utils.json_to_sheet(
+            rows,
+            {
+              header:
+                headers,
+            }
+          );
+
+        worksheet["!cols"] = [
+          { wch: 8 },
+          { wch: 42 },
+          { wch: 22 },
+          { wch: 38 },
+          { wch: 16 },
+          { wch: 18 },
+          { wch: 46 },
+          { wch: 14 },
+          { wch: 30 },
+          { wch: 24 },
+        ];
+
+        if (
+          worksheet["!ref"]
+        ) {
+          worksheet["!autofilter"] = {
+            ref:
+              worksheet["!ref"],
+          };
+        }
+
+        const workbook =
+          XLSX.utils.book_new();
+
+        workbook.Props = {
+          Title:
+            "Arsip Surat DLH",
+
+          Subject:
+            "Export metadata Surat / Naskah Dinas dari LEMARI DLH",
+
+          Author:
+            "LEMARI DLH",
+
+          Company:
+            "Dinas Lingkungan Hidup Kabupaten Mojokerto",
+        };
+
+        XLSX.utils.book_append_sheet(
+          workbook,
+          worksheet,
+          "Arsip Surat"
+        );
+
+        XLSX.writeFile(
+          workbook,
+          "ARSIP_SURAT_DLH.xlsx",
+          {
+            compression:
+              true,
+          }
+        );
+
+        await Swal.fire({
+          icon:
+            "success",
+
+          title:
+            "Excel berhasil dibuat",
+
+          text:
+            `${items.length} arsip surat berhasil diekspor.`,
+
+          confirmButtonColor:
+            "#2f6b45",
+        });
+      }
+
+      catch (error) {
+        await Swal.fire({
+          icon:
+            "error",
+
+          title:
+            "Export Excel gagal",
+
+          text:
+            error.message ||
+            "Terjadi kesalahan saat membuat file Excel.",
+
+          confirmButtonColor:
+            "#2f6b45",
+        });
+      }
+
+      finally {
+        button.disabled =
+          false;
+
+        button.innerHTML =
+          originalHtml;
+      }
+    }
+
+
+    // ==================================================
     // EVENTS
     // ==================================================
 
@@ -9698,6 +10027,11 @@
         await loginAdmin();
 
       };
+
+
+    $("exportLettersBtn").onclick =
+      () =>
+        exportAllLettersToExcel();
 
 
     $("settingsBtn").onclick =

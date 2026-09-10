@@ -3170,6 +3170,178 @@
       }
     }
 
+
+    /* ==================================================
+       V21 — MULTI UPLOAD ADAPTIF
+    ================================================== */
+
+    .multi-modal-card {
+      width: min(1120px, calc(100vw - 28px));
+    }
+
+    .multi-type-picker {
+      margin-bottom: 14px;
+    }
+
+    .multi-type-picker .archive-type-option {
+      min-height: 92px;
+    }
+
+    .multi-top-grid-v21 {
+      grid-template-columns:
+        minmax(230px, .40fr)
+        minmax(0, 1fr);
+      align-items: stretch;
+    }
+
+    .multi-mode-note {
+      display: grid;
+      gap: 4px;
+      margin: 0 0 14px;
+      padding: 12px 14px;
+      border: 1px solid rgba(47,107,69,.15);
+      border-radius: 13px;
+      background: rgba(236,245,238,.75);
+    }
+
+    .multi-mode-note strong {
+      color: var(--primary-dark);
+      font-size: 12px;
+    }
+
+    .multi-mode-note span {
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.5;
+    }
+
+    .multi-file-list {
+      max-height: 54vh;
+      gap: 12px;
+    }
+
+    .multi-item {
+      padding: 14px;
+    }
+
+    .multi-file-head {
+      margin-bottom: 12px;
+    }
+
+    .multi-file-name {
+      font-size: 12px;
+    }
+
+    .multi-file-size {
+      font-size: 10px;
+    }
+
+    .multi-item-grid {
+      align-items: end;
+    }
+
+    .multi-item-grid.multi-letter-grid {
+      grid-template-columns:
+        minmax(200px, 1.1fr)
+        minmax(240px, 1.35fr)
+        minmax(150px, .75fr)
+        minmax(170px, .85fr);
+    }
+
+    .multi-item-grid.multi-document-grid {
+      grid-template-columns:
+        minmax(260px, 1.4fr)
+        minmax(190px, .9fr)
+        130px
+        auto;
+    }
+
+    .multi-letter-secondary {
+      display: grid;
+      grid-template-columns:
+        minmax(170px, .85fr)
+        minmax(170px, .85fr)
+        auto;
+      gap: 9px;
+      align-items: end;
+      margin-top: 9px;
+    }
+
+    .multi-sensitive {
+      min-height: 46px;
+      justify-content: center;
+    }
+
+    .multi-check-status {
+      display: none;
+      margin-top: 10px;
+      padding: 10px 12px;
+      border-radius: 11px;
+      font-size: 11px;
+      line-height: 1.5;
+    }
+
+    .multi-check-status.show {
+      display: block;
+    }
+
+    .multi-check-status.ok {
+      border: 1px solid rgba(47,107,69,.20);
+      background: #eef7f0;
+      color: #28583a;
+    }
+
+    .multi-check-status.warn {
+      border: 1px solid rgba(180,118,30,.24);
+      background: #fff7e8;
+      color: #835916;
+    }
+
+    .multi-check-status.error {
+      border: 1px solid rgba(185,54,54,.22);
+      background: #fff0f0;
+      color: #963434;
+    }
+
+    .multi-classification-choice {
+      display: none;
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px dashed #d9cdbf;
+    }
+
+    .multi-classification-choice.show {
+      display: block;
+    }
+
+    .multi-check-mini {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    @media (max-width: 920px) {
+      .multi-item-grid.multi-letter-grid,
+      .multi-item-grid.multi-document-grid,
+      .multi-letter-secondary {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .multi-sensitive {
+        justify-content: flex-start;
+      }
+    }
+
+    @media (max-width: 680px) {
+      .multi-top-grid-v21,
+      .multi-item-grid.multi-letter-grid,
+      .multi-item-grid.multi-document-grid,
+      .multi-letter-secondary {
+        grid-template-columns: 1fr;
+      }
+    }
+
   </style>
 </head>
 
@@ -4104,7 +4276,7 @@
 
 
   <!-- =================================================
-       MULTI UPLOAD
+       MULTI UPLOAD — ADAPTIVE ARCHIVE TYPE
   ================================================== -->
 
   <div
@@ -4116,10 +4288,17 @@
       <div class="modal-head">
         <div>
           <h2 class="modal-title">
-            <svg class='ic' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' ><path d='M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z'/></svg> Upload Banyak File
+            <svg class='ic' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'>
+              <path d='M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z'/>
+            </svg>
+            Upload Banyak Arsip
           </h2>
-          <p class="modal-desc">
-            Bidang berlaku untuk satu batch. Judul, Tahun, Kategori, dan Sensitif diatur per file.
+
+          <p
+            id="multiUploadDesc"
+            class="modal-desc"
+          >
+            Pilih tipe arsip dan bidang untuk satu batch. Metadata tiap file dapat diatur satu per satu.
           </p>
         </div>
 
@@ -4132,9 +4311,56 @@
         </button>
       </div>
 
+
       <div class="modal-body">
 
-        <div class="multi-top-grid">
+        <div class="archive-type-picker multi-type-picker">
+
+          <button
+            id="multiArchiveTypeLetterBtn"
+            class="archive-type-option active"
+            type="button"
+            data-multi-archive-type="Surat / Naskah Dinas"
+          >
+            <span class="archive-type-icon">
+              <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M7 3h7l4 4v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/>
+                <path d="M14 3v4h4"/>
+                <path d="M9 13h6M9 17h4"/>
+              </svg>
+            </span>
+
+            <span>
+              <strong>Surat / Naskah Dinas</strong>
+              <small>Nomor dokumen, klasifikasi, arah agenda, jenis surat, dan jenis agenda.</small>
+            </span>
+          </button>
+
+
+          <button
+            id="multiArchiveTypeDocumentBtn"
+            class="archive-type-option"
+            type="button"
+            data-multi-archive-type="Dokumen Non-Surat"
+          >
+            <span class="archive-type-icon">
+              <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 4h16v16H4z"/>
+                <path d="M8 8h8M8 12h8M8 16h5"/>
+              </svg>
+            </span>
+
+            <span>
+              <strong>Dokumen Non-Surat</strong>
+              <small>RENSTRA, RENJA, LKjIP, RKA/DPA, laporan, SPJ, dokumentasi, dan lainnya.</small>
+            </span>
+          </button>
+
+        </div>
+
+
+        <div class="multi-top-grid multi-top-grid-v21">
+
           <div>
             <label
               class="field-label"
@@ -4152,6 +4378,7 @@
               </option>
             </select>
           </div>
+
 
           <div>
             <label
@@ -4172,11 +4399,24 @@
                 class="sensitive-desc"
                 style="margin-top:8px"
               >
-                Maksimal 50 MB per file. Upload dilakukan satu per satu agar ID arsip tetap aman.
+                Maksimal 50 MB per file. File diunggah satu per satu agar ID arsip tetap aman.
               </div>
             </div>
           </div>
+
         </div>
+
+
+        <div
+          id="multiModeNote"
+          class="multi-mode-note"
+        >
+          <strong>Mode Surat / Naskah Dinas</strong>
+          <span>
+            Tahun dan klasifikasi dibaca otomatis dari nomor dokumen. Jika kode klasifikasi ambigu, LEMARI akan meminta Anda memilih uraian yang sesuai.
+          </span>
+        </div>
+
 
         <div
           id="multiEmptyText"
@@ -4184,22 +4424,28 @@
           style="padding:24px 10px"
         >
           <div class="state-icon">
-            <svg class='ic' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' ><path d='M3 9l2-5h14l2 5'/><path d='M3 9v9a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V9'/><path d='M3 9h6l1 3h4l1-3h6'/></svg>
+            <svg class='ic' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'>
+              <path d='M3 9l2-5h14l2 5'/>
+              <path d='M3 9v9a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V9'/>
+              <path d='M3 9h6l1 3h4l1-3h6'/>
+            </svg>
           </div>
 
           <h3 class="state-title">
-            Pilih beberapa file dulu
+            Pilih beberapa file terlebih dahulu
           </h3>
 
           <p class="state-desc">
-            Setelah dipilih, metadata masing-masing file akan muncul di sini.
+            Setelah dipilih, metadata masing-masing arsip akan muncul di sini.
           </p>
         </div>
+
 
         <div
           id="multiFileList"
           class="multi-file-list"
         ></div>
+
 
         <div
           id="multiProgressWrap"
@@ -4220,13 +4466,15 @@
           </div>
         </div>
 
+
         <div class="form-actions">
+
           <button
             id="backMultiChooserBtn"
             class="btn btn-secondary"
             type="button"
           >
-            ← Ganti Jenis Upload
+            ← Ganti Metode Upload
           </button>
 
           <button
@@ -4234,11 +4482,13 @@
             class="btn btn-primary"
             type="button"
           >
-            Upload Semua
+            Periksa & Upload Batch
           </button>
+
         </div>
 
       </div>
+
     </div>
   </div>
 
@@ -4504,6 +4754,10 @@
 
     let currentItems =
       [];
+
+
+    let multiUploadArchiveType =
+      "Surat / Naskah Dinas";
 
 
     let multiFiles =
@@ -7630,13 +7884,93 @@
 
 
     // ==================================================
-    // MULTI UPLOAD
+    // MULTI UPLOAD — ADAPTIVE ARCHIVE TYPE
     // ==================================================
 
     function baseTitleFromFileName(name) {
       return String(name || "")
         .replace(/\.[^.]+$/, "")
         .trim();
+    }
+
+
+    function setMultiUploadArchiveType(type) {
+      const isLetter =
+        type ===
+          "Surat / Naskah Dinas";
+
+      multiUploadArchiveType =
+        isLetter
+          ? "Surat / Naskah Dinas"
+          : "Dokumen Non-Surat";
+
+      $("multiArchiveTypeLetterBtn")
+        .classList
+        .toggle("active", isLetter);
+
+      $("multiArchiveTypeDocumentBtn")
+        .classList
+        .toggle("active", !isLetter);
+
+      $("multiModeNote").innerHTML =
+        isLetter
+          ? `
+              <strong>Mode Surat / Naskah Dinas</strong>
+              <span>
+                Tahun dan klasifikasi dibaca otomatis dari nomor dokumen. Jika kode klasifikasi ambigu, LEMARI akan meminta Anda memilih uraian yang sesuai.
+              </span>
+            `
+          : `
+              <strong>Mode Dokumen Non-Surat</strong>
+              <span>
+                Gunakan untuk RENSTRA, RENJA, LKjIP, RKA/DPA, laporan, SPJ, dokumentasi, dan dokumen lainnya. Nomor surat dan klasifikasi tidak diperlukan.
+              </span>
+            `;
+
+      const currentYear =
+        String(
+          new Date().getFullYear()
+        );
+
+      multiFiles =
+        multiFiles.map(
+          item => ({
+            file:
+              item.file,
+
+            judul:
+              item.judul ||
+              baseTitleFromFileName(
+                item.file.name
+              ),
+
+            sensitif:
+              Boolean(item.sensitif),
+
+            nomorDokumen:
+              "",
+
+            uraianKlasifikasi:
+              "",
+
+            arahAgenda:
+              "",
+
+            jenisSurat:
+              "",
+
+            jenisAgenda:
+              "",
+
+            jenisDokumen:
+              "",
+
+            tahun:
+              currentYear,
+          })
+        );
+
+      renderMultiFiles();
     }
 
 
@@ -7658,6 +7992,32 @@
       $("multiProgressBar")
         .style
         .width = "0%";
+
+      $("multiProgressLabel")
+        .textContent =
+          "Menyiapkan upload...";
+
+      setMultiUploadArchiveType(
+        "Surat / Naskah Dinas"
+      );
+    }
+
+
+    function multiSensitiveHtml(checked) {
+      return `
+        <label class="multi-sensitive">
+          <input
+            data-multi-field="sensitif"
+            type="checkbox"
+            ${checked ? "checked" : ""}
+          >
+          <svg class='ic' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'>
+            <rect x='5' y='11' width='14' height='9' rx='2'/>
+            <path d='M8 11V7a4 4 0 0 1 8 0v4'/>
+          </svg>
+          Sensitif
+        </label>
+      `;
     }
 
 
@@ -7674,6 +8034,10 @@
           multiFiles.length === 0
         );
 
+      const isLetter =
+        multiUploadArchiveType ===
+          "Surat / Naskah Dinas";
+
       const currentYear =
         String(
           new Date().getFullYear()
@@ -7681,7 +8045,6 @@
 
       multiFiles.forEach(
         (item, index) => {
-
           const card =
             document.createElement("div");
 
@@ -7691,91 +8054,228 @@
           card.dataset.multiIndex =
             String(index);
 
-          card.innerHTML =
-            `
-            <div class="multi-file-head">
+          const titleValue =
+            item.judul ||
+            baseTitleFromFileName(
+              item.file.name
+            );
 
-              <div
-                class="multi-file-name"
-                title="${escapeHtml(item.file.name)}"
-              >
-                ${index + 1}. ${escapeHtml(item.file.name)}
-              </div>
+          if (isLetter) {
+            card.innerHTML =
+              `
+                <div class="multi-file-head">
+                  <div
+                    class="multi-file-name"
+                    title="${escapeHtml(item.file.name)}"
+                  >
+                    ${index + 1}. ${escapeHtml(item.file.name)}
+                  </div>
 
-              <div class="multi-file-size">
-                ${formatBytes(item.file.size)}
-              </div>
+                  <div class="multi-file-size">
+                    ${formatBytes(item.file.size)}
+                  </div>
+                </div>
 
-            </div>
 
-            <div class="multi-item-grid">
+                <div class="multi-item-grid multi-letter-grid">
 
-              <div>
-                <label class="field-label">
-                  Judul
-                </label>
+                  <div>
+                    <label class="field-label">Judul / Perihal</label>
 
-                <input
-                  class="input"
-                  data-multi-field="judul"
-                  value="${escapeHtml(
-                    item.judul ||
-                    baseTitleFromFileName(
-                      item.file.name
-                    )
-                  )}"
+                    <input
+                      class="input"
+                      data-multi-field="judul"
+                      value="${escapeHtml(titleValue)}"
+                      placeholder="Judul / perihal dokumen"
+                    >
+                  </div>
+
+
+                  <div>
+                    <label class="field-label">Nomor Surat / Dokumen</label>
+
+                    <input
+                      class="input"
+                      data-multi-field="nomorDokumen"
+                      value="${escapeHtml(item.nomorDokumen || "")}"
+                      placeholder="500.12.13/3006/416-110/2026"
+                    >
+                  </div>
+
+
+                  <div>
+                    <label class="field-label">Arah Agenda</label>
+
+                    <select
+                      class="select"
+                      data-multi-field="arahAgenda"
+                    >
+                      <option value="">Pilih Arah</option>
+                      ${optionsHtml(
+                        bootstrapData.arahAgenda,
+                        item.arahAgenda || ""
+                      )}
+                    </select>
+                  </div>
+
+
+                  <div>
+                    <label class="field-label">Jenis Surat</label>
+
+                    <select
+                      class="select"
+                      data-multi-field="jenisSurat"
+                    >
+                      <option value="">Pilih Jenis Surat</option>
+                      ${optionsHtml(
+                        bootstrapData.jenisSurat,
+                        item.jenisSurat || ""
+                      )}
+                    </select>
+                  </div>
+
+                </div>
+
+
+                <div class="multi-letter-secondary">
+
+                  <div>
+                    <label class="field-label">Jenis Agenda</label>
+
+                    <select
+                      class="select"
+                      data-multi-field="jenisAgenda"
+                    >
+                      <option value="">Pilih Jenis Agenda</option>
+                      ${optionsHtml(
+                        bootstrapData.jenisAgenda,
+                        item.jenisAgenda || ""
+                      )}
+                    </select>
+                  </div>
+
+
+                  <div>
+                    <label class="field-label">Klasifikasi</label>
+
+                    <div
+                      class="input"
+                      style="
+                        min-height:46px;
+                        display:flex;
+                        align-items:center;
+                        color:var(--muted);
+                        background:#faf8f3;
+                      "
+                    >
+                      Otomatis dari nomor dokumen
+                    </div>
+                  </div>
+
+
+                  ${multiSensitiveHtml(item.sensitif)}
+
+                </div>
+
+
+                <div
+                  class="multi-classification-choice"
+                  data-multi-choice-wrap
                 >
-              </div>
+                  <label class="field-label">
+                    Pilih Uraian Klasifikasi
+                  </label>
 
-              <div>
-                <label class="field-label">
-                  Tahun
-                </label>
+                  <select
+                    class="select"
+                    data-multi-field="uraianKlasifikasi"
+                  >
+                    <option value="">
+                      Pilih uraian yang sesuai
+                    </option>
+                  </select>
+                </div>
 
-                <input
-                  class="input"
-                  data-multi-field="tahun"
-                  type="number"
-                  min="1900"
-                  max="2100"
-                  value="${escapeHtml(
-                    item.tahun ||
-                    currentYear
-                  )}"
-                >
-              </div>
 
-              <div>
-                <label class="field-label">
-                  Kategori
-                </label>
+                <div
+                  class="multi-check-status"
+                  data-multi-status
+                ></div>
+              `;
+          }
 
-                <select
-                  class="select"
-                  data-multi-field="kategori"
-                >
-                  <option value="">
-                    Pilih Kategori
-                  </option>
+          else {
+            card.innerHTML =
+              `
+                <div class="multi-file-head">
+                  <div
+                    class="multi-file-name"
+                    title="${escapeHtml(item.file.name)}"
+                  >
+                    ${index + 1}. ${escapeHtml(item.file.name)}
+                  </div>
 
-                  ${optionsHtml(
-                    bootstrapData.kategori,
-                    item.kategori || ""
-                  )}
-                </select>
-              </div>
+                  <div class="multi-file-size">
+                    ${formatBytes(item.file.size)}
+                  </div>
+                </div>
 
-              <label class="multi-sensitive">
-                <input
-                  data-multi-field="sensitif"
-                  type="checkbox"
-                  ${item.sensitif ? "checked" : ""}
-                >
-                <svg class='ic' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' ><rect x='5' y='11' width='14' height='9' rx='2'/><path d='M8 11V7a4 4 0 0 1 8 0v4'/></svg> Sensitif
-              </label>
 
-            </div>
-            `;
+                <div class="multi-item-grid multi-document-grid">
+
+                  <div>
+                    <label class="field-label">Judul Dokumen</label>
+
+                    <input
+                      class="input"
+                      data-multi-field="judul"
+                      value="${escapeHtml(titleValue)}"
+                      placeholder="Contoh: RENJA DLH Tahun 2027"
+                    >
+                  </div>
+
+
+                  <div>
+                    <label class="field-label">Jenis Dokumen</label>
+
+                    <select
+                      class="select"
+                      data-multi-field="jenisDokumen"
+                    >
+                      <option value="">Pilih Jenis Dokumen</option>
+                      ${optionsHtml(
+                        bootstrapData.jenisDokumen,
+                        item.jenisDokumen || ""
+                      )}
+                    </select>
+                  </div>
+
+
+                  <div>
+                    <label class="field-label">Tahun</label>
+
+                    <input
+                      class="input"
+                      data-multi-field="tahun"
+                      type="number"
+                      min="1900"
+                      max="2100"
+                      value="${escapeHtml(item.tahun || currentYear)}"
+                    >
+                  </div>
+
+
+                  ${multiSensitiveHtml(item.sensitif)}
+
+                </div>
+
+
+                <div
+                  class="multi-check-status"
+                  data-multi-status
+                ></div>
+              `;
+          }
 
           list.appendChild(card);
         }
@@ -7791,9 +8291,12 @@
           ),
         ];
 
+      const isLetter =
+        multiUploadArchiveType ===
+          "Surat / Naskah Dinas";
+
       return cards.map(
         card => {
-
           const index =
             Number(
               card.dataset.multiIndex
@@ -7802,29 +8305,77 @@
           const item =
             multiFiles[index];
 
-          return {
+          const result = {
             index,
-            file: item.file,
+            file:
+              item.file,
 
             judul:
               card.querySelector(
                 '[data-multi-field="judul"]'
               ).value.trim(),
 
-            tahun:
-              card.querySelector(
-                '[data-multi-field="tahun"]'
-              ).value.trim(),
-
-            kategori:
-              card.querySelector(
-                '[data-multi-field="kategori"]'
-              ).value,
-
             sensitif:
               card.querySelector(
                 '[data-multi-field="sensitif"]'
               ).checked,
+          };
+
+          if (isLetter) {
+            result.nomorDokumen =
+              card.querySelector(
+                '[data-multi-field="nomorDokumen"]'
+              ).value.trim();
+
+            result.arahAgenda =
+              card.querySelector(
+                '[data-multi-field="arahAgenda"]'
+              ).value;
+
+            result.jenisSurat =
+              card.querySelector(
+                '[data-multi-field="jenisSurat"]'
+              ).value;
+
+            result.jenisAgenda =
+              card.querySelector(
+                '[data-multi-field="jenisAgenda"]'
+              ).value;
+
+            result.uraianKlasifikasi =
+              card.querySelector(
+                '[data-multi-field="uraianKlasifikasi"]'
+              )?.value || "";
+          }
+
+          else {
+            result.jenisDokumen =
+              card.querySelector(
+                '[data-multi-field="jenisDokumen"]'
+              ).value;
+
+            result.tahun =
+              card.querySelector(
+                '[data-multi-field="tahun"]'
+              ).value.trim();
+          }
+
+          return result;
+        }
+      );
+    }
+
+
+    function syncMultiItemsFromCards(items) {
+      items.forEach(
+        item => {
+          if (!multiFiles[item.index]) {
+            return;
+          }
+
+          multiFiles[item.index] = {
+            ...multiFiles[item.index],
+            ...item,
           };
         }
       );
@@ -7835,12 +8386,17 @@
       bidang,
       items
     ) {
+      const isLetter =
+        multiUploadArchiveType ===
+          "Surat / Naskah Dinas";
+
       const response =
         await fetch(
           API_URL +
           "/api/upload/multi/check",
           {
-            method: "POST",
+            method:
+              "POST",
 
             headers: {
               "Content-Type":
@@ -7851,13 +8407,49 @@
               JSON.stringify({
                 bidang,
 
+                tipeArsip:
+                  multiUploadArchiveType,
+
                 items:
                   items.map(
-                    item => ({
-                      judul: item.judul,
-                      tahun: item.tahun,
-                      kategori: item.kategori,
-                    })
+                    item =>
+                      isLetter
+                        ? {
+                            judul:
+                              item.judul,
+
+                            nomorDokumen:
+                              item.nomorDokumen,
+
+                            uraianKlasifikasi:
+                              item.uraianKlasifikasi ||
+                              "",
+
+                            arahAgenda:
+                              item.arahAgenda,
+
+                            jenisSurat:
+                              item.jenisSurat,
+
+                            jenisAgenda:
+                              item.jenisAgenda,
+
+                            sensitif:
+                              item.sensitif,
+                          }
+                        : {
+                            judul:
+                              item.judul,
+
+                            tahun:
+                              item.tahun,
+
+                            jenisDokumen:
+                              item.jenisDokumen,
+
+                            sensitif:
+                              item.sensitif,
+                          }
                   ),
               }),
           }
@@ -7872,11 +8464,189 @@
       ) {
         throw new Error(
           data.error ||
-          "Gagal memeriksa duplikat."
+          "Gagal memeriksa batch."
         );
       }
 
       return data;
+    }
+
+
+    function applyMultiCheckResults(check) {
+      check.items.forEach(
+        result => {
+          const card =
+            document.querySelector(
+              `[data-multi-index="${result.index}"]`
+            );
+
+          if (!card) {
+            return;
+          }
+
+          const status =
+            card.querySelector(
+              "[data-multi-status]"
+            );
+
+          const choiceWrap =
+            card.querySelector(
+              "[data-multi-choice-wrap]"
+            );
+
+          const choice =
+            card.querySelector(
+              '[data-multi-field="uraianKlasifikasi"]'
+            );
+
+          if (
+            choiceWrap &&
+            choice &&
+            Array.isArray(result.pilihan) &&
+            result.pilihan.length > 1
+          ) {
+            const current =
+              choice.value;
+
+            choice.innerHTML =
+              `
+                <option value="">
+                  Pilih uraian yang sesuai
+                </option>
+                ${result.pilihan
+                  .map(
+                    option => `
+                      <option
+                        value="${escapeHtml(option.uraian)}"
+                        ${
+                          current === option.uraian
+                            ? "selected"
+                            : ""
+                        }
+                      >
+                        ${escapeHtml(option.kode)} — ${escapeHtml(option.uraian)}
+                      </option>
+                    `
+                  )
+                  .join("")}
+              `;
+
+            choiceWrap
+              .classList
+              .add("show");
+          }
+
+          else if (choiceWrap) {
+            choiceWrap
+              .classList
+              .remove("show");
+          }
+
+          if (!status) {
+            return;
+          }
+
+          let statusClass =
+            "ok";
+
+          let htmlText =
+            "";
+
+          if (!result.valid) {
+            statusClass =
+              "error";
+
+            htmlText =
+              `
+                <strong>Perlu diperbaiki.</strong>
+                ${escapeHtml(
+                  result.error ||
+                  "Metadata belum valid."
+                )}
+              `;
+          }
+
+          else if (result.ditemukan) {
+            statusClass =
+              "warn";
+
+            htmlText =
+              `
+                <strong>Terindikasi duplikat.</strong>
+                ${
+                  result.duplicateReasons?.includes(
+                    "nomor_existing"
+                  )
+                    ? "Nomor dokumen sudah ada di LEMARI. "
+                    : ""
+                }
+                ${
+                  result.duplicateReasons?.includes(
+                    "nomor_batch"
+                  )
+                    ? "Nomor dokumen berulang di batch ini. "
+                    : ""
+                }
+                ${
+                  result.duplicateReasons?.includes(
+                    "metadata_existing"
+                  )
+                    ? "Metadata serupa sudah tersimpan. "
+                    : ""
+                }
+                ${
+                  result.duplicateReasons?.includes(
+                    "metadata_batch"
+                  )
+                    ? "Metadata serupa berulang di batch ini."
+                    : ""
+                }
+
+                ${
+                  result.kodeKlasifikasi
+                    ? `
+                      <span class="multi-check-mini">
+                        ${escapeHtml(result.kodeKlasifikasi)}
+                        — ${escapeHtml(result.uraianKlasifikasi || "")}
+                      </span>
+                    `
+                    : ""
+                }
+              `;
+          }
+
+          else if (
+            result.tipeArsip ===
+              "Surat / Naskah Dinas"
+          ) {
+            htmlText =
+              `
+                <strong>Siap diunggah.</strong>
+                ${escapeHtml(result.kodeKlasifikasi)}
+                — ${escapeHtml(result.uraianKlasifikasi)}
+                <span class="multi-check-mini">
+                  Nomor ${escapeHtml(result.nomorSurat)}
+                  • Tahun ${escapeHtml(result.tahunSurat)}
+                </span>
+              `;
+          }
+
+          else {
+            htmlText =
+              `
+                <strong>Siap diunggah.</strong>
+                ${escapeHtml(result.jenisDokumen)}
+                • Tahun ${escapeHtml(result.tahun)}
+              `;
+          }
+
+          status.className =
+            `multi-check-status show ${statusClass}`;
+
+          status.innerHTML =
+            htmlText;
+        }
+      );
     }
 
 
@@ -7885,8 +8655,17 @@
       item,
       allowDuplicate
     ) {
+      const isLetter =
+        multiUploadArchiveType ===
+          "Surat / Naskah Dinas";
+
       const form =
         new FormData();
+
+      form.append(
+        "tipeArsip",
+        multiUploadArchiveType
+      );
 
       form.append(
         "judul",
@@ -7894,19 +8673,49 @@
       );
 
       form.append(
-        "tahun",
-        item.tahun
-      );
-
-      form.append(
         "bidang",
         bidang
       );
 
-      form.append(
-        "kategori",
-        item.kategori
-      );
+      if (isLetter) {
+        form.append(
+          "nomorDokumen",
+          item.nomorDokumen
+        );
+
+        form.append(
+          "uraianKlasifikasi",
+          item.uraianKlasifikasi ||
+          ""
+        );
+
+        form.append(
+          "arahAgenda",
+          item.arahAgenda
+        );
+
+        form.append(
+          "jenisSurat",
+          item.jenisSurat
+        );
+
+        form.append(
+          "jenisAgenda",
+          item.jenisAgenda
+        );
+      }
+
+      else {
+        form.append(
+          "tahun",
+          item.tahun
+        );
+
+        form.append(
+          "jenisDokumen",
+          item.jenisDokumen
+        );
+      }
 
       form.append(
         "sensitif",
@@ -7933,8 +8742,10 @@
           API_URL +
           "/api/upload/single",
           {
-            method: "POST",
-            body: form,
+            method:
+              "POST",
+            body:
+              form,
           }
         );
 
@@ -7955,10 +8766,16 @@
       const items =
         collectMultiMetadata();
 
+      const isLetter =
+        multiUploadArchiveType ===
+          "Surat / Naskah Dinas";
+
       if (!bidang) {
         await Swal.fire({
-          icon: "warning",
-          title: "Pilih Bidang",
+          icon:
+            "warning",
+          title:
+            "Pilih Bidang",
           text:
             "Bidang berlaku untuk seluruh batch upload.",
         });
@@ -7968,8 +8785,10 @@
 
       if (!items.length) {
         await Swal.fire({
-          icon: "warning",
-          title: "Belum ada file",
+          icon:
+            "warning",
+          title:
+            "Belum ada file",
         });
 
         return;
@@ -7977,19 +8796,43 @@
 
       const invalid =
         items.find(
-          item =>
-            !item.judul ||
-            !/^\d{4}$/.test(item.tahun) ||
-            !item.kategori ||
-            item.file.size <= 0 ||
-            item.file.size >
-              50 * 1024 * 1024
+          item => {
+            const fileInvalid =
+              item.file.size <= 0 ||
+              item.file.size >
+                50 * 1024 * 1024;
+
+            if (
+              !item.judul ||
+              fileInvalid
+            ) {
+              return true;
+            }
+
+            if (isLetter) {
+              return (
+                !item.nomorDokumen ||
+                !item.arahAgenda ||
+                !item.jenisSurat ||
+                !item.jenisAgenda
+              );
+            }
+
+            return (
+              !item.jenisDokumen ||
+              !/^\d{4}$/.test(
+                item.tahun
+              )
+            );
+          }
         );
 
       if (invalid) {
         await Swal.fire({
-          icon: "warning",
-          title: "Metadata belum lengkap",
+          icon:
+            "warning",
+          title:
+            "Metadata belum lengkap",
           text:
             `Periksa file nomor ${invalid.index + 1}.`,
         });
@@ -7997,10 +8840,19 @@
         return;
       }
 
+      syncMultiItemsFromCards(items);
+
       const button =
         $("submitMultiBtn");
 
-      button.disabled = true;
+      button.disabled =
+        true;
+
+      const originalText =
+        button.textContent;
+
+      button.textContent =
+        "Memeriksa batch...";
 
       try {
         const check =
@@ -8008,6 +8860,88 @@
             bidang,
             items
           );
+
+        applyMultiCheckResults(check);
+
+        if (
+          check.jumlahError > 0
+        ) {
+          const firstError =
+            check.items.find(
+              item => !item.valid
+            );
+
+          const firstCard =
+            firstError
+              ? document.querySelector(
+                  `[data-multi-index="${firstError.index}"]`
+                )
+              : null;
+
+          firstCard?.scrollIntoView({
+            behavior:
+              "smooth",
+            block:
+              "center",
+          });
+
+          await Swal.fire({
+            icon:
+              "warning",
+            title:
+              `${check.jumlahError} arsip perlu diperbaiki`,
+            text:
+              "Periksa penanda pada masing-masing file. Jika klasifikasi ambigu, pilih uraian yang sesuai lalu tekan Periksa & Upload Batch lagi.",
+            confirmButtonColor:
+              "#2f6b45",
+          });
+
+          return;
+        }
+
+        check.items.forEach(
+          result => {
+            const source =
+              multiFiles[
+                result.index
+              ];
+
+            if (!source) {
+              return;
+            }
+
+            source.judul =
+              result.judul;
+
+            source.sensitif =
+              result.sensitif;
+
+            if (isLetter) {
+              source.nomorDokumen =
+                result.nomorDokumen;
+
+              source.uraianKlasifikasi =
+                result.uraianKlasifikasi;
+
+              source.arahAgenda =
+                result.arahAgenda;
+
+              source.jenisSurat =
+                result.jenisSurat;
+
+              source.jenisAgenda =
+                result.jenisAgenda;
+            }
+
+            else {
+              source.tahun =
+                result.tahun;
+
+              source.jenisDokumen =
+                result.jenisDokumen;
+            }
+          }
+        );
 
         let allowDuplicate =
           false;
@@ -8017,33 +8951,35 @@
         ) {
           const duplicateNames =
             check.items
-              .filter(x => x.ditemukan)
+              .filter(
+                item =>
+                  item.ditemukan
+              )
               .slice(0, 6)
               .map(
-                x =>
+                item =>
                   "• " +
                   escapeHtml(
-                    x.judul ||
-                    `File ${x.index + 1}`
+                    item.judul ||
+                    `File ${item.index + 1}`
                   )
               )
               .join("<br>");
 
           const result =
             await Swal.fire({
-              icon: "warning",
-
+              icon:
+                "warning",
               title:
                 `${check.jumlahDuplikat} arsip terindikasi duplikat`,
-
               html:
                 `${duplicateNames}${
                   check.jumlahDuplikat > 6
                     ? "<br>• ..."
                     : ""
                 }<br><br>Tetap upload seluruh batch?`,
-
-              showCancelButton: true,
+              showCancelButton:
+                true,
               confirmButtonText:
                 "Tetap Upload",
               cancelButtonText:
@@ -8052,11 +8988,14 @@
                 "#2f6b45",
             });
 
-          if (!result.isConfirmed) {
+          if (
+            !result.isConfirmed
+          ) {
             return;
           }
 
-          allowDuplicate = true;
+          allowDuplicate =
+            true;
         }
 
         $("multiProgressWrap")
@@ -8066,23 +9005,26 @@
         const success = [];
         const failed = [];
 
+        const finalItems =
+          collectMultiMetadata();
+
         for (
           let i = 0;
-          i < items.length;
+          i < finalItems.length;
           i++
         ) {
           const item =
-            items[i];
+            finalItems[i];
 
           $("multiProgressLabel")
             .textContent =
-              `Mengunggah ${i + 1} dari ${items.length}: ${item.file.name}`;
+              `Mengunggah ${i + 1} dari ${finalItems.length}: ${item.file.name}`;
 
           $("multiProgressBar")
             .style
             .width =
               `${Math.round(
-                (i / items.length) * 100
+                (i / finalItems.length) * 100
               )}%`;
 
           try {
@@ -8110,11 +9052,11 @@
               data.arsip
             );
           }
+
           catch (error) {
             failed.push({
               name:
                 item.file.name,
-
               error:
                 error.message,
             });
@@ -8124,7 +9066,7 @@
             .style
             .width =
               `${Math.round(
-                ((i + 1) / items.length) * 100
+                ((i + 1) / finalItems.length) * 100
               )}%`;
         }
 
@@ -8134,7 +9076,8 @@
 
         await loadBootstrap();
 
-        state.page = 1;
+        state.page =
+          1;
 
         await loadArchives();
 
@@ -8148,7 +9091,8 @@
           resetMultiUpload();
 
           await Swal.fire({
-            icon: "success",
+            icon:
+              "success",
             title:
               `${success.length} arsip masuk LEMARI!`,
             text:
@@ -8157,18 +9101,20 @@
               "#2f6b45",
           });
         }
+
         else {
           const failText =
             failed
               .slice(0, 6)
               .map(
-                x =>
-                  `• ${escapeHtml(x.name)} — ${escapeHtml(x.error)}`
+                item =>
+                  `• ${escapeHtml(item.name)} — ${escapeHtml(item.error)}`
               )
               .join("<br>");
 
           await Swal.fire({
-            icon: "warning",
+            icon:
+              "warning",
             title:
               "Batch selesai sebagian",
             html:
@@ -8178,9 +9124,11 @@
           });
         }
       }
+
       catch (error) {
         await Swal.fire({
-          icon: "error",
+          icon:
+            "error",
           title:
             "Multi Upload gagal",
           text:
@@ -8188,8 +9136,13 @@
             "Terjadi kesalahan.",
         });
       }
+
       finally {
-        button.disabled = false;
+        button.disabled =
+          false;
+
+        button.textContent =
+          originalText;
       }
     }
 
@@ -8716,10 +9669,33 @@
       };
 
 
+    document
+      .querySelectorAll(
+        "[data-multi-archive-type]"
+      )
+      .forEach(
+        button => {
+          button.addEventListener(
+            "click",
+            () =>
+              setMultiUploadArchiveType(
+                button.dataset.multiArchiveType
+              )
+          );
+        }
+      );
+
+
     $("multiFilesInput")
       .addEventListener(
         "change",
         function() {
+
+          const currentYear =
+            String(
+              new Date()
+                .getFullYear()
+            );
 
           multiFiles =
             [
@@ -8733,14 +9709,29 @@
                     file.name
                   ),
 
-                tahun:
-                  String(
-                    new Date()
-                      .getFullYear()
-                  ),
+                sensitif:
+                  false,
 
-                kategori: "",
-                sensitif: false,
+                nomorDokumen:
+                  "",
+
+                uraianKlasifikasi:
+                  "",
+
+                arahAgenda:
+                  "",
+
+                jenisSurat:
+                  "",
+
+                jenisAgenda:
+                  "",
+
+                jenisDokumen:
+                  "",
+
+                tahun:
+                  currentYear,
               })
             );
 

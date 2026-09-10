@@ -4462,7 +4462,7 @@
                 class="sensitive-desc"
                 style="margin-top:8px"
               >
-                Maksimal 50 MB per file. File diunggah satu per satu agar ID arsip tetap aman.
+                Maksimal 50 MB per file. Anda dapat memilih file lagi untuk menambahkan ke batch yang sama.
               </div>
             </div>
           </div>
@@ -7957,6 +7957,15 @@
     }
 
 
+    function multiFileSignature(file) {
+      return [
+        String(file?.name || ""),
+        Number(file?.size || 0),
+        Number(file?.lastModified || 0),
+      ].join("|");
+    }
+
+
     function syncMultiFileInput() {
       const input =
         $("multiFilesInput");
@@ -9882,45 +9891,103 @@
                 .getFullYear()
             );
 
-          multiFiles =
-            [
-              ...this.files,
-            ].map(
-              file => ({
-                file,
-
-                judul:
-                  baseTitleFromFileName(
-                    file.name
-                  ),
-
-                sensitif:
-                  false,
-
-                nomorDokumen:
-                  "",
-
-                uraianKlasifikasi:
-                  "",
-
-                arahAgenda:
-                  "",
-
-                jenisSurat:
-                  "",
-
-                jenisAgenda:
-                  "",
-
-                jenisDokumen:
-                  "",
-
-                tahun:
-                  currentYear,
-              })
+          const existingSignatures =
+            new Set(
+              multiFiles.map(
+                item =>
+                  multiFileSignature(
+                    item.file
+                  )
+              )
             );
 
+          const selectedFiles =
+            [
+              ...this.files,
+            ];
+
+          let addedCount = 0;
+
+          for (
+            const file of selectedFiles
+          ) {
+            const signature =
+              multiFileSignature(
+                file
+              );
+
+            if (
+              existingSignatures.has(
+                signature
+              )
+            ) {
+              continue;
+            }
+
+            multiFiles.push({
+              file,
+
+              judul:
+                baseTitleFromFileName(
+                  file.name
+                ),
+
+              sensitif:
+                false,
+
+              nomorDokumen:
+                "",
+
+              uraianKlasifikasi:
+                "",
+
+              arahAgenda:
+                "",
+
+              jenisSurat:
+                "",
+
+              jenisAgenda:
+                "",
+
+              jenisDokumen:
+                "",
+
+              tahun:
+                currentYear,
+            });
+
+            existingSignatures.add(
+              signature
+            );
+
+            addedCount++;
+          }
+
+          // Sinkronkan kembali input dengan seluruh batch,
+          // bukan cuma file yang baru dipilih.
+          syncMultiFileInput();
+
           renderMultiFiles();
+
+          if (
+            selectedFiles.length > 0 &&
+            addedCount === 0
+          ) {
+            Swal.fire({
+              icon:
+                "info",
+
+              title:
+                "File sudah ada di batch",
+
+              text:
+                "File yang dipilih sudah tercantum dalam daftar upload.",
+
+              confirmButtonColor:
+                "#2f6b45",
+            });
+          }
         }
       );
 

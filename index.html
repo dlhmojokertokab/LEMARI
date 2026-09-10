@@ -4462,7 +4462,7 @@
                 class="sensitive-desc"
                 style="margin-top:8px"
               >
-                Maksimal 50 MB per file. Anda dapat memilih file lagi untuk menambahkan ke batch yang sama.
+                Maksimal 50 MB per file. File baru dapat ditambahkan kapan saja tanpa menghapus metadata yang sudah diisi.
               </div>
             </div>
           </div>
@@ -7966,6 +7966,25 @@
     }
 
 
+    function syncMultiStateFromRenderedCards() {
+      const renderedCards =
+        document.querySelectorAll(
+          "[data-multi-index]"
+        );
+
+      if (!renderedCards.length) {
+        return;
+      }
+
+      const currentMetadata =
+        collectMultiMetadata();
+
+      syncMultiItemsFromCards(
+        currentMetadata
+      );
+    }
+
+
     function syncMultiFileInput() {
       const input =
         $("multiFilesInput");
@@ -7998,6 +8017,10 @@
       ) {
         return;
       }
+
+      // Simpan dulu semua metadata yang sudah diisi user
+      // sebelum daftar dirender ulang.
+      syncMultiStateFromRenderedCards();
 
       multiFiles.splice(
         index,
@@ -9855,6 +9878,36 @@
       );
 
 
+    ["input", "change"]
+      .forEach(
+        eventName => {
+          $("multiFileList")
+            .addEventListener(
+              eventName,
+              event => {
+                if (
+                  !event.target.closest(
+                    "[data-multi-index]"
+                  )
+                ) {
+                  return;
+                }
+
+                if (
+                  !event.target.matches(
+                    "[data-multi-field]"
+                  )
+                ) {
+                  return;
+                }
+
+                syncMultiStateFromRenderedCards();
+              }
+            );
+        }
+      );
+
+
     $("multiFileList")
       .addEventListener(
         "click",
@@ -9884,6 +9937,10 @@
       .addEventListener(
         "change",
         function() {
+
+          // Penting: field yang sudah diketik di card masih hidup di DOM.
+          // Simpan ke state sebelum render ulang akibat penambahan file.
+          syncMultiStateFromRenderedCards();
 
           const currentYear =
             String(

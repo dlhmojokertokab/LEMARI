@@ -3342,6 +3342,69 @@
       }
     }
 
+
+    /* ==================================================
+       V22 — REMOVE FILE PER ITEM
+    ================================================== */
+
+    .multi-file-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .multi-file-head-main {
+      min-width: 0;
+      flex: 1;
+    }
+
+    .multi-file-head-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex: 0 0 auto;
+    }
+
+    .multi-remove-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      min-height: 34px;
+      padding: 7px 10px;
+      border: 1px solid rgba(171, 63, 63, .22);
+      border-radius: 10px;
+      background: #fff8f8;
+      color: #a23f3f;
+      font-size: 11px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: .15s ease;
+    }
+
+    .multi-remove-btn:hover {
+      border-color: rgba(171, 63, 63, .38);
+      background: #fff0f0;
+      transform: translateY(-1px);
+    }
+
+    .multi-remove-btn .ic {
+      width: 14px;
+      height: 14px;
+    }
+
+    @media (max-width: 680px) {
+      .multi-remove-btn span {
+        display: none;
+      }
+
+      .multi-remove-btn {
+        width: 34px;
+        padding: 7px;
+      }
+    }
+
   </style>
 </head>
 
@@ -7894,6 +7957,61 @@
     }
 
 
+    function syncMultiFileInput() {
+      const input =
+        $("multiFilesInput");
+
+      try {
+        const transfer =
+          new DataTransfer();
+
+        multiFiles.forEach(
+          item =>
+            transfer.items.add(
+              item.file
+            )
+        );
+
+        input.files =
+          transfer.files;
+      }
+      catch (_) {
+        // Beberapa browser membatasi assignment FileList.
+        // multiFiles tetap menjadi sumber data utama aplikasi.
+      }
+    }
+
+
+    function removeMultiFile(index) {
+      if (
+        index < 0 ||
+        index >= multiFiles.length
+      ) {
+        return;
+      }
+
+      multiFiles.splice(
+        index,
+        1
+      );
+
+      syncMultiFileInput();
+      renderMultiFiles();
+
+      if (
+        multiFiles.length === 0
+      ) {
+        $("multiProgressWrap")
+          .classList
+          .remove("show");
+
+        $("multiProgressBar")
+          .style
+          .width = "0%";
+      }
+    }
+
+
     function setMultiUploadArchiveType(type) {
       const isLetter =
         type ===
@@ -8064,16 +8182,37 @@
             card.innerHTML =
               `
                 <div class="multi-file-head">
-                  <div
-                    class="multi-file-name"
-                    title="${escapeHtml(item.file.name)}"
-                  >
-                    ${index + 1}. ${escapeHtml(item.file.name)}
+
+                  <div class="multi-file-head-main">
+                    <div
+                      class="multi-file-name"
+                      title="${escapeHtml(item.file.name)}"
+                    >
+                      ${index + 1}. ${escapeHtml(item.file.name)}
+                    </div>
+
+                    <div class="multi-file-size">
+                      ${formatBytes(item.file.size)}
+                    </div>
                   </div>
 
-                  <div class="multi-file-size">
-                    ${formatBytes(item.file.size)}
+                  <div class="multi-file-head-actions">
+                    <button
+                      class="multi-remove-btn"
+                      type="button"
+                      data-multi-remove="${index}"
+                      title="Hapus file dari batch"
+                    >
+                      <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M3 6h18"/>
+                        <path d="M8 6V4h8v2"/>
+                        <path d="M19 6l-1 14H6L5 6"/>
+                        <path d="M10 11v5M14 11v5"/>
+                      </svg>
+                      <span>Hapus</span>
+                    </button>
                   </div>
+
                 </div>
 
 
@@ -8208,16 +8347,37 @@
             card.innerHTML =
               `
                 <div class="multi-file-head">
-                  <div
-                    class="multi-file-name"
-                    title="${escapeHtml(item.file.name)}"
-                  >
-                    ${index + 1}. ${escapeHtml(item.file.name)}
+
+                  <div class="multi-file-head-main">
+                    <div
+                      class="multi-file-name"
+                      title="${escapeHtml(item.file.name)}"
+                    >
+                      ${index + 1}. ${escapeHtml(item.file.name)}
+                    </div>
+
+                    <div class="multi-file-size">
+                      ${formatBytes(item.file.size)}
+                    </div>
                   </div>
 
-                  <div class="multi-file-size">
-                    ${formatBytes(item.file.size)}
+                  <div class="multi-file-head-actions">
+                    <button
+                      class="multi-remove-btn"
+                      type="button"
+                      data-multi-remove="${index}"
+                      title="Hapus file dari batch"
+                    >
+                      <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M3 6h18"/>
+                        <path d="M8 6V4h8v2"/>
+                        <path d="M19 6l-1 14H6L5 6"/>
+                        <path d="M10 11v5M14 11v5"/>
+                      </svg>
+                      <span>Hapus</span>
+                    </button>
                   </div>
+
                 </div>
 
 
@@ -9681,6 +9841,31 @@
               setMultiUploadArchiveType(
                 button.dataset.multiArchiveType
               )
+          );
+        }
+      );
+
+
+    $("multiFileList")
+      .addEventListener(
+        "click",
+        event => {
+          const button =
+            event.target.closest(
+              "[data-multi-remove]"
+            );
+
+          if (!button) {
+            return;
+          }
+
+          const index =
+            Number(
+              button.dataset.multiRemove
+            );
+
+          removeMultiFile(
+            index
           );
         }
       );

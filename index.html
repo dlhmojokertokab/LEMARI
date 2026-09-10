@@ -3076,6 +3076,100 @@
       }
     }
 
+
+    /* ==================================================
+       V19 — HEADER + LANDING DALAM SATU CARD
+    ================================================== */
+
+    .main {
+      margin-top: 0;
+    }
+
+    .top-unified-card {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(47,107,69,.11);
+      border-radius: 28px;
+      background: #f7f2e9;
+      box-shadow:
+        0 24px 60px rgba(61,46,34,.12);
+    }
+
+    .top-unified-card .hero {
+      position: relative;
+      z-index: 5;
+      min-height: 92px;
+      padding: 13px 18px 12px 20px;
+
+      border: 0;
+      border-radius: 0;
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(255,255,255,.94),
+          rgba(250,246,238,.90)
+        );
+
+      box-shadow: none;
+      backdrop-filter: blur(14px);
+    }
+
+    .top-unified-card .editorial-home {
+      margin: 0;
+      border: 0;
+      border-top: 1px solid rgba(47,107,69,.08);
+      border-radius: 0;
+      box-shadow: none;
+    }
+
+    .top-unified-card .editorial-office-bg {
+      border-radius: 0;
+    }
+
+    /* Give the logo a little more room now that the header is inside the hero card */
+    .top-unified-card .brand-logo-horizontal {
+      width: clamp(320px, 30vw, 455px);
+      max-height: 78px;
+    }
+
+    .top-unified-card .brand-subtitle-lockup {
+      margin-top: 1px;
+      margin-left: 9px;
+    }
+
+    /* Slightly tighter transition from header to hero content */
+    .top-unified-card .editorial-home {
+      min-height: clamp(590px, 66vh, 730px);
+      padding-top: clamp(38px, 4.4vw, 62px);
+    }
+
+    @media (max-width: 1060px) {
+      .top-unified-card .brand-logo-horizontal {
+        width: clamp(280px, 34vw, 390px);
+      }
+    }
+
+    @media (max-width: 760px) {
+      .top-unified-card {
+        border-radius: 22px;
+      }
+
+      .top-unified-card .hero {
+        padding: 12px 14px;
+      }
+
+      .top-unified-card .brand-logo-horizontal {
+        width: min(300px, 74vw);
+        max-height: 64px;
+      }
+
+      .top-unified-card .editorial-home {
+        min-height: 590px;
+        padding-top: 32px;
+      }
+    }
+
   </style>
 </head>
 
@@ -3083,7 +3177,16 @@
 
   <div class="app">
 
-    <header class="hero">
+
+
+
+
+
+    <main class="main">
+
+      <div class="top-unified-card">
+
+        <header class="hero">
 
       <div class="brand brand-horizontal-lockup">
 
@@ -3141,12 +3244,8 @@
 
       </div>
 
-    </header>
+        </header>
 
-
-
-
-    <main class="main">
 
       <section class="editorial-home">
 
@@ -3221,6 +3320,9 @@
         </div>
 
       </section>
+
+      </div>
+
 
 
       <section

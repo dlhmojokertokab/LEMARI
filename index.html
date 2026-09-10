@@ -3409,6 +3409,318 @@
       }
     }
 
+
+    /* ==================================================
+       V26 — SPLIT EDITORIAL LANDING
+    ================================================== */
+
+    .top-unified-card {
+      overflow: hidden;
+    }
+
+    .split-landing {
+      display: grid;
+      grid-template-columns: minmax(0, 1.12fr) minmax(360px, .88fr);
+      min-height: 590px;
+      border-top: 1px solid rgba(47,107,69,.08);
+      background: #f7f2e9;
+    }
+
+    .split-copy {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding:
+        clamp(46px, 6vw, 86px)
+        clamp(34px, 5vw, 72px);
+      background:
+        radial-gradient(circle at 16% 14%, rgba(47,107,69,.06), transparent 28%),
+        linear-gradient(180deg, #fbf7ef 0%, #f7f2e9 100%);
+    }
+
+    .split-copy::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: -58px;
+      bottom: 0;
+      width: 116px;
+      z-index: 3;
+      background: #f7f2e9;
+      border-radius: 0 52% 52% 0 / 0 48% 52% 0;
+      box-shadow: 22px 0 32px rgba(51,38,29,.05);
+      pointer-events: none;
+    }
+
+    .split-kicker {
+      position: relative;
+      z-index: 4;
+      color: var(--primary-dark);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+    }
+
+    .split-heading {
+      position: relative;
+      z-index: 4;
+      display: grid;
+      gap: 8px;
+      margin-top: 22px;
+      max-width: 760px;
+    }
+
+    .split-heading-main {
+      color: #214f35;
+      font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+      font-size: clamp(48px, 5.2vw, 82px);
+      font-weight: 900;
+      line-height: .98;
+      letter-spacing: -.055em;
+    }
+
+    .split-heading-accent {
+      width: fit-content;
+      max-width: 690px;
+      color: #2a211b;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(31px, 3.25vw, 54px);
+      font-style: italic;
+      font-weight: 600;
+      line-height: 1.06;
+      letter-spacing: -.025em;
+      background:
+        linear-gradient(
+          180deg,
+          transparent 62%,
+          rgba(138,90,59,.14) 62%
+        );
+    }
+
+    .split-lead {
+      position: relative;
+      z-index: 4;
+      max-width: 680px;
+      margin: 22px 0 0;
+      color: #665c53;
+      font-size: 16px;
+      line-height: 1.75;
+    }
+
+    .split-search-wrap {
+      position: relative;
+      z-index: 4;
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 10px;
+      width: min(760px, 100%);
+      margin-top: 28px;
+      padding: 8px 9px 8px 15px;
+      border: 1px solid rgba(99,76,58,.18);
+      border-radius: 18px;
+      background: rgba(255,255,255,.92);
+      box-shadow: 0 15px 34px rgba(58,42,31,.10);
+      backdrop-filter: blur(10px);
+    }
+
+    .split-search-icon {
+      width: 22px;
+      height: 22px;
+      color: #877b71;
+    }
+
+    .split-search-input {
+      width: 100%;
+      min-width: 0;
+      height: 52px;
+      border: 0;
+      outline: 0;
+      background: transparent;
+      color: var(--text);
+      font-size: 17px;
+    }
+
+    .split-search-input::placeholder {
+      color: #9b9188;
+    }
+
+    .split-search-btn {
+      min-height: 46px;
+      padding: 0 18px;
+      border: 0;
+      border-radius: 13px;
+      background: var(--primary);
+      color: #fff;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 10px 22px rgba(47,107,69,.18);
+    }
+
+    .split-search-btn:hover {
+      background: var(--primary-dark);
+    }
+
+    .split-hints {
+      position: relative;
+      z-index: 4;
+      justify-content: flex-start;
+      width: min(760px, 100%);
+      margin-top: 12px;
+    }
+
+    .split-caption {
+      position: relative;
+      z-index: 4;
+      margin-top: 32px;
+      color: #8a7f75;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .01em;
+    }
+
+    .split-visual {
+      position: relative;
+      min-width: 0;
+      background: #dfe7dc;
+    }
+
+    .split-photo-frame {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+    }
+
+    .split-photo-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center center;
+      display: block;
+      filter: saturate(.92) contrast(.98);
+      transform: scale(1.02);
+    }
+
+    .split-photo-overlay {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(
+          90deg,
+          rgba(247,242,233,.26) 0%,
+          rgba(247,242,233,.05) 26%,
+          rgba(27,42,32,.04) 100%
+        ),
+        linear-gradient(
+          180deg,
+          rgba(255,255,255,.04) 0%,
+          rgba(24,32,25,.13) 100%
+        );
+    }
+
+    .split-photo-label {
+      position: absolute;
+      right: 18px;
+      bottom: 18px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 12px;
+      border: 1px solid rgba(255,255,255,.34);
+      border-radius: 999px;
+      background: rgba(32,43,34,.50);
+      color: rgba(255,255,255,.95);
+      font-size: 11px;
+      font-weight: 700;
+      backdrop-filter: blur(10px);
+    }
+
+    .split-photo-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #dbeedc;
+      box-shadow: 0 0 0 3px rgba(219,238,220,.16);
+    }
+
+    /* Old landing styles are no longer used */
+    .editorial-home,
+    .editorial-office-bg,
+    .editorial-office-overlay,
+    .editorial-kicker,
+    .editorial-brandline,
+    .editorial-lead,
+    .editorial-search-wrap,
+    .editorial-hints,
+    .editorial-footerline {
+      display: none !important;
+    }
+
+    @media (max-width: 980px) {
+      .split-landing {
+        grid-template-columns: 1fr;
+        min-height: auto;
+      }
+
+      .split-copy {
+        padding:
+          42px
+          clamp(24px, 6vw, 54px)
+          36px;
+      }
+
+      .split-copy::after {
+        display: none;
+      }
+
+      .split-visual {
+        min-height: 360px;
+      }
+
+      .split-photo-frame {
+        position: relative;
+        height: 360px;
+      }
+
+      .split-heading-main {
+        font-size: clamp(44px, 9vw, 70px);
+      }
+
+      .split-heading-accent {
+        font-size: clamp(30px, 6vw, 46px);
+      }
+    }
+
+    @media (max-width: 680px) {
+      .split-copy {
+        padding: 30px 18px 28px;
+      }
+
+      .split-search-wrap {
+        grid-template-columns: auto minmax(0, 1fr);
+      }
+
+      .split-search-btn {
+        grid-column: 1 / -1;
+        width: 100%;
+      }
+
+      .split-visual {
+        min-height: 300px;
+      }
+
+      .split-photo-frame {
+        height: 300px;
+      }
+
+      .split-caption {
+        margin-top: 24px;
+      }
+    }
+
   </style>
 </head>
 
@@ -3502,82 +3814,97 @@
         </header>
 
 
-      <section class="editorial-home">
+      <section class="split-landing">
 
-        <div class="editorial-office-bg" aria-hidden="true"></div>
-        <div class="editorial-office-overlay" aria-hidden="true"></div>
+        <div class="split-copy">
 
-        <div class="editorial-kicker">
-          ARSIP DIGITAL • DINAS LINGKUNGAN HIDUP KABUPATEN MOJOKERTO
+          <div class="split-kicker">
+            ARSIP DIGITAL • DINAS LINGKUNGAN HIDUP KABUPATEN MOJOKERTO
+          </div>
+
+          <div class="split-heading">
+            <span class="split-heading-main">LEMARI DLH</span>
+            <span class="split-heading-accent">Cari yang Anda butuhkan di sini.</span>
+          </div>
+
+          <p class="split-lead">
+            Temukan arsip berdasarkan judul, nomor surat, kode klasifikasi,
+            jenis dokumen, tahun, maupun bidang.
+          </p>
+
+          <div class="split-search-wrap">
+            <svg class="split-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="11" cy="11" r="7"></circle>
+              <path d="M20 20l-3.6-3.6"></path>
+            </svg>
+
+            <input
+              id="searchInput"
+              class="split-search-input"
+              type="search"
+              placeholder="Cari judul, nomor surat, kode klasifikasi, RENJA, LKjIP..."
+              autocomplete="off"
+            >
+
+            <button
+              id="homeSearchBtn"
+              class="split-search-btn"
+              type="button"
+            >
+              Cari Arsip
+            </button>
+          </div>
+
+          <div class="search-hints split-hints">
+
+            <button type="button" class="search-hint-chip" data-search-chip="SK">
+              SK
+            </button>
+
+            <button type="button" class="search-hint-chip" data-search-chip="SE">
+              SE
+            </button>
+
+            <button type="button" class="search-hint-chip" data-search-chip="RENJA">
+              RENJA
+            </button>
+
+            <button type="button" class="search-hint-chip" data-search-chip="LKjIP">
+              LKjIP
+            </button>
+
+            <button type="button" class="search-hint-chip" data-search-chip="SPPD">
+              SPPD
+            </button>
+
+          </div>
+
+          <div class="split-caption">
+            <span>Layanan Elektronik Manajemen Arsip Ringkas dan Integratif</span>
+          </div>
+
         </div>
 
-        <div class="editorial-brandline">
-          <span class="editorial-brand-main">LEMARI DLH</span>
-          <span class="editorial-brand-separator">:</span>
-          <span class="editorial-brand-accent">Cari yang Anda butuhkan di sini.</span>
-        </div>
 
-        <p class="editorial-lead">
-          Temukan arsip berdasarkan judul, nomor surat, kode klasifikasi, jenis dokumen, tahun, maupun bidang.
-        </p>
+        <div class="split-visual" aria-label="Kantor Dinas Lingkungan Hidup Kabupaten Mojokerto">
 
-        <div class="editorial-search-wrap">
-          <svg class="editorial-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <circle cx="11" cy="11" r="7"></circle>
-            <path d="M20 20l-3.6-3.6"></path>
-          </svg>
+          <div class="split-photo-frame">
+            <img
+              src="assets/home/kantor-dlh.jpg"
+              alt="Kantor Dinas Lingkungan Hidup Kabupaten Mojokerto"
+            >
 
-          <input
-            id="searchInput"
-            class="editorial-search-input"
-            type="search"
-            placeholder="Cari judul, nomor surat, kode klasifikasi, RENJA, LKjIP..."
-            autocomplete="off"
-          >
+            <div class="split-photo-overlay"></div>
 
-          <button
-            id="homeSearchBtn"
-            class="editorial-search-btn"
-            type="button"
-          >
-            Cari Arsip
-          </button>
-        </div>
+            <div class="split-photo-label">
+              <span class="split-photo-dot"></span>
+              DLH Kabupaten Mojokerto
+            </div>
+          </div>
 
-        <div class="search-hints editorial-hints">
-
-          <button type="button" class="search-hint-chip" data-search-chip="SK">
-            SK → Surat Keputusan
-          </button>
-
-          <button type="button" class="search-hint-chip" data-search-chip="SE">
-            SE → Surat Edaran
-          </button>
-
-          <button type="button" class="search-hint-chip" data-search-chip="RENJA">
-            RENJA
-          </button>
-
-          <button type="button" class="search-hint-chip" data-search-chip="LKjIP">
-            LKjIP
-          </button>
-
-          <button type="button" class="search-hint-chip" data-search-chip="SPPD">
-            SPPD
-          </button>
-
-        </div>
-
-        <div class="editorial-footerline">
-          <span>Layanan Elektronik Manajemen Arsip Ringkas dan Integratif</span>
-          <span class="editorial-dot">•</span>
-          <span>Terintegrasi dengan Google Drive</span>
         </div>
 
       </section>
-
-      </div>
-
 
 
       <section

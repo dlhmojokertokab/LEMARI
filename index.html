@@ -4145,6 +4145,21 @@
       }
     }
 
+
+    /* ==================================================
+       V29 — EXPLICIT SEARCH ONLY
+    ================================================== */
+
+    .split-search-note {
+      position: relative;
+      z-index: 4;
+      width: min(760px, 100%);
+      margin-top: 8px;
+      color: #8a7f75;
+      font-size: 11px;
+      line-height: 1.45;
+    }
+
   </style>
 </head>
 
@@ -4266,7 +4281,7 @@
               id="searchInput"
               class="split-search-input"
               type="search"
-              placeholder="Cari judul, nomor surat, kode klasifikasi, RENJA, LKjIP..."
+              placeholder="Ketik kata kunci, lalu klik Cari Arsip..."
               autocomplete="off"
             >
 
@@ -4277,6 +4292,10 @@
             >
               Cari Arsip
             </button>
+          </div>
+
+          <div class="split-search-note">
+            Hasil ditampilkan setelah tombol Cari Arsip ditekan atau Enter.
           </div>
 
           <div class="search-hints split-hints">
@@ -7695,8 +7714,8 @@
         return;
       }
 
-      // Kalau live-search sebelumnya masih jalan,
-      // tunggu sebentar supaya query Enter tidak dilewatkan.
+      // Tunggu bila request sebelumnya masih berjalan
+      // supaya pencarian baru tidak bertabrakan.
       while (
         state.loading
       ) {
@@ -11569,38 +11588,6 @@
         event.preventDefault();
 
         runEnterSearch();
-
-      }
-    );
-
-
-    $("searchInput").addEventListener(
-      "input",
-      function() {
-
-        clearTimeout(
-          searchTimer
-        );
-
-
-        searchTimer =
-          setTimeout(
-            () => {
-
-              state.q =
-                this.value.trim();
-
-              state.showAll =
-                false;
-
-              state.page =
-                1;
-
-              loadArchives();
-
-            },
-            350
-          );
 
       }
     );
